@@ -86,5 +86,8 @@ systemctl --user enable --now waybar hyprpaper mako hypridle nwg-dock hyprpolkit
   nwg-displays and gitignored — it's machine-specific.
 - Fish is installed but zsh stays the login shell. Run `fish` to try it.
 - Both shells have autosuggestions and syntax highlighting.
-- A few absolute paths still hardcode `/home/erick` (wallpaper, askpass,
-  btop theme). Fix those before using this on another machine.
+- No hardcoded home paths: configs use `$HOME` (hyprlang), `os.getenv("HOME")`
+  (Lua), or theme-by-name (btop). Clone and it works under any username.
+- The wallpaper is not in this repo. Drop your own at
+  `~/Imagens/wallpapers/synthwave.jpg` or edit `hyprpaper.conf` and
+  `hyprlock.conf`. Hyprlock falls back to a solid color if the file is missing.

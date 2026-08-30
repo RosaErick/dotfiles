@@ -81,7 +81,7 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -- lancadores usam $TERMINAL pra rodar apps com Terminal=true (ex: nvim)
 hl.env("TERMINAL", "ghostty")
 -- askpass grafico: permite `sudo -A <cmd>` sem tty (prompt em rofi)
-hl.env("SUDO_ASKPASS", "/home/erick/.local/bin/rofi-askpass")
+hl.env("SUDO_ASKPASS", os.getenv("HOME") .. "/.local/bin/rofi-askpass")
 
 
 -----------------------
