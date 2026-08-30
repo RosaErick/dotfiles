@@ -13,7 +13,8 @@ Arch Linux + Hyprland.
 
     git clone <repo> ~/.dotfiles
     cd ~/.dotfiles
-    stow -t ~ waybar rofi mako ghostty hypr nwg-dock gtk bin
+    stow -t ~ waybar rofi mako ghostty kitty hypr nwg-dock gtk bin \
+         systemd btop yazi fish zsh
     theme carbonfox
 
 Pacotes que o yazi usa para preview (nenhum e obrigatorio):
