@@ -1,17 +1,141 @@
-/* GERADO por `theme` a partir de theme/templates/waybar-style.css.tmpl
-   NAO EDITE ESTE ARQUIVO — edite o template. */
+/* GERADO por `theme` — edite theme/templates/waybar-style.css.tmpl
+ *
+ * Mistura:
+ *   space_dots (vdawg-git)          -> barra transparente flutuante, sem moldura
+ *   summer-day-and-night (MathisP75) -> efeito 3D: cada modulo e uma tecla com
+ *                                       borda inferior numa versao escura da
+ *                                       propria cor; o item ativo AFUNDA.
+ *
+ * As sombras (sufixo _dark) sao calculadas pelo render.py a partir da paleta —
+ * nao ha cor escrita a mao aqui.
+ */
+
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
     font-size: 13px;
+    font-weight: bold;
     border: none;
     border-radius: 0;
     min-height: 0;
 }
-window#waybar { background: rgba(22,22,22, 0.90); color: #f2f4f8; }
-#workspaces button { padding: 0 8px; color: #6f6f6f; }
-#workspaces button.active { color: #f2f4f8; box-shadow: inset 0 -2px #78a9ff; }
-#workspaces button:hover { background: #282828; }
-#window { color: #b6b8bb; }
-#pulseaudio, #network, #cpu, #memory, #clock, #tray { padding: 0 10px; }
-#clock { color: #78a9ff; font-weight: bold; }
-#network.disconnected { color: #ee5396; }
+
+/* A barra em si nao existe visualmente: so as teclas flutuam. */
+window#waybar {
+    background: transparent;
+    color: #f2f4f8;
+}
+
+tooltip {
+    background: #1c1c1c;
+    color: #f2f4f8;
+    border: 1px solid #484848;
+    border-radius: 8px;
+}
+tooltip label { padding: 4px; }
+
+/* ---- a tecla: base compartilhada -------------------------------------- */
+#custom-launcher,
+#workspaces,
+#window,
+#cpu,
+#memory,
+#pulseaudio,
+#network,
+#language,
+#clock,
+#tray,
+#custom-power {
+    background: #282828;      /* mais claro que o fundo da tela... */
+    color: #f2f4f8;
+    padding: 0 12px;
+    margin: 4px 0 8px 0;          /* 8px embaixo = espaco pra "sombra" */
+    border-radius: 9px;
+    border-bottom: 4px solid #0e0e0e;  /* ...pra sombra ter contraste */
+}
+
+/* ---- acentos ---------------------------------------------------------- */
+#custom-launcher {
+    background: #78a9ff;
+    color: #161616;
+    border-bottom-color: #3c547f;
+    padding: 0 14px;
+    font-size: 15px;
+}
+#custom-launcher:hover { background: #33b1ff; border-bottom-color: #19587f; }
+
+#custom-power {
+    background: #ee5396;
+    color: #161616;
+    border-bottom-color: #77294b;
+    padding: 0 13px;
+}
+#custom-power:hover { background: #be95ff; border-bottom-color: #5f4a7f; }
+
+/* ---- workspaces: numerais CJK, o ativo afunda ------------------------- */
+#workspaces { padding: 0 4px; }
+
+#workspaces button {
+    color: #6f6f6f;
+    background: transparent;
+    padding: 0 7px;
+    margin: 2px 2px 0 2px;
+    border-radius: 6px;
+    font-size: 15px;
+    border-bottom: 3px solid transparent;
+    transition: all 160ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* o truque do summer-day-and-night: perde a borda e desce 3px,
+   entao a tecla parece pressionada pra dentro. */
+#workspaces button.active {
+    color: #161616;
+    background: #78a9ff;
+    border-bottom: 0 solid transparent;
+    margin-top: 5px;
+    margin-bottom: -3px;
+}
+
+/* area corrente de um monitor que NAO esta focado: estado intermediario,
+   senao no dual-monitor a outra tela parece nao ter nada aberto. */
+#workspaces button.visible {
+    color: #78a9ff;
+    background: #282828;
+    border-bottom-color: #3c547f;
+}
+
+#workspaces button:hover {
+    color: #f2f4f8;
+    background: #484848;
+    border-bottom-color: #0e0e0e;
+}
+
+#workspaces button.urgent {
+    color: #161616;
+    background: #ee5396;
+    border-bottom-color: #77294b;
+}
+
+/* ---- titulo da janela: discreto, so contexto -------------------------- */
+#window {
+    color: #b5b7ba;
+    font-weight: normal;
+    padding: 0 16px;
+}
+window#waybar.empty #window {
+    background: transparent;
+    border-bottom-color: transparent;
+}
+
+/* ---- indicadores ------------------------------------------------------ */
+#cpu, #memory { color: #33b1ff; padding: 0 10px; }
+#pulseaudio   { color: #be95ff; }
+#network      { color: #25be6a; }
+#language     { color: #08bdba; }
+#clock        { color: #78a9ff; font-size: 14px; }
+
+#pulseaudio.muted        { color: #6f6f6f; }
+#network.disconnected    { color: #ee5396; border-bottom-color: #77294b; }
+
+#tray { padding: 0 10px; }
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }

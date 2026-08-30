@@ -4,7 +4,7 @@
     bg:     #161616;
     bg-alt: #1c1c1c;
     fg:     #f2f4f8;
-    fg-dim: #b6b8bb;
+    fg-dim: #b5b7ba;
     accent: #78a9ff;
     line:   #484848;
 

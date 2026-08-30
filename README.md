@@ -71,3 +71,16 @@ desatualiza. A descricao de cada atalho vem do comentario no fim da linha:
 
 Adicionou um bind? Comente ele e a tela ja mostra.
 Conferir sem abrir janela: `cheatsheet --print`.
+
+## Waybar
+
+Desenho proprio, misturando duas referencias:
+
+  space_dots (vdawg-git)           barra transparente flutuante; areas em
+                                   numerais CJK; CPU como grafico de blocos
+  summer-day-and-night (MathisP75) efeito 3D de tecla: borda inferior numa
+                                   versao escura da cor do modulo; a area
+                                   ativa AFUNDA (perde a borda e desce)
+
+As sombras nao sao escritas a mao: o render.py deriva `_dark` (50%) e `_dim`
+(75%) de cada cor da paleta. Paleta nova ganha sombras corretas de graca.

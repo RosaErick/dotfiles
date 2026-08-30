@@ -1,17 +1,141 @@
-/* GERADO por `theme` a partir de theme/templates/waybar-style.css.tmpl
-   NAO EDITE ESTE ARQUIVO — edite o template. */
+/* GERADO por `theme` — edite theme/templates/waybar-style.css.tmpl
+ *
+ * Mistura:
+ *   space_dots (vdawg-git)          -> barra transparente flutuante, sem moldura
+ *   summer-day-and-night (MathisP75) -> efeito 3D: cada modulo e uma tecla com
+ *                                       borda inferior numa versao escura da
+ *                                       propria cor; o item ativo AFUNDA.
+ *
+ * As sombras (sufixo _dark) sao calculadas pelo render.py a partir da paleta —
+ * nao ha cor escrita a mao aqui.
+ */
+
 * {
     font-family: "{{font}}", monospace;
-    font-size: {{font_size}};
+    font-size: 13px;
+    font-weight: bold;
     border: none;
     border-radius: 0;
     min-height: 0;
 }
-window#waybar { background: rgba({{bg_raw}}, {{alpha}}); color: {{fg}}; }
-#workspaces button { padding: 0 8px; color: {{fg_mute}}; }
-#workspaces button.active { color: {{fg}}; box-shadow: inset 0 -2px {{accent}}; }
-#workspaces button:hover { background: {{bg_high}}; }
-#window { color: {{fg_dim}}; }
-#pulseaudio, #network, #cpu, #memory, #clock, #tray { padding: 0 10px; }
-#clock { color: {{accent}}; font-weight: bold; }
-#network.disconnected { color: {{urgent}}; }
+
+/* A barra em si nao existe visualmente: so as teclas flutuam. */
+window#waybar {
+    background: transparent;
+    color: {{fg}};
+}
+
+tooltip {
+    background: {{bg_alt}};
+    color: {{fg}};
+    border: 1px solid {{line}};
+    border-radius: 8px;
+}
+tooltip label { padding: 4px; }
+
+/* ---- a tecla: base compartilhada -------------------------------------- */
+#custom-launcher,
+#workspaces,
+#window,
+#cpu,
+#memory,
+#pulseaudio,
+#network,
+#language,
+#clock,
+#tray,
+#custom-power {
+    background: {{bg_high}};      /* mais claro que o fundo da tela... */
+    color: {{fg}};
+    padding: 0 12px;
+    margin: 4px 0 8px 0;          /* 8px embaixo = espaco pra "sombra" */
+    border-radius: 9px;
+    border-bottom: 4px solid {{bg_alt_dark}};  /* ...pra sombra ter contraste */
+}
+
+/* ---- acentos ---------------------------------------------------------- */
+#custom-launcher {
+    background: {{accent}};
+    color: {{bg}};
+    border-bottom-color: {{accent_dark}};
+    padding: 0 14px;
+    font-size: 15px;
+}
+#custom-launcher:hover { background: {{cyan}}; border-bottom-color: {{cyan_dark}}; }
+
+#custom-power {
+    background: {{red}};
+    color: {{bg}};
+    border-bottom-color: {{red_dark}};
+    padding: 0 13px;
+}
+#custom-power:hover { background: {{magenta}}; border-bottom-color: {{magenta_dark}}; }
+
+/* ---- workspaces: numerais CJK, o ativo afunda ------------------------- */
+#workspaces { padding: 0 4px; }
+
+#workspaces button {
+    color: {{fg_mute}};
+    background: transparent;
+    padding: 0 7px;
+    margin: 2px 2px 0 2px;
+    border-radius: 6px;
+    font-size: 15px;
+    border-bottom: 3px solid transparent;
+    transition: all 160ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* o truque do summer-day-and-night: perde a borda e desce 3px,
+   entao a tecla parece pressionada pra dentro. */
+#workspaces button.active {
+    color: {{bg}};
+    background: {{accent}};
+    border-bottom: 0 solid transparent;
+    margin-top: 5px;
+    margin-bottom: -3px;
+}
+
+/* area corrente de um monitor que NAO esta focado: estado intermediario,
+   senao no dual-monitor a outra tela parece nao ter nada aberto. */
+#workspaces button.visible {
+    color: {{accent}};
+    background: {{bg_high}};
+    border-bottom-color: {{accent_dark}};
+}
+
+#workspaces button:hover {
+    color: {{fg}};
+    background: {{line}};
+    border-bottom-color: {{bg_alt_dark}};
+}
+
+#workspaces button.urgent {
+    color: {{bg}};
+    background: {{red}};
+    border-bottom-color: {{red_dark}};
+}
+
+/* ---- titulo da janela: discreto, so contexto -------------------------- */
+#window {
+    color: {{fg_dim}};
+    font-weight: normal;
+    padding: 0 16px;
+}
+window#waybar.empty #window {
+    background: transparent;
+    border-bottom-color: transparent;
+}
+
+/* ---- indicadores ------------------------------------------------------ */
+#cpu, #memory { color: {{cyan}}; padding: 0 10px; }
+#pulseaudio   { color: {{magenta}}; }
+#network      { color: {{green}}; }
+#language     { color: {{yellow}}; }
+#clock        { color: {{accent}}; font-size: 14px; }
+
+#pulseaudio.muted        { color: {{fg_mute}}; }
+#network.disconnected    { color: {{red}}; border-bottom-color: {{red_dark}}; }
+
+#tray { padding: 0 10px; }
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }

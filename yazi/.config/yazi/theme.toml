@@ -14,7 +14,7 @@ marker_marked   = { fg = "#33b1ff",    bg = "#33b1ff" }
 marker_selected = { fg = "#be95ff", bg = "#be95ff" }
 
 tab_active   = { fg = "#161616", bg = "#78a9ff" }
-tab_inactive = { fg = "#b6b8bb", bg = "#282828" }
+tab_inactive = { fg = "#b5b7ba", bg = "#282828" }
 tab_width    = 1
 
 border_symbol = "│"

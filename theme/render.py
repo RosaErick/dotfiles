@@ -49,12 +49,22 @@ def load_palette(name):
     vars_ = {}
     vars_.update(data.get("colors", {}))
     vars_.update(data.get("opts", {}))
-    # variantes _raw: "#78a9ff" -> "120,169,255"  (hyprland usa rgb(r,g,b))
+    # Para cada cor #rrggbb gera variantes derivadas:
+    #   _raw   "120,169,255"  -> hyprland usa rgb(r,g,b)
+    #   _hex   "78a9ff"       -> sem o #
+    #   _dark  50% mais escura -> sombra do efeito 3D (borda de baixo)
+    #   _dim   75% mais escura -> estados apagados
+    def escurecer(val, fator):
+        r, g, b = (int(val[i:i + 2], 16) for i in (1, 3, 5))
+        return "#%02x%02x%02x" % (int(r * fator), int(g * fator), int(b * fator))
+
     for key, val in list(vars_.items()):
         if isinstance(val, str) and re.fullmatch(r"#[0-9a-fA-F]{6}", val):
             r, g, b = (int(val[i:i + 2], 16) for i in (1, 3, 5))
             vars_[f"{key}_raw"] = f"{r},{g},{b}"
             vars_[f"{key}_hex"] = val.lstrip("#")
+            vars_[f"{key}_dark"] = escurecer(val, 0.50)
+            vars_[f"{key}_dim"] = escurecer(val, 0.75)
     return data.get("name", name), vars_
 
 

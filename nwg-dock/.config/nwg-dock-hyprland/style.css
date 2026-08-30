@@ -6,7 +6,7 @@ window {
 }
 #box { padding: 8px; }
 #active { border-bottom: solid 2px; border-color: #78a9ff; }
-button, image { background: none; border: none; box-shadow: none; color: #b6b8bb; }
+button, image { background: none; border: none; box-shadow: none; color: #b5b7ba; }
 button {
     padding: 6px;
     margin: 0 3px;

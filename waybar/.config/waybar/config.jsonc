@@ -1,40 +1,98 @@
 {
+    // Barra propria: mistura o minimalismo flutuante do space_dots (vdawg-git)
+    // com o efeito 3D de tecla do summer-day-and-night (MathisP75),
+    // na paleta do nosso tema. O visual mora em theme/templates/waybar-style.css.tmpl
     "layer": "top",
     "position": "top",
-    "height": 34,
+    "height": 42,
+    "margin-top": 8,
+    "margin-left": 12,
+    "margin-right": 12,
     "spacing": 8,
 
-    "modules-left":   ["hyprland/workspaces", "hyprland/submap"],
+    "modules-left":   ["custom/launcher", "hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["hyprland/window"],
-    "modules-right":  ["hyprland/language", "pulseaudio", "network", "cpu", "memory", "clock", "tray"],
+    "modules-right":  ["cpu", "memory", "pulseaudio", "network",
+                       "hyprland/language", "clock", "tray", "custom/power"],
 
-    "hyprland/workspaces": { "on-click": "activate" },
-    "hyprland/window": { "max-length": 60, "separate-outputs": true },
+    // --- esquerda ---------------------------------------------------------
+    "custom/launcher": {
+        "format": "󰣇",
+        "on-click": "rofi -show drun -theme grid",
+        "tooltip-format": "aplicativos  (SUPER+D)"
+    },
+
+    // numerais CJK, ideia do space_dots: ocupam 1 caractere e nao viram ruido
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "sort-by-number": true,
+        "format-icons": {
+            "1": "一", "2": "二", "3": "三", "4": "四", "5": "五",
+            "6": "六", "7": "七", "8": "八", "9": "九", "10": "十"
+        }
+    },
+
+    // --- centro -----------------------------------------------------------
+    "hyprland/window": {
+        "max-length": 55,
+        "separate-outputs": true,
+        "format": "{}",
+        "rewrite": {
+            "": "—"
+        }
+    },
+
+    // --- direita ----------------------------------------------------------
+    // grafico de blocos, ideia do space_dots: 4 celulas em vez de "42%"
+    "cpu": {
+        "interval": 3,
+        "format": "󰻠 {icon0}{icon1}{icon2}{icon3}",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "tooltip-format": "CPU {usage}%",
+        "on-click": "taskmanager"
+    },
+    // memoria tem um valor so: {icon} unico + o numero (cpu expoe por core)
+    "memory": {
+        "interval": 10,
+        "format": "󰍛 {icon} {percentage}%",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "tooltip-format": "RAM {used:0.1f}G / {total:0.1f}G  ({percentage}%)",
+        "on-click": "taskmanager"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 mudo",
+        "format-icons": { "headphone": "󰋋", "headset": "󰋎", "default": ["󰕿", "󰖀", "󰕾"] },
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "scroll-step": 5
+    },
+    "network": {
+        "format-ethernet": "󰈀",
+        "format-wifi": "󰖩 {signalStrength}%",
+        "format-disconnected": "󰖪",
+        "tooltip-format-ethernet": "{ifname}   {ipaddr}",
+        "tooltip-format-wifi": "{essid}   {ipaddr}   {signalStrength}%",
+        "tooltip-format-disconnected": "sem rede",
+        "on-click": "nm-connection-editor"
+    },
     "hyprland/language": {
         "format": "󰌌 {}",
         "format-en": "US",
         "format-pt": "BR",
         "on-click": "hyprctl switchxkblayout current next",
-        "tooltip-format": "layout do teclado — SUPER+ESPACO alterna"
+        "tooltip-format": "layout do teclado  (SUPER+ESPACO)"
     },
-
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "󰝟 mudo",
-        "format-icons": { "default": ["󰕿", "󰖀", "󰕾"] },
-        "on-click": "pavucontrol"
-    },
-    "network": {
-        "format-ethernet": "󰈀 {ipaddr}",
-        "format-wifi": "󰖩 {essid}",
-        "format-disconnected": "󰖪 off"
-    },
-    "cpu":    { "format": "󰻠 {usage}%" },
-    "memory": { "format": "󰍛 {percentage}%" },
     "clock": {
-        "format": "󰥔 {:%H:%M}",
-        "format-alt": "󰃭 {:%d/%m/%Y}",
+        "format": "{:%H:%M}",
+        "format-alt": "{:%a %d/%m}",
         "tooltip-format": "<tt>{calendar}</tt>"
     },
-    "tray": { "spacing": 10 }
+    "tray": { "icon-size": 15, "spacing": 8 },
+    "custom/power": {
+        "format": "󰐥",
+        "on-click": "powermenu",
+        "tooltip-format": "sessao  (CTRL+ALT+DEL)"
+    }
 }
