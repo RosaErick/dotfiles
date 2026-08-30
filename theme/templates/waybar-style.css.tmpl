@@ -36,10 +36,10 @@ tooltip label { padding: 4px; }
 /* ---- a tecla: base compartilhada -------------------------------------- */
 #custom-launcher,
 #workspaces,
+#audio,
 #window,
 #cpu,
 #memory,
-#pulseaudio,
 #network,
 #language,
 #clock,
@@ -151,3 +151,54 @@ window#waybar.empty #window {
 #tray { padding: 0 10px; }
 #tray > .passive { -gtk-icon-effect: dim; }
 #tray > .needs-attention { -gtk-icon-effect: highlight; }
+
+
+/* ---- grupo de audio (drawer: abre no hover) --------------------------- */
+/* O grupo e a tecla; os filhos sao conteudo dentro dela. */
+#audio { padding: 0 4px; }
+
+#audio #pulseaudio,
+#audio #custom-audio-out,
+#audio #custom-audio-in {
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0 8px;
+    color: {{magenta}};
+}
+#audio #pulseaudio.muted { color: {{fg_mute}}; }
+
+#audio #custom-audio-out:hover,
+#audio #custom-audio-in:hover { color: {{fg}}; }
+
+/* estado escondido: o waybar aplica children-class nos filhos recolhidos */
+#audio .audio-item {
+    opacity: 0;
+    min-width: 0;
+    transition: opacity 250ms ease, min-width 250ms ease;
+}
+#audio:hover .audio-item {
+    opacity: 1;
+}
+
+/* o slider: trilho fino, botao redondo na cor do tema */
+#audio slider {
+    min-width: 0;
+    min-height: 0;
+    background: {{magenta}};
+    border: 2px solid {{bg_high}};
+    border-radius: 8px;
+    box-shadow: none;
+}
+#audio trough {
+    min-width: 110px;
+    min-height: 6px;
+    border-radius: 3px;
+    background: {{line}};
+    margin: 0 6px;
+}
+#audio highlight {
+    min-height: 6px;
+    border-radius: 3px;
+    background: {{magenta}};
+}

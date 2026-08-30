@@ -1,0 +1,79 @@
+#!/usr/bin/python3
+"""Troca a saida ou a entrada de audio padrao, escolhendo num rofi.
+
+    audio-device out    escolhe o alto-falante/fone
+    audio-device in     escolhe o microfone
+
+Move tambem os streams que ja estao tocando, senao o app so muda quando
+reabre. Nomes vem de uma cadeia de fallback porque muito hardware reporta
+description vazio.
+"""
+import json
+import subprocess
+import sys
+
+
+def pactl_json(o):
+    r = subprocess.run(["pactl", "-f", "json", "list", o],
+                       capture_output=True, text=True)
+    return json.loads(r.stdout) if r.returncode == 0 else []
+
+
+def nome(dev):
+    p = dev.get("properties", {})
+    for chave in ("device.description", "node.description", "device.nick",
+                  "node.nick", "alsa.card_name", "api.alsa.card.name"):
+        v = (p.get(chave) or "").strip()
+        if v and v != "(null)":
+            return v
+    # ultimo recurso: limpa o long_card_name ("X at usb-0000:.., full speed")
+    v = (p.get("alsa.long_card_name") or "").strip()
+    if v:
+        return v.split(" at ")[0].strip() or v
+    return dev["name"]
+
+
+def main():
+    tipo = sys.argv[1] if len(sys.argv) > 1 else "out"
+    if tipo == "out":
+        objs, atual_cmd, set_cmd, mover = "sinks", "@DEFAULT_SINK@", "set-default-sink", ("sink-inputs", "move-sink-input")
+        titulo = "saida"
+    else:
+        objs, atual_cmd, set_cmd, mover = "sources", "@DEFAULT_SOURCE@", "set-default-source", ("source-outputs", "move-source-output")
+        titulo = "entrada"
+
+    devs = [d for d in pactl_json(objs) if not d["name"].endswith(".monitor")]
+    if not devs:
+        sys.exit(f"nenhuma {titulo} encontrada")
+
+    atual = subprocess.run(["pactl", f"get-default-{objs[:-1]}"],
+                           capture_output=True, text=True).stdout.strip()
+
+    linhas = []
+    for d in devs:
+        marca = "󰄬 " if d["name"] == atual else "  "
+        linhas.append(f"{marca}{nome(d)}")
+
+    # sem operador % aqui: o CSS ja usa "%" e colide com a formatacao
+    tema = "window { width: 34%; } listview { lines: " + str(min(len(devs), 8)) + "; }"
+    r = subprocess.run(
+        ["rofi", "-dmenu", "-i", "-p", titulo, "-theme-str", tema],
+        input="\n".join(linhas), capture_output=True, text=True)
+    escolha = r.stdout.strip()
+    if not escolha:
+        return
+    idx = linhas.index(escolha) if escolha in linhas else -1
+    if idx < 0:
+        return
+    alvo = devs[idx]["name"]
+
+    subprocess.run(["pactl", set_cmd, alvo])
+    # move o que ja esta tocando
+    for s in pactl_json(mover[0]):
+        subprocess.run(["pactl", mover[1], str(s["index"]), alvo],
+                       capture_output=True)
+    subprocess.run(["notify-send", "-t", "2000", f"Audio: {titulo}", nome(devs[idx])])
+
+
+if __name__ == "__main__":
+    main()

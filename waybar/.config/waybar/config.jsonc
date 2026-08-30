@@ -12,7 +12,7 @@
 
     "modules-left":   ["custom/launcher", "hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["hyprland/window"],
-    "modules-right":  ["cpu", "memory", "pulseaudio", "network",
+    "modules-right":  ["cpu", "memory", "group/audio", "network",
                        "hyprland/language", "clock", "tray", "custom/power"],
 
     // --- esquerda ---------------------------------------------------------
@@ -55,11 +55,39 @@
     // memoria tem um valor so: {icon} unico + o numero (cpu expoe por core)
     "memory": {
         "interval": 10,
-        "format": "󰍛 {icon} {percentage}%",
+        "format": "󰍛 {icon} {used:0.1f}/{total:0.0f}G",
         "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
         "tooltip-format": "RAM {used:0.1f}G / {total:0.1f}G  ({percentage}%)",
         "on-click": "taskmanager"
     },
+    // Passar o mouse revela slider + trocar saida/entrada.
+    // "drawer" e nativo do waybar: esconde tudo menos o primeiro filho.
+    "group/audio": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 250,
+            "children-class": "audio-item",
+            "transition-left-to-right": false
+        },
+        "modules": ["pulseaudio", "pulseaudio/slider",
+                    "custom/audio-out", "custom/audio-in"]
+    },
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+    "custom/audio-out": {
+        "format": "󰓃",
+        "on-click": "audio-device out",
+        "tooltip-format": "trocar saida de audio"
+    },
+    "custom/audio-in": {
+        "format": "󰍬",
+        "on-click": "audio-device in",
+        "tooltip-format": "trocar entrada (microfone)"
+    },
+
     "pulseaudio": {
         "format": "{icon} {volume}%",
         "format-muted": "󰝟 mudo",
