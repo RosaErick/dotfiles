@@ -1,0 +1,115 @@
+#!/usr/bin/python3
+"""Seletor visual de wallpaper (SUPER+W).
+
+Mostra as imagens de ~/Imagens/wallpapers em grade no rofi, com miniatura.
+Ao escolher: aplica na hora e persiste no reboot.
+
+Persistencia sem sujar o git: o hyprpaper.conf aponta para o symlink
+~/.config/hypr/wallpaper, e este script so re-aponta o symlink. Assim o
+arquivo versionado nunca muda — a escolha e estado da maquina, nao config.
+
+    wallpaper            abre o seletor
+    wallpaper <arquivo>  aplica direto, sem GUI
+    wallpaper --random   escolhe uma ao acaso
+"""
+import os
+import random
+import subprocess
+import sys
+import tomllib
+from pathlib import Path
+
+DIR = Path.home() / "Imagens/wallpapers"
+LINK = Path.home() / ".config/hypr/wallpaper"
+DOTS = Path.home() / ".dotfiles"
+EXT = {".jpg", ".jpeg", ".png", ".webp", ".heic", ".bmp"}
+
+
+def paleta():
+    p = {"accent": "#78a9ff", "fg": "#f2f4f8", "fg_dim": "#b6b8bb",
+         "bg_raw": "22,22,22"}
+    try:
+        atual = (DOTS / "theme/.current").read_text().strip()
+        with open(DOTS / f"theme/palettes/{atual}.toml", "rb") as f:
+            c = tomllib.load(f).get("colors", {})
+        p.update({k: v for k, v in c.items() if k in p})
+        if "bg" in c:
+            r, g, b = (int(c["bg"][i:i + 2], 16) for i in (1, 3, 5))
+            p["bg_raw"] = f"{r},{g},{b}"
+    except Exception:
+        pass
+    return p
+
+
+def imagens():
+    if not DIR.is_dir():
+        sys.exit(f"nao achei {DIR}")
+    return sorted((f for f in DIR.iterdir()
+                   if f.is_file() and f.suffix.lower() in EXT),
+                  key=lambda f: f.name.lower())
+
+
+def aplicar(img):
+    img = img.resolve()
+    LINK.parent.mkdir(parents=True, exist_ok=True)
+    if LINK.is_symlink() or LINK.exists():
+        LINK.unlink()
+    LINK.symlink_to(img)                       # persiste no reboot
+    r = subprocess.run(["hyprctl", "hyprpaper", "wallpaper", f",{img}"],
+                       capture_output=True, text=True)          # aplica agora
+    ok = r.returncode == 0 and "error" not in r.stdout.lower()
+    subprocess.run(["notify-send", "-t", "2500", "Wallpaper",
+                    img.name if ok else f"falhou: {r.stdout.strip()[:60]}"],
+                   capture_output=True)
+    print(("ok: " if ok else "falhou: ") + img.name)
+    return ok
+
+
+def escolher(imgs):
+    p = paleta()
+    entradas = "\n".join(f"{f.name}\0icon\x1f{f}" for f in imgs)
+    tema = (
+        f"window {{ width: 76%; height: 74%; padding: 16px; "
+        f"background-color: rgba({p['bg_raw']}, 1.0); }} "
+        "listview { columns: 4; lines: 3; spacing: 10px; scrollbar: false; } "
+        "element { orientation: vertical; padding: 8px; border-radius: 8px; "
+        "          spacing: 6px; } "
+        "element-icon { size: 190px; horizontal-align: 0.5; } "
+        "element-text { horizontal-align: 0.5; } "
+        f"element selected {{ background-color: {p['accent']}; "
+        f"                    text-color: rgba({p['bg_raw']}, 1.0); }}"
+    )
+    r = subprocess.run(
+        ["rofi", "-dmenu", "-i", "-show-icons", "-p", "wallpaper",
+         "-format", "s", "-theme-str", tema],
+        input=entradas, capture_output=True, text=True)
+    nome = r.stdout.strip()
+    return next((f for f in imgs if f.name == nome), None)
+
+
+def main():
+    args = sys.argv[1:]
+    if args and args[0] in ("-h", "--help"):
+        print(__doc__)
+        return
+    imgs = imagens()
+    if not imgs:
+        sys.exit(f"nenhuma imagem em {DIR}")
+
+    if args and args[0] == "--random":
+        aplicar(random.choice(imgs))
+    elif args:
+        alvo = Path(args[0])
+        if not alvo.is_absolute():
+            alvo = DIR / args[0]
+        if not alvo.is_file():
+            sys.exit(f"nao achei {alvo}")
+        aplicar(alvo)
+    else:
+        escolhida = escolher(imgs)
+        if escolhida:
+            aplicar(escolhida)
+
+
+if __name__ == "__main__":
+    main()

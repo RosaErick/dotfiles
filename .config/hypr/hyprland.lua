@@ -304,6 +304,7 @@ hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("rofi -show drun -theme grid"))  -- g
 hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd("taskmanager"))  -- monitor de processos
 hl.bind("CTRL + ALT + Delete",   hl.dsp.exec_cmd("powermenu"))  -- bloquear / sair / desligar
 hl.bind(mainMod .. " + slash", hl.dsp.exec_cmd("cheatsheet"))  -- esta tela de atalhos
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("wallpaper"))  -- trocar wallpaper
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("makoctl dismiss -a"))  -- limpa notificacoes
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))     -- bloqueia a tela
 

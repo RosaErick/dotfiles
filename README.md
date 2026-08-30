@@ -101,3 +101,16 @@ theme/       palettes + templates + the render engine
 - The wallpaper is not in this repo. Drop your own at
   `~/Imagens/wallpapers/synthwave.jpg` or edit `hyprpaper.conf` and
   `hyprlock.conf`. Hyprlock falls back to a solid color if the file is missing.
+
+## Wallpapers
+
+`SUPER + W` opens a thumbnail grid (rofi) of `~/Imagens/wallpapers`.
+
+Persistence uses a symlink, not config edits: `hyprpaper.conf` and
+`hyprlock.conf` both point at `~/.config/hypr/wallpaper`, and the picker
+just re-points that symlink. The versioned config never changes, so
+switching wallpaper produces no git diff.
+
+    wallpaper              picker
+    wallpaper <file>       apply directly
+    wallpaper --random     random one

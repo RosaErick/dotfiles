@@ -13,3 +13,4 @@ theme/.current
 # zsh: historico e backups nao entram no repo
 .zsh_history
 *.bak*
+.config/hypr/wallpaper
