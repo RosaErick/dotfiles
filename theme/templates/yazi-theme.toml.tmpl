@@ -1,0 +1,69 @@
+# GERADO por `theme` — edite theme/templates/yazi-theme.toml.tmpl
+
+[mgr]
+cwd             = { fg = "{{accent}}" }
+hovered         = { fg = "{{bg}}", bg = "{{accent}}" }
+preview_hovered = { underline = true }
+
+find_keyword  = { fg = "{{yellow}}", bold = true }
+find_position = { fg = "{{magenta}}", bg = "reset", bold = true }
+
+marker_copied   = { fg = "{{green}}",   bg = "{{green}}" }
+marker_cut      = { fg = "{{red}}",     bg = "{{red}}" }
+marker_marked   = { fg = "{{cyan}}",    bg = "{{cyan}}" }
+marker_selected = { fg = "{{magenta}}", bg = "{{magenta}}" }
+
+tab_active   = { fg = "{{bg}}", bg = "{{accent}}" }
+tab_inactive = { fg = "{{fg_dim}}", bg = "{{bg_high}}" }
+tab_width    = 1
+
+border_symbol = "│"
+border_style  = { fg = "{{line}}" }
+
+[mode]
+normal_main = { fg = "{{bg}}", bg = "{{accent}}",  bold = true }
+normal_alt  = { fg = "{{accent}}", bg = "{{bg_high}}" }
+select_main = { fg = "{{bg}}", bg = "{{green}}",   bold = true }
+select_alt  = { fg = "{{green}}",  bg = "{{bg_high}}" }
+unset_main  = { fg = "{{bg}}", bg = "{{magenta}}", bold = true }
+unset_alt   = { fg = "{{magenta}}", bg = "{{bg_high}}" }
+
+[status]
+overall   = { fg = "{{fg}}" }
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+[select]
+border   = { fg = "{{accent}}" }
+active   = { fg = "{{magenta}}" }
+inactive = {}
+
+[input]
+border   = { fg = "{{accent}}" }
+title    = {}
+value    = {}
+selected = { reversed = true }
+
+[pick]
+border   = { fg = "{{accent}}" }
+active   = { fg = "{{magenta}}" }
+inactive = {}
+
+[confirm]
+border  = { fg = "{{accent}}" }
+title   = { fg = "{{accent}}" }
+content = {}
+list    = {}
+
+[filetype]
+rules = [
+  { mime = "image/*", fg = "{{cyan}}" },
+  { mime = "video/*", fg = "{{magenta}}" },
+  { mime = "audio/*", fg = "{{magenta}}" },
+  { mime = "application/zip",   fg = "{{red}}" },
+  { mime = "application/gzip",  fg = "{{red}}" },
+  { mime = "application/x-tar", fg = "{{red}}" },
+  { mime = "application/pdf",   fg = "{{red}}" },
+  { url = "*/", fg = "{{accent}}" },
+  { url = "*",  fg = "{{fg}}" },
+]

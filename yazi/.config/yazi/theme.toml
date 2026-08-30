@@ -1,0 +1,69 @@
+# GERADO por `theme` — edite theme/templates/yazi-theme.toml.tmpl
+
+[mgr]
+cwd             = { fg = "#78a9ff" }
+hovered         = { fg = "#161616", bg = "#78a9ff" }
+preview_hovered = { underline = true }
+
+find_keyword  = { fg = "#08bdba", bold = true }
+find_position = { fg = "#be95ff", bg = "reset", bold = true }
+
+marker_copied   = { fg = "#25be6a",   bg = "#25be6a" }
+marker_cut      = { fg = "#ee5396",     bg = "#ee5396" }
+marker_marked   = { fg = "#33b1ff",    bg = "#33b1ff" }
+marker_selected = { fg = "#be95ff", bg = "#be95ff" }
+
+tab_active   = { fg = "#161616", bg = "#78a9ff" }
+tab_inactive = { fg = "#b6b8bb", bg = "#282828" }
+tab_width    = 1
+
+border_symbol = "│"
+border_style  = { fg = "#484848" }
+
+[mode]
+normal_main = { fg = "#161616", bg = "#78a9ff",  bold = true }
+normal_alt  = { fg = "#78a9ff", bg = "#282828" }
+select_main = { fg = "#161616", bg = "#25be6a",   bold = true }
+select_alt  = { fg = "#25be6a",  bg = "#282828" }
+unset_main  = { fg = "#161616", bg = "#be95ff", bold = true }
+unset_alt   = { fg = "#be95ff", bg = "#282828" }
+
+[status]
+overall   = { fg = "#f2f4f8" }
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+[select]
+border   = { fg = "#78a9ff" }
+active   = { fg = "#be95ff" }
+inactive = {}
+
+[input]
+border   = { fg = "#78a9ff" }
+title    = {}
+value    = {}
+selected = { reversed = true }
+
+[pick]
+border   = { fg = "#78a9ff" }
+active   = { fg = "#be95ff" }
+inactive = {}
+
+[confirm]
+border  = { fg = "#78a9ff" }
+title   = { fg = "#78a9ff" }
+content = {}
+list    = {}
+
+[filetype]
+rules = [
+  { mime = "image/*", fg = "#33b1ff" },
+  { mime = "video/*", fg = "#be95ff" },
+  { mime = "audio/*", fg = "#be95ff" },
+  { mime = "application/zip",   fg = "#ee5396" },
+  { mime = "application/gzip",  fg = "#ee5396" },
+  { mime = "application/x-tar", fg = "#ee5396" },
+  { mime = "application/pdf",   fg = "#ee5396" },
+  { url = "*/", fg = "#78a9ff" },
+  { url = "*",  fg = "#f2f4f8" },
+]

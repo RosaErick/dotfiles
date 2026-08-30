@@ -1,0 +1,3 @@
+#!/bin/sh
+# Explorador de arquivos. Trocar de programa aqui muda o SUPER+E.
+exec ghostty --title="Arquivos" -e yazi "$@"

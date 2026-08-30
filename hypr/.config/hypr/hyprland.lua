@@ -45,7 +45,7 @@ end
 
 -- Set programs that you use
 local terminal = "ghostty"
-local fileManager = "dolphin"
+local fileManager = "files"     -- wrapper: ghostty + yazi (bin/.local/bin/files)
 local menu        = "rofi -show drun"
 
 
