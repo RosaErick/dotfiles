@@ -43,3 +43,15 @@ especificos desta maquina (nomes de saida, posicao das telas).
 
 abre um prompt de senha em rofi em vez de exigir tty. Util quando o comando
 parte de um lancador, script ou agente sem terminal interativo.
+
+## Tela de atalhos
+
+`SUPER + /` abre uma lista pesquisavel de todos os keybinds.
+
+Ela e gerada lendo `hypr/.config/hypr/hyprland.lua` na hora, entao nunca
+desatualiza. A descricao de cada atalho vem do comentario no fim da linha:
+
+    hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))  -- abrir terminal
+
+Adicionou um bind? Comente ele e a tela ja mostra.
+Conferir sem abrir janela: `cheatsheet --print`.

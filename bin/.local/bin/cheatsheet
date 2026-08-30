@@ -1,0 +1,128 @@
+#!/usr/bin/python3
+"""Tela de atalhos do Hyprland.
+
+Le os binds direto de ~/.config/hypr/hyprland.lua e mostra num rofi
+pesquisavel. Como le do arquivo real, nunca fica desatualizada:
+adicionou um hl.bind, ele aparece aqui.
+
+Descricao de cada atalho, em ordem de prioridade:
+  1. comentario no fim da linha  -- assim
+  2. traducao do dispatcher (tabela ACOES abaixo)
+  3. o comando cru, como ultimo recurso
+"""
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+CONF = Path.home() / ".config/hypr/hyprland.lua"
+
+# dispatcher -> rotulo legivel
+ACOES = [
+    (r'window\.close\(\)',                      "fechar janela"),
+    (r'window\.float\(',                        "alternar janela flutuante"),
+    (r'window\.pseudo\(\)',                     "alternar pseudo-tile"),
+    (r'window\.drag\(\)',                       "arrastar janela (mouse)"),
+    (r'window\.resize\(\)',                     "redimensionar janela (mouse)"),
+    (r'layout\("togglesplit"\)',                "alternar divisao horizontal/vertical"),
+    (r'workspace\.toggle_special\("(\w+)"\)',   "area especial: {0}"),
+    (r'window\.move\(\{ workspace = "special:(\w+)" \}\)', "mover janela pra area especial: {0}"),
+    (r'window\.move\(\{ workspace = i ?\}\)',   "mover janela pra area N"),
+    (r'focus\(\{ ?workspace = i ?\}\)',         "ir pra area N"),
+    (r'focus\(\{ workspace = "e\+1" \}\)',      "proxima area"),
+    (r'focus\(\{ workspace = "e-1" \}\)',       "area anterior"),
+    (r'focus\(\{ direction = "(\w+)" \}\)',     "focar janela: {0}"),
+    (r'exit\(\)',                               "sair da sessao"),
+]
+
+# variaveis do proprio hyprland.lua que aparecem dentro dos binds
+def ler_vars(texto):
+    v = {}
+    for m in re.finditer(r'^local\s+(\w+)\s*=\s*"([^"]*)"', texto, re.M):
+        v[m.group(1)] = m.group(2)
+    for m in re.finditer(r"^local\s+(\w+)\s*=\s*'([^']*)'", texto, re.M):
+        v[m.group(1)] = m.group(2)
+    return v
+
+
+def resolver_tecla(expr, vars_):
+    """mainMod .. " + Q"  ->  SUPER + Q"""
+    partes = []
+    for p in expr.split(".."):
+        p = p.strip()
+        if (p.startswith('"') and p.endswith('"')) or (p.startswith("'") and p.endswith("'")):
+            partes.append(p[1:-1])
+        elif p in vars_:
+            partes.append(vars_[p])
+        elif p == "key":
+            partes.append("1..9")
+        else:
+            partes.append(p)
+    return "".join(partes).strip()
+
+
+def descrever(acao, comentario, vars_):
+    if comentario:
+        return comentario.strip()
+    m = re.search(r'exec_cmd\((.+)\)\s*$', acao)
+    if m:
+        alvo = m.group(1).strip()
+        if alvo in vars_:
+            return f"{vars_[alvo]}"
+        if alvo.startswith('"') and alvo.endswith('"'):
+            cmd = alvo[1:-1]
+            return cmd if len(cmd) <= 60 else cmd[:57] + "..."
+        return alvo
+    for padrao, rotulo in ACOES:
+        mm = re.search(padrao, acao)
+        if mm:
+            return rotulo.format(*mm.groups()) if mm.groups() else rotulo
+    return acao.strip()
+
+
+def main():
+    if not CONF.exists():
+        sys.exit(f"nao achei {CONF}")
+    texto = CONF.read_text()
+    vars_ = ler_vars(texto)
+
+    linhas = []
+    padrao = re.compile(
+        r'hl\.bind\(\s*(?P<tecla>.+?),\s*(?P<acao>hl\.dsp\..+?)\s*(?:,\s*\{.*\})?\)\s*(?:--\s*(?P<cmt>.*))?$'
+    )
+    for linha in texto.splitlines():
+        s = linha.strip()
+        if not s.startswith(("hl.bind(", "local ")) or "hl.bind(" not in s:
+            continue
+        if s.startswith("--"):
+            continue
+        s = re.sub(r'^local\s+\w+\s*=\s*', '', s)
+        m = padrao.match(s)
+        if not m:
+            continue
+        tecla = resolver_tecla(m.group("tecla"), vars_)
+        desc = descrever(m.group("acao"), m.group("cmt"), vars_)
+        linhas.append((tecla, desc))
+
+    if not linhas:
+        sys.exit("nenhum bind encontrado — o formato do hyprland.lua mudou?")
+
+    largura = max(len(t) for t, _ in linhas)
+    corpo = "\n".join(f"{t.ljust(largura)}   {d}" for t, d in linhas)
+
+    if "--print" in sys.argv:      # conferir o parser sem abrir janela
+        print(corpo)
+        return
+
+    rofi = [
+        "rofi", "-dmenu", "-i", "-p", "atalhos",
+        "-mesg", f"{len(linhas)} atalhos — digite pra filtrar, Esc pra fechar",
+        "-theme-str", "window { width: 52%; } listview { lines: 18; } "
+                      "element-text { font: \"JetBrainsMono Nerd Font 10\"; }",
+        "-no-custom",
+    ]
+    subprocess.run(rofi, input=corpo, text=True, capture_output=True)
+
+
+if __name__ == "__main__":
+    main()

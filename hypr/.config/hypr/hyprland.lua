@@ -279,28 +279,29 @@ hl.device({
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))  -- abrir terminal
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))  -- encerrar sessao
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))  -- gerenciador de arquivos
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))  -- lancador de apps (lista)
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("rofi -show drun -theme grid"))  -- grade de aplicativos
 
 -- Monitor de processos e menu de sessao
-hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd("taskmanager"))
-hl.bind("CTRL + ALT + Delete",   hl.dsp.exec_cmd("powermenu"))
+hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd("taskmanager"))  -- monitor de processos
+hl.bind("CTRL + ALT + Delete",   hl.dsp.exec_cmd("powermenu"))  -- menu de sessao: bloquear/sair/desligar
+hl.bind(mainMod .. " + slash", hl.dsp.exec_cmd("cheatsheet"))  -- esta tela de atalhos
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("makoctl dismiss -a"))  -- limpa notificacoes
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))     -- bloqueia a tela
 
 -- Capturas de tela (hyprshot: salva na pasta e copia pro clipboard)
 local shots = 'hyprshot -z -o "$HOME/Imagens/Capturas de tela" -m '
-hl.bind("Print",                  hl.dsp.exec_cmd(shots .. "region"))
-hl.bind("SHIFT + Print",          hl.dsp.exec_cmd(shots .. "window"))
-hl.bind(mainMod .. " + Print",    hl.dsp.exec_cmd(shots .. "output"))
+hl.bind("Print",                  hl.dsp.exec_cmd(shots .. "region"))  -- captura: selecionar regiao
+hl.bind("SHIFT + Print",          hl.dsp.exec_cmd(shots .. "window"))  -- captura: uma janela
+hl.bind(mainMod .. " + Print",    hl.dsp.exec_cmd(shots .. "output"))  -- captura: monitor inteiro
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- alternar split (layout dwindle)
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -329,18 +330,18 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
-hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })  -- aumentar volume
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })  -- diminuir volume
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })  -- mudo
+hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })  -- mudo no microfone
+hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })  -- brilho +
+hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })  -- brilho -
 
 -- Requires playerctl
-hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
+hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })  -- proxima faixa
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })  -- pausar/tocar
+hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })  -- pausar/tocar
+hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })  -- faixa anterior
 
 
 --------------------------------
