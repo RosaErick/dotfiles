@@ -95,6 +95,18 @@ tooltip label { padding: 4px; }
     margin-bottom: -3px;
 }
 
+/* area sem janela nenhuma: quase invisivel, so marca que o slot existe.
+   Sem borda inferior — nao e uma "tecla", e um espaco vazio. */
+#workspaces button.empty {
+    color: #484848;
+    background: transparent;
+    border-bottom-color: transparent;
+}
+#workspaces button.empty:hover {
+    color: #b5b7ba;
+    background: #282828;
+}
+
 /* area corrente de um monitor que NAO esta focado: estado intermediario,
    senao no dual-monitor a outra tela parece nao ter nada aberto. */
 #workspaces button.visible {
