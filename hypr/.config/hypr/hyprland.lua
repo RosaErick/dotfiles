@@ -115,10 +115,8 @@ hl.config({
 
         border_size = 2,
 
-        col = {
-            active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
-            inactive_border = "rgba(595959aa)",
-        },
+        -- cores da borda ficam em colors.lua (geradas por `theme`).
+        -- Nao redefina aqui: este bloco roda depois do require e sobrescreveria.
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = false,
@@ -288,6 +286,7 @@ local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))  -- encerrar sessao
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))  -- arquivos
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("nautilus"))  -- arquivos (GUI)
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))  -- lancador (lista)
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("rofi -show drun -theme grid"))  -- grade de aplicativos

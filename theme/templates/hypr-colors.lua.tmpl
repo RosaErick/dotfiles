@@ -1,8 +1,16 @@
 -- GERADO por `theme` — edite theme/templates/hypr-colors.lua.tmpl
 -- Carregado pelo hyprland.lua via require("colors")
+--
+-- Gradiente accent -> magenta a 45 graus: fica em tom com a paleta sem virar
+-- um retangulo chapado. Inativa quase invisivel, so marca o limite.
+--
+-- ATENCAO: gradiente em lua e uma TABELA { colors = {...}, angle = n },
+-- nao a string "rgba(..) rgba(..) 45deg" do formato .conf.
 hl.config({
     general = {
-        ["col.active_border"]   = "rgb({{accent_raw}})",
-        ["col.inactive_border"] = "rgb({{line_raw}})",
+        col = {
+            active_border   = { colors = { "rgba({{accent_hex}}ff)", "rgba({{magenta_hex}}ff)" }, angle = 45 },
+            inactive_border = "rgba({{bg_high_hex}}cc)",
+        },
     },
 })

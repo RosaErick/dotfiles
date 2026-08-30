@@ -141,15 +141,30 @@ window#waybar.empty #window {
     border-bottom-color: transparent;
 }
 
-/* ---- indicadores ------------------------------------------------------ */
-#cpu, #memory { color: #33b1ff; padding: 0 10px; }
-#pulseaudio   { color: #be95ff; }
-#network      { color: #25be6a; }
-#language     { color: #08bdba; }
-#clock        { color: #78a9ff; font-size: 14px; }
+/* ---- indicadores ------------------------------------------------------
+ * Principio: cor carrega significado, nao enfeite.
+ *   - leitura normal  -> cinza claro, todos iguais: nada disputa atencao
+ *   - relogio         -> unico acento permanente, ancora visual da barra
+ *   - cor viva        -> so quando e ESTADO (caiu, mudo, urgente)
+ * Antes cada modulo tinha sua cor e o olho nao sabia onde pousar.
+ */
+#cpu, #memory, #network, #language {
+    color: #b5b7ba;
+    padding: 0 10px;
+}
 
-#pulseaudio.muted        { color: #6f6f6f; }
-#network.disconnected    { color: #ee5396; border-bottom-color: #77294b; }
+#clock {
+    color: #78a9ff;
+    font-size: 14px;
+}
+
+/* estados — aqui a cor significa alguma coisa */
+#pulseaudio.muted     { color: #6f6f6f; }
+#network.disconnected { color: #ee5396; border-bottom-color: #77294b; }
+#memory.critical,
+#cpu.critical         { color: #ee5396; border-bottom-color: #77294b; }
+#memory.warning,
+#cpu.warning          { color: #08bdba; }
 
 #tray { padding: 0 10px; }
 #tray > .passive { -gtk-icon-effect: dim; }
@@ -167,7 +182,7 @@ window#waybar.empty #window {
     border: none;
     margin: 0;
     padding: 0 8px;
-    color: #be95ff;
+    color: #b5b7ba;
 }
 #audio #pulseaudio.muted { color: #6f6f6f; }
 
