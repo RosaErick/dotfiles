@@ -27,6 +27,8 @@ urgent    = "#ee5396"   # crítico / erro
 # mako aceita hex com alpha -> use {{bg}}{{alpha_hex}}
 alpha     = "0.90"
 alpha_hex = "e6"
+# overlays grandes (grade de apps) pedem mais opacidade pra ler bem
+alpha_solid = "0.97"
 radius    = "8px"
 font      = "JetBrainsMono Nerd Font"
 font_size = "13px"

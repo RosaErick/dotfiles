@@ -24,6 +24,7 @@ STATE = ROOT / "theme" / ".current"
 TARGETS = {
     "waybar-style.css.tmpl":  "waybar/.config/waybar/style.css",
     "rofi-theme.rasi.tmpl":   "rofi/.config/rofi/theme.rasi",
+    "rofi-grid.rasi.tmpl":    "rofi/.config/rofi/grid.rasi",
     "mako-config.tmpl":       "mako/.config/mako/config",
     "dock-style.css.tmpl":    "nwg-dock/.config/nwg-dock-hyprland/style.css",
     "ghostty-theme.tmpl":     "ghostty/.config/ghostty/themes/current",

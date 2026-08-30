@@ -68,7 +68,7 @@ local menu        = "rofi -show drun"
 -- (systemctl --user enable/disable <nome>), nao aqui.
 hl.on("hyprland.start", function()
     -- dock com auto-hide: some da tela, aparece ao encostar o mouse embaixo
-    hl.exec_cmd('nwg-dock-hyprland -d -i 40 -c "nwg-drawer -term ghostty"')
+    hl.exec_cmd('nwg-dock-hyprland -d -i 40 -c "rofi -show drun -theme grid"')
 end)
 
 
@@ -286,7 +286,7 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("nwg-drawer -term ghostty"))   -- grid de aplicativos
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("rofi -show drun -theme grid"))  -- grade de aplicativos
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("makoctl dismiss -a"))  -- limpa notificacoes
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))     -- bloqueia a tela
 
