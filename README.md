@@ -84,3 +84,21 @@ Desenho proprio, misturando duas referencias:
 
 As sombras nao sao escritas a mao: o render.py deriva `_dark` (50%) e `_dim`
 (75%) de cada cor da paleta. Paleta nova ganha sombras corretas de graca.
+
+## fish
+
+Instalado ao lado do zsh — o shell de login continua sendo o zsh.
+Para experimentar: rode `fish` num terminal. Para adotar de vez:
+
+    chsh -s /usr/bin/fish
+
+Plugins ficam em `fish/.config/fish/fish_plugins` (versionado). Numa maquina
+nova: `fisher update` reinstala todos.
+
+    tide          prompt (equivale ao powerlevel10k do zsh)
+    fzf.fish      Ctrl+R historico, Ctrl+Alt+F arquivos, Ctrl+Alt+L git log
+    zoxide        o "z": aprende os diretorios que voce usa; `zi` escolhe no fzf
+    eza           ls com icones — substitui o Terminal-Icons do PowerShell
+    r             funcao propria: pula pra qualquer repo do ghq via fzf
+
+Nota: `--icons` sozinho no eza cai em "auto"; use `--icons=always`.

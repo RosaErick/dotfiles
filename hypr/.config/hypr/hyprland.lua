@@ -142,11 +142,20 @@ hl.config({
             color        = 0xee1a1a1a,
         },
 
+        -- Vidro fosco escuro: o segredo nao e a opacidade, e escurecer e
+        -- dessaturar o que passa pelo blur. Sem isso o wallpaper "tinge"
+        -- a janela em vez de virar fundo neutro, e o texto perde contraste.
         blur = {
-            enabled   = true,
-            size      = 3,
-            passes    = 1,
-            vibrancy  = 0.1696,
+            enabled     = true,
+            size        = 8,
+            passes      = 4,
+            new_optimizations = true,
+            xray        = false,
+            brightness  = 0.68,   -- escurece o que esta atras
+            contrast    = 1.05,
+            noise       = 0.02,   -- graozinho: mata o "banding" do desfoque
+            vibrancy    = 0.10,   -- menos saturacao: cor do wallpaper nao vaza
+            vibrancy_darkness = 0.35,
         },
     },
 

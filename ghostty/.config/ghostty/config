@@ -12,6 +12,12 @@ adjust-cell-height = 12%
 # Variantes: nightfox (azul), terafox (verde), nordfox (claro), duskfox (roxo).
 theme = current
 
+# ── Transparencia e blur ──────────────────────────────────────────
+# O blur em si e do compositor: o Hyprland desfoca o que esta ATRAS de
+# qualquer superficie translucida. Por isso basta a opacidade < 1 aqui.
+background-opacity = 0.88
+background-blur = true
+
 # ── Janela ────────────────────────────────────────────────────────
 window-padding-x = 8
 window-padding-y = 4
