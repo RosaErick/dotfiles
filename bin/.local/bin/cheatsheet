@@ -163,23 +163,37 @@ def main():
         return
 
     p = paleta()
-    linhas, atual = [], None
+    linhas, cabec, atual = [], [], None
     for cat, glifo, tecla, desc in itens:
         if cat != atual:
             linhas.append(
                 f"<span foreground='{p['accent']}'><b>{glifo}  {html.escape(cat.upper())}</b></span>")
+            cabec.append(True)
             atual = cat
         k = html.escape(tecla).ljust(larg)
         linhas.append(
             f"<span foreground='{p['fg']}'>  {k}</span>"
             f"<span foreground='{p['fg_mute']}'>  </span>"
             f"<span foreground='{p['fg_dim']}'>{html.escape(desc)}</span>")
+        cabec.append(False)
+
+    # O fluxo vertical parte a lista no meio sem olhar o conteudo, o que pode
+    # deixar um cabecalho sozinho no fim da coluna 1 com os itens dele na 2.
+    # Empurramos o cabecalho pra proxima coluna com uma linha vazia.
+    for _ in range(12):
+        por_col = -(-len(linhas) // 2)          # teto da divisao
+        fim_col1 = por_col - 1
+        if fim_col1 < len(linhas) and cabec[fim_col1]:
+            linhas.insert(fim_col1, " ")
+            cabec.insert(fim_col1, False)
+            continue
+        break
 
     tema = (
         f"window {{ width: 52%; padding: 14px; "
         f"background-color: rgba({p['bg_raw']}, 1.0); }} "
         "inputbar { padding: 0 0 8px 0; } "
-        "listview { lines: 17; columns: 2; flow: vertical; "
+        f"listview {{ lines: {por_col}; columns: 2; flow: vertical; "
         "spacing: 0px; scrollbar: false; } "
         "element { padding: 1px 6px; border-radius: 4px; } "
         "element-text { font: \"JetBrainsMono Nerd Font 9.5\"; } "
