@@ -242,10 +242,14 @@ hl.config({
 
 hl.config({
     input = {
-        kb_layout  = "us",
-        kb_variant = "",
+        -- dois layouts; SUPER+ESPACO alterna entre eles.
+        -- "br" = ABNT2 (teclado com tecla C-cedilha fisica).
+        -- Se seu teclado e fisicamente US, troque por "us,us" com
+        -- kb_variant = ",intl" (US Internacional: acentos por tecla morta).
+        kb_layout  = "us,br",
+        kb_variant = ",",
         kb_model   = "",
-        kb_options = "",
+        kb_options = "grp:win_space_toggle",
         kb_rules   = "",
 
         follow_mouse = 1,

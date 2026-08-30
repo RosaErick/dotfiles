@@ -6,10 +6,17 @@
 
     "modules-left":   ["hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["hyprland/window"],
-    "modules-right":  ["pulseaudio", "network", "cpu", "memory", "clock", "tray"],
+    "modules-right":  ["hyprland/language", "pulseaudio", "network", "cpu", "memory", "clock", "tray"],
 
     "hyprland/workspaces": { "on-click": "activate" },
     "hyprland/window": { "max-length": 60, "separate-outputs": true },
+    "hyprland/language": {
+        "format": "󰌌 {}",
+        "format-en": "US",
+        "format-pt": "BR",
+        "on-click": "hyprctl switchxkblayout current next",
+        "tooltip-format": "layout do teclado — SUPER+ESPACO alterna"
+    },
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
