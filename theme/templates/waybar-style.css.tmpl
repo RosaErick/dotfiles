@@ -77,23 +77,17 @@ tooltip label { padding: 4px; }
 #workspaces button {
     color: {{fg_mute}};
     background: transparent;
-    padding: 0 7px;
-    margin: 2px 2px 0 2px;
+    min-width: 26px;              /* largura fixa: glifos CJK tem larguras diferentes */
+    padding: 0;
+    margin: 3px 2px;              /* margem simetrica: nada vaza da pilula */
     border-radius: 6px;
-    font-size: 15px;
-    border-bottom: 3px solid transparent;
+    font-size: 14px;
+    border-bottom: 2px solid transparent;
     transition: all 160ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* o truque do summer-day-and-night: perde a borda e desce 3px,
    entao a tecla parece pressionada pra dentro. */
-#workspaces button.active {
-    color: {{bg}};
-    background: {{accent}};
-    border-bottom: 0 solid transparent;
-    margin-top: 5px;
-    margin-bottom: -3px;
-}
 
 /* area sem janela nenhuma: quase invisivel, so marca que o slot existe.
    Sem borda inferior — nao e uma "tecla", e um espaco vazio. */
@@ -119,6 +113,15 @@ tooltip label { padding: 4px; }
     color: {{fg}};
     background: {{line}};
     border-bottom-color: {{bg_alt_dark}};
+}
+
+/* Estado ativo vem por ultimo de proposito: o waybar aplica .visible junto
+   com .active na area corrente, e com a mesma especificidade a ultima regra
+   vence. Se subir, a area ativa volta a parecer so "visivel". */
+#workspaces button.active {
+    color: {{bg}};
+    background: {{accent}};
+    border-bottom-color: {{accent_dark}};
 }
 
 #workspaces button.urgent {
