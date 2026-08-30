@@ -14,3 +14,7 @@ theme/.current
 .zsh_history
 *.bak*
 .config/hypr/wallpaper
+
+# gerado pelo seletor de wallpaper (estado da maquina)
+.config/hypr/hyprpaper.conf
+.config/hypr/wallpapers.json

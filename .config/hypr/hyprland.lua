@@ -44,8 +44,12 @@ end
 ---------------------
 
 -- Set programs that you use
-local terminal = "ghostty"
-local fileManager = "files"     -- wrapper: ghostty + yazi (bin/.local/bin/files)
+-- Caminho absoluto dos scripts. O Hyprland nao le o .zshrc, entao ~/.scripts
+-- nao entra no PATH dele — chamar so pelo nome faz o atalho falhar em silencio.
+local scripts     = os.getenv("HOME") .. "/.scripts/"
+
+local terminal    = "ghostty"
+local fileManager = scripts .. "files"    -- ghostty + yazi
 local menu        = "rofi -show drun"
 
 
@@ -81,7 +85,7 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -- lancadores usam $TERMINAL pra rodar apps com Terminal=true (ex: nvim)
 hl.env("TERMINAL", "ghostty")
 -- askpass grafico: permite `sudo -A <cmd>` sem tty (prompt em rofi)
-hl.env("SUDO_ASKPASS", os.getenv("HOME") .. "/.scripts/rofi-askpass")
+hl.env("PATH", os.getenv("HOME") .. "/.scripts:" .. (os.getenv("PATH") or "/usr/bin:/bin"))
 
 
 -----------------------
@@ -301,10 +305,10 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))  -- lancador (lista)
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("rofi -show drun -theme grid"))  -- grade de aplicativos
 
 -- Monitor de processos e menu de sessao
-hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd("taskmanager"))  -- monitor de processos
-hl.bind("CTRL + ALT + Delete",   hl.dsp.exec_cmd("powermenu"))  -- bloquear / sair / desligar
-hl.bind(mainMod .. " + slash", hl.dsp.exec_cmd("cheatsheet"))  -- esta tela de atalhos
-hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("wallpaper"))  -- trocar wallpaper
+hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd(scripts .. "taskmanager"))  -- monitor de processos
+hl.bind("CTRL + ALT + Delete",   hl.dsp.exec_cmd(scripts .. "powermenu"))  -- bloquear / sair / desligar
+hl.bind(mainMod .. " + slash", hl.dsp.exec_cmd(scripts .. "cheatsheet"))  -- esta tela de atalhos
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(scripts .. "wallpaper"))  -- trocar wallpaper
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("makoctl dismiss -a"))  -- limpa notificacoes
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))     -- bloqueia a tela
 

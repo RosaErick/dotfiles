@@ -106,11 +106,17 @@ theme/       palettes + templates + the render engine
 
 `SUPER + W` opens a thumbnail grid (rofi) of `~/Imagens/wallpapers`.
 
-Persistence uses a symlink, not config edits: `hyprpaper.conf` and
-`hyprlock.conf` both point at `~/.config/hypr/wallpaper`, and the picker
-just re-points that symlink. The versioned config never changes, so
-switching wallpaper produces no git diff.
+Three steps: image, then monitor (all / one), then fit mode
+(`cover`, `contain`, `tile` — the only three hyprpaper actually supports).
+
+State lives in `~/.config/hypr/wallpapers.json`, and `hyprpaper.conf` is
+**generated** from it — same pattern as `monitors.lua`. That's why the
+`.conf` is gitignored: it's machine state, not configuration. The generator
+is what this repo versions.
+
+`hyprlock.conf` points at the `~/.config/hypr/wallpaper` symlink, so the
+lock screen follows whatever the first monitor is showing.
 
     wallpaper              picker
-    wallpaper <file>       apply directly
+    wallpaper <file>       apply to all, current fit
     wallpaper --random     random one
