@@ -72,6 +72,7 @@ theme/       palettes + templates + the render engine
 | `SUPER + R` | Launcher (list) |
 | `SUPER + D` | App grid |
 | `SUPER + E` | Files (Yazi) |
+| `SUPER + W` | Wallpaper picker |
 | `SUPER + L` | Lock |
 | `SUPER + 1-9` | Workspace |
 | `CTRL+SHIFT+ESC` | Process monitor |
