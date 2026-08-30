@@ -16,10 +16,26 @@ Arch Linux + Hyprland.
     stow -t ~ waybar rofi mako ghostty hypr nwg-dock gtk bin
     theme carbonfox
 
+Pacotes que o yazi usa para preview (nenhum e obrigatorio):
+
+    ffmpeg       video
+    poppler      PDF          (+ poppler-data para encodings especiais)
+    resvg        SVG          <- NAO e o imagemagick
+    imagemagick  HEIC, PSD
+    fd fzf zoxide 7zip jq     busca, arquivos compactados, JSON
+
 ## Trocar de tema
 
     theme --list
     theme carbonfox
+
+Pacotes que o yazi usa para preview (nenhum e obrigatorio):
+
+    ffmpeg       video
+    poppler      PDF          (+ poppler-data para encodings especiais)
+    resvg        SVG          <- NAO e o imagemagick
+    imagemagick  HEIC, PSD
+    fd fzf zoxide 7zip jq     busca, arquivos compactados, JSON
 
 Renderiza todos os templates e recarrega waybar, mako, hyprland e o dock.
 Ghostty e rofi releem sozinhos na proxima janela.
