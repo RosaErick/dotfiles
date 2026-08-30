@@ -33,6 +33,7 @@ TARGETS = {
     "hypr-colors.lua.tmpl":   "hypr/.config/hypr/colors.lua",
     "btop.theme.tmpl":        "btop/.config/btop/themes/current.theme",
     "yazi-theme.toml.tmpl":   "yazi/.config/yazi/theme.toml",
+    "kitty-theme.conf.tmpl":  "kitty/.config/kitty/theme.conf",
 }
 
 # gtk-4.0 recebe copia identica do gtk-3.0

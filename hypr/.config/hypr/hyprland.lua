@@ -151,7 +151,7 @@ hl.config({
             passes      = 4,
             new_optimizations = true,
             xray        = false,
-            brightness  = 0.68,   -- escurece o que esta atras
+            brightness  = 0.80,   -- escurece o que esta atras (menor = mais escuro)
             contrast    = 1.05,
             noise       = 0.02,   -- graozinho: mata o "banding" do desfoque
             vibrancy    = 0.10,   -- menos saturacao: cor do wallpaper nao vaza

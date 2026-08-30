@@ -15,7 +15,7 @@ theme = current
 # ── Transparencia e blur ──────────────────────────────────────────
 # O blur em si e do compositor: o Hyprland desfoca o que esta ATRAS de
 # qualquer superficie translucida. Por isso basta a opacidade < 1 aqui.
-background-opacity = 0.88
+background-opacity = 0.82
 background-blur = true
 
 # ── Janela ────────────────────────────────────────────────────────
@@ -38,7 +38,8 @@ cursor-style = block
 cursor-style-blink = false
 mouse-hide-while-typing = true
 
-# ── Shell integration (zsh) ───────────────────────────────────────
+# ── Shell integration ─────────────────────────────────────────────
+# Sem "command": abre o shell de login (zsh). Rode `fish` quando quiser.
 # Marca prompts (salto ctrl+shift+seta), herda o cwd em split/aba nova,
 # muda o cursor no modo vi, destaca comando com sudo.
 shell-integration = zsh
