@@ -81,16 +81,11 @@ def reload_apps():
     for label, cmd in steps:
         r = subprocess.run(cmd, capture_output=True, text=True)
         print(f"  {label}: {'ok' if r.returncode == 0 else 'FALHOU — ' + r.stderr.strip()[:60]}")
-    # dock nao tem reload: reinicia se estiver de pe
-    if subprocess.run(["pgrep", "-f", "nwg-dock-hyprland"],
-                      capture_output=True).returncode == 0:
-        subprocess.run(["pkill", "-f", "nwg-dock-hyprland"])
-        # ATENCAO: manter igual ao autostart em hypr/.config/hypr/hyprland.lua
-        subprocess.Popen(["nwg-dock-hyprland", "-d", "-i", "40",
-                          "-c", "rofi -show drun -theme grid"],
-                         start_new_session=True,
-                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        print("  dock: reiniciado")
+    # dock nao recarrega CSS a quente: reinicia pelo systemd.
+    # Os flags moram so em bin/.local/bin/dock — nao duplicar aqui.
+    r = subprocess.run(["systemctl", "--user", "restart", "nwg-dock.service"],
+                       capture_output=True, text=True)
+    print(f"  dock: {'ok' if r.returncode == 0 else 'FALHOU — ' + r.stderr.strip()[:60]}")
     print("  ghostty/rofi: releem sozinhos na proxima janela")
 
 

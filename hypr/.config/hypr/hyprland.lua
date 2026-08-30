@@ -66,10 +66,8 @@ local menu        = "rofi -show drun"
 
 -- waybar, hyprpaper e hyprpolkitagent sobem por systemd user
 -- (systemctl --user enable/disable <nome>), nao aqui.
-hl.on("hyprland.start", function()
-    -- dock com auto-hide: some da tela, aparece ao encostar o mouse embaixo
-    hl.exec_cmd('nwg-dock-hyprland -d -i 40 -c "rofi -show drun -theme grid"')
-end)
+-- waybar, hyprpaper, mako, hyprpolkitagent, hypridle e o dock sobem por
+-- systemd user (systemctl --user enable/disable <nome>), nao aqui.
 
 
 -------------------------------

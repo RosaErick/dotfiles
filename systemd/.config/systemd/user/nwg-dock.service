@@ -1,0 +1,15 @@
+[Unit]
+Description=nwg-dock-hyprland (dock com auto-hide)
+PartOf=graphical-session.target
+After=graphical-session.target
+ConditionEnvironment=WAYLAND_DISPLAY
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/dock
+Slice=session.slice
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=graphical-session.target

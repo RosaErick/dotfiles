@@ -1,0 +1,4 @@
+#!/bin/sh
+# Fonte unica do comando do dock. Usado pelo systemd (nwg-dock.service)
+# e pelo `theme` ao recarregar. Nao duplique estes flags em outro lugar.
+exec nwg-dock-hyprland -d -i 40 -c "rofi -show drun -theme grid"
