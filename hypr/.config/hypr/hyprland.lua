@@ -287,6 +287,10 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("rofi -show drun -theme grid"))  -- grade de aplicativos
+
+-- Monitor de processos e menu de sessao
+hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd("taskmanager"))
+hl.bind("CTRL + ALT + Delete",   hl.dsp.exec_cmd("powermenu"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("makoctl dismiss -a"))  -- limpa notificacoes
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))     -- bloqueia a tela
 
@@ -347,6 +351,15 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 -- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 
 -- Example window rules that are useful
+
+-- monitor de processos abre flutuando e centralizado
+hl.window_rule({
+    name  = "taskmanager-float",
+    match = { class = "net.nokyan.Resources" },
+    float = true,
+    size  = { 1100, 750 },
+    center = true,
+})
 
 local suppressMaximizeRule = hl.window_rule({
     -- Ignore maximize requests from all apps. You'll probably like this.

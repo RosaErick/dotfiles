@@ -1,0 +1,3 @@
+#!/bin/sh
+# Monitor de processos. Trocar de programa aqui muda o CTRL+SHIFT+ESC.
+exec resources

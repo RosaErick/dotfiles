@@ -30,6 +30,7 @@ TARGETS = {
     "ghostty-theme.tmpl":     "ghostty/.config/ghostty/themes/current",
     "gtk.css.tmpl":           "gtk/.config/gtk-3.0/gtk.css",
     "hypr-colors.lua.tmpl":   "hypr/.config/hypr/colors.lua",
+    "btop.theme.tmpl":        "btop/.config/btop/themes/current.theme",
 }
 
 # gtk-4.0 recebe copia identica do gtk-3.0

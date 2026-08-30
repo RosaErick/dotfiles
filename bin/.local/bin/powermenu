@@ -1,0 +1,13 @@
+#!/bin/sh
+# Menu de energia em rofi (o "Ctrl+Alt+Del").
+# Usa o mesmo tema do lancador, entao segue a paleta atual.
+choice=$(printf '󰌾  Bloquear\n󰤄  Suspender\n󰗽  Sair da sessao\n󰜉  Reiniciar\n󰐥  Desligar' \
+    | rofi -dmenu -i -p "sessao" -theme-str 'window { width: 22%; } listview { lines: 5; }')
+
+case "$choice" in
+    *Bloquear*)  loginctl lock-session ;;
+    *Suspender*) systemctl suspend ;;
+    *Sair*)      hyprctl dispatch 'hl.dsp.exit()' 2>/dev/null || loginctl terminate-user "$USER" ;;
+    *Reiniciar*) systemctl reboot ;;
+    *Desligar*)  systemctl poweroff ;;
+esac
