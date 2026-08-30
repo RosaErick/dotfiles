@@ -45,9 +45,19 @@ and `_dim` (75%) variants, plus `_raw` (`r,g,b`) and `_hex` forms. The bar's
 
 ```sh
 git clone <repo> ~/.dotfiles && cd ~/.dotfiles
-stow -t ~ bin btop fish ghostty gtk hypr kitty mako nwg-dock rofi systemd waybar yazi zsh
+./install.sh
 theme carbonfox
 systemctl --user enable --now waybar hyprpaper mako hypridle nwg-dock hyprpolkitagent
+```
+
+## Layout
+
+```
+.config/     mirrors ~/.config — one folder per app
+.scripts/    executables, symlinked to ~/.scripts (on PATH)
+theme/       palettes + templates + the render engine
+.zshrc       these two live in $HOME
+.p10k.zsh
 ```
 
 ## Keybindings
@@ -69,7 +79,7 @@ systemctl --user enable --now waybar hyprpaper mako hypridle nwg-dock hyprpolkit
 
 ## Scripts
 
-`bin/.local/bin/` — all on `PATH`:
+`.scripts/` — added to `PATH` by both shells:
 
 | | |
 |---|---|

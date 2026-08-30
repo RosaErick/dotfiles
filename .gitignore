@@ -1,15 +1,15 @@
 # gerado por nwg-displays, especifico desta maquina
-hypr/.config/hypr/monitors.lua
-hypr/.config/hypr/workspaces.lua
+.config/hypr/monitors.lua
+.config/hypr/workspaces.lua
 theme/.current
 
 # fish: gerado pelo fisher e pelo proprio shell
-fish/.config/fish/functions/
-fish/.config/fish/completions/
-fish/.config/fish/conf.d/
-fish/.config/fish/themes/
-fish/.config/fish/fish_variables
+.config/fish/functions/
+.config/fish/completions/
+.config/fish/conf.d/
+.config/fish/themes/
+.config/fish/fish_variables
 
 # zsh: historico e backups nao entram no repo
-zsh/.zsh_history
-zsh/*.bak*
+.zsh_history
+*.bak*

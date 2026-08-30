@@ -22,23 +22,23 @@ STATE = ROOT / "theme" / ".current"
 
 # template -> destino, relativo a ROOT (dentro do pacote stow)
 TARGETS = {
-    "waybar-style.css.tmpl":  "waybar/.config/waybar/style.css",
-    "waybar-config.jsonc.tmpl": "waybar/.config/waybar/config.jsonc",
-    "rofi-theme.rasi.tmpl":   "rofi/.config/rofi/theme.rasi",
-    "rofi-grid.rasi.tmpl":    "rofi/.config/rofi/grid.rasi",
-    "mako-config.tmpl":       "mako/.config/mako/config",
-    "dock-style.css.tmpl":    "nwg-dock/.config/nwg-dock-hyprland/style.css",
-    "ghostty-theme.tmpl":     "ghostty/.config/ghostty/themes/current",
-    "gtk.css.tmpl":           "gtk/.config/gtk-3.0/gtk.css",
-    "hypr-colors.lua.tmpl":   "hypr/.config/hypr/colors.lua",
-    "btop.theme.tmpl":        "btop/.config/btop/themes/current.theme",
-    "yazi-theme.toml.tmpl":   "yazi/.config/yazi/theme.toml",
-    "kitty-theme.conf.tmpl":  "kitty/.config/kitty/theme.conf",
+    "waybar-style.css.tmpl":  ".config/waybar/style.css",
+    "waybar-config.jsonc.tmpl": ".config/waybar/config.jsonc",
+    "rofi-theme.rasi.tmpl":   ".config/rofi/theme.rasi",
+    "rofi-grid.rasi.tmpl":    ".config/rofi/grid.rasi",
+    "mako-config.tmpl":       ".config/mako/config",
+    "dock-style.css.tmpl":    ".config/nwg-dock-hyprland/style.css",
+    "ghostty-theme.tmpl":     ".config/ghostty/themes/current",
+    "gtk.css.tmpl":           ".config/gtk-3.0/gtk.css",
+    "hypr-colors.lua.tmpl":   ".config/hypr/colors.lua",
+    "btop.theme.tmpl":        ".config/btop/themes/current.theme",
+    "yazi-theme.toml.tmpl":   ".config/yazi/theme.toml",
+    "kitty-theme.conf.tmpl":  ".config/kitty/theme.conf",
 }
 
 # gtk-4.0 recebe copia identica do gtk-3.0
 EXTRA_COPIES = {
-    "gtk/.config/gtk-3.0/gtk.css": ["gtk/.config/gtk-4.0/gtk.css"],
+    ".config/gtk-3.0/gtk.css": [".config/gtk-4.0/gtk.css"],
 }
 
 
@@ -96,7 +96,7 @@ def reload_apps():
         r = subprocess.run(cmd, capture_output=True, text=True)
         print(f"  {label}: {'ok' if r.returncode == 0 else 'FALHOU — ' + r.stderr.strip()[:60]}")
     # dock nao recarrega CSS a quente: reinicia pelo systemd.
-    # Os flags moram so em bin/.local/bin/dock — nao duplicar aqui.
+    # Os flags moram so em .scripts/dock — nao duplicar aqui.
     r = subprocess.run(["systemctl", "--user", "restart", "nwg-dock.service"],
                        capture_output=True, text=True)
     print(f"  dock: {'ok' if r.returncode == 0 else 'FALHOU — ' + r.stderr.strip()[:60]}")

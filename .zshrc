@@ -169,3 +169,6 @@ bindkey '^ ' autosuggest-accept
 
 # <- este tem que ficar por ultimo
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# scripts dos dotfiles
+export PATH="$HOME/.scripts:$PATH"

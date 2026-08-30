@@ -2,6 +2,7 @@
 
 if status is-interactive
     # ── PATH ──────────────────────────────────────────────────────────
+    fish_add_path -g ~/.scripts
     fish_add_path -g ~/.local/bin
     fish_add_path -g ~/go/bin
 
