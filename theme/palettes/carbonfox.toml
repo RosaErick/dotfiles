@@ -23,8 +23,10 @@ accent    = "#78a9ff"   # cor de destaque da UI
 urgent    = "#ee5396"   # crítico / erro
 
 [opts]
-# 'e6' = 90% opaco. Use 'ff' pra sólido.
-alpha     = "e6"
+# GTK CSS nao aceita #RRGGBBAA -> use rgba({{bg_raw}}, {{alpha}})
+# mako aceita hex com alpha -> use {{bg}}{{alpha_hex}}
+alpha     = "0.90"
+alpha_hex = "e6"
 radius    = "8px"
 font      = "JetBrainsMono Nerd Font"
 font_size = "13px"
