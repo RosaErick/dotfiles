@@ -283,25 +283,25 @@ hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))  -- abrir terminal
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))  -- encerrar sessao
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))  -- gerenciador de arquivos
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))  -- arquivos
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))  -- lancador de apps (lista)
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))  -- lancador (lista)
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("rofi -show drun -theme grid"))  -- grade de aplicativos
 
 -- Monitor de processos e menu de sessao
 hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd("taskmanager"))  -- monitor de processos
-hl.bind("CTRL + ALT + Delete",   hl.dsp.exec_cmd("powermenu"))  -- menu de sessao: bloquear/sair/desligar
+hl.bind("CTRL + ALT + Delete",   hl.dsp.exec_cmd("powermenu"))  -- bloquear / sair / desligar
 hl.bind(mainMod .. " + slash", hl.dsp.exec_cmd("cheatsheet"))  -- esta tela de atalhos
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("makoctl dismiss -a"))  -- limpa notificacoes
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))     -- bloqueia a tela
 
 -- Capturas de tela (hyprshot: salva na pasta e copia pro clipboard)
 local shots = 'hyprshot -z -o "$HOME/Imagens/Capturas de tela" -m '
-hl.bind("Print",                  hl.dsp.exec_cmd(shots .. "region"))  -- captura: selecionar regiao
-hl.bind("SHIFT + Print",          hl.dsp.exec_cmd(shots .. "window"))  -- captura: uma janela
-hl.bind(mainMod .. " + Print",    hl.dsp.exec_cmd(shots .. "output"))  -- captura: monitor inteiro
+hl.bind("Print",                  hl.dsp.exec_cmd(shots .. "region"))  -- selecionar regiao
+hl.bind("SHIFT + Print",          hl.dsp.exec_cmd(shots .. "window"))  -- uma janela
+hl.bind(mainMod .. " + Print",    hl.dsp.exec_cmd(shots .. "output"))  -- monitor inteiro
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- alternar split (layout dwindle)
+hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- alternar split
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))

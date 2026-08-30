@@ -21,6 +21,9 @@ from pathlib import Path
 CONF = Path.home() / ".config/hypr/hyprland.lua"
 DOTS = Path.home() / ".dotfiles"
 
+# teclas de midia/brilho do teclado: nao entram na tela (autoexplicativas)
+IGNORAR = re.compile(r'^XF86')
+
 ACOES = [
     (r'window\.close\(\)',                      "fechar janela"),
     (r'window\.float\(',                        "alternar flutuante"),
@@ -47,7 +50,6 @@ CATEGORIAS = [
         "terminal", "fileManager", "menu", "taskmanager", "powermenu",
         "cheatsheet", "rofi"))),
     ("Captura",      "󰄀", lambda k, a, d: "Print" in k),
-    ("Midia",        "󰎈", lambda k, a, d: k.startswith("XF86")),
     ("Sistema",      "󰒓", lambda k, a, d: any(x in a for x in (
         "lock-session", "makoctl", "exit()", "hyprshutdown"))),
     ("Areas",        "󰕰", lambda k, a, d: "workspace" in a or "area" in d),
@@ -129,6 +131,8 @@ def coletar():
         if not m:
             continue
         tecla = resolver_tecla(m.group("tecla"), vars_)
+        if IGNORAR.match(tecla):
+            continue
         desc = descrever(m.group("acao"), m.group("cmt"), vars_)
         acao = m.group("acao")
         for rotulo, glifo, teste in CATEGORIAS:
@@ -172,12 +176,12 @@ def main():
             f"<span foreground='{p['fg_dim']}'>{html.escape(desc)}</span>")
 
     tema = (
-        f"window {{ width: 64%; padding: 18px; "
+        f"window {{ width: 52%; padding: 14px; "
         f"background-color: rgba({p['bg_raw']}, 1.0); }} "
-        "inputbar { padding: 0 0 10px 0; } "
-        "listview { lines: 23; columns: 2; flow: vertical; "
+        "inputbar { padding: 0 0 8px 0; } "
+        "listview { lines: 17; columns: 2; flow: vertical; "
         "spacing: 0px; scrollbar: false; } "
-        "element { padding: 2px 8px; border-radius: 4px; } "
+        "element { padding: 1px 6px; border-radius: 4px; } "
         "element-text { font: \"JetBrainsMono Nerd Font 9.5\"; } "
         "element selected { background-color: transparent; } "
         "element selected element-text { background-color: transparent; }"
