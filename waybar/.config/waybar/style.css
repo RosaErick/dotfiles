@@ -148,8 +148,10 @@ window#waybar.empty #window {
  *   - cor viva        -> so quando e ESTADO (caiu, mudo, urgente)
  * Antes cada modulo tinha sua cor e o olho nao sabia onde pousar.
  */
+/* Valores em branco: a cor identifica o modulo pelo ICONE (markup Pango no
+   config), nao pintando o numero. Numero colorido perde legibilidade. */
 #cpu, #memory, #network, #language {
-    color: #b5b7ba;
+    color: #f2f4f8;
     padding: 0 10px;
 }
 
@@ -182,8 +184,10 @@ window#waybar.empty #window {
     border: none;
     margin: 0;
     padding: 0 8px;
-    color: #b5b7ba;
+    color: #f2f4f8;
 }
+#audio #custom-audio-out,
+#audio #custom-audio-in { color: #be95ff; }
 #audio #pulseaudio.muted { color: #6f6f6f; }
 
 #audio #custom-audio-out:hover,

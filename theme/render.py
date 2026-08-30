@@ -23,6 +23,7 @@ STATE = ROOT / "theme" / ".current"
 # template -> destino, relativo a ROOT (dentro do pacote stow)
 TARGETS = {
     "waybar-style.css.tmpl":  "waybar/.config/waybar/style.css",
+    "waybar-config.jsonc.tmpl": "waybar/.config/waybar/config.jsonc",
     "rofi-theme.rasi.tmpl":   "rofi/.config/rofi/theme.rasi",
     "rofi-grid.rasi.tmpl":    "rofi/.config/rofi/grid.rasi",
     "mako-config.tmpl":       "mako/.config/mako/config",
