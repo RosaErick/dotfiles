@@ -55,6 +55,7 @@ systemctl --user enable --now waybar hyprpaper mako hypridle nwg-dock hyprpolkit
 ```
 .config/     mirrors ~/.config — one folder per app
 .scripts/    executables, symlinked to ~/.scripts (on PATH)
+.config/environment.d/  puts ~/.scripts on PATH for systemd user services
 theme/       palettes + templates + the render engine
 .zshrc       these two live in $HOME
 .p10k.zsh
@@ -79,7 +80,11 @@ theme/       palettes + templates + the render engine
 
 ## Scripts
 
-`.scripts/` — added to `PATH` by both shells:
+`.scripts/` — on `PATH` in three places, because three different things
+launch them: both shells (`.zshrc`, `config.fish`), Hyprland (via an absolute
+path in `hyprland.lua`), and systemd user services (`environment.d`).
+Miss any one and the buttons that call a script fail silently.
+
 
 | | |
 |---|---|
@@ -120,3 +125,24 @@ lock screen follows whatever the first monitor is showing.
     wallpaper              picker
     wallpaper <file>       apply to all, current fit
     wallpaper --random     random one
+
+## Gotchas worth knowing
+
+Things that fail *silently* here, found the hard way:
+
+- **`~/.scripts` must be on three PATHs.** Shells read `.zshrc`/`config.fish`,
+  Hyprland doesn't read either (so binds use an absolute path), and systemd
+  user services read only `environment.d`. Waybar runs under systemd — a
+  missing entry there means every button that calls a script does nothing,
+  with no error anywhere.
+- **hyprpaper and hyprlock don't validate their config.** A bad value or a
+  missing file produces no error, just a wrong result. Only `cover`,
+  `contain` and `tile` are real `fit_mode` values.
+- **yazi renamed the filetype rule key** from `name` to `url` in v26. Every
+  tutorial online still shows `name`. Diagnose with `ya env`.
+- **eza's `--icons` defaults to "auto"** and disappears in many contexts.
+  Use `--icons=always`.
+- **`zsh-syntax-highlighting` must be the last `source`** in `.zshrc`.
+  Anything loaded after it stops being highlighted, without complaint.
+- **mise hijacks `python`**, which breaks AUR builds of Python packages.
+  Build with `PATH=/usr/bin` when that happens.
