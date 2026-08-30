@@ -85,8 +85,9 @@ def reload_apps():
     if subprocess.run(["pgrep", "-f", "nwg-dock-hyprland"],
                       capture_output=True).returncode == 0:
         subprocess.run(["pkill", "-f", "nwg-dock-hyprland"])
+        # ATENCAO: manter igual ao autostart em hypr/.config/hypr/hyprland.lua
         subprocess.Popen(["nwg-dock-hyprland", "-d", "-i", "40",
-                          "-c", "nwg-drawer -term ghostty"],
+                          "-c", "rofi -show drun -theme grid"],
                          start_new_session=True,
                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         print("  dock: reiniciado")

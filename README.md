@@ -34,3 +34,12 @@ template correspondente em `theme/templates/`.
 
 `monitors.lua` e `workspaces.lua` sao gerados pelo nwg-displays e sao
 especificos desta maquina (nomes de saida, posicao das telas).
+
+## sudo sem terminal
+
+`SUDO_ASKPASS` aponta pra `bin/.local/bin/rofi-askpass`, entao:
+
+    sudo -A pacman -S <pacote>
+
+abre um prompt de senha em rofi em vez de exigir tty. Util quando o comando
+parte de um lancador, script ou agente sem terminal interativo.

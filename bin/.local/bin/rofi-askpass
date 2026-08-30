@@ -1,0 +1,5 @@
+#!/bin/sh
+# Askpass grafico via rofi. Usado pelo sudo -A quando nao ha tty.
+# A senha vai direto do rofi pro stdin do sudo; nao passa por arquivo nem log.
+exec rofi -dmenu -password -no-fixed-num-lines -p "sudo" \
+          -mesg "${1:-senha}" -theme-str 'window { width: 30%; }'
