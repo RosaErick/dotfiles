@@ -1,0 +1,17 @@
+/* GERADO por `theme` — edite theme/templates/dock-style.css.tmpl */
+window {
+    background: #161616e6;
+    border-radius: 8px;
+    border: 1px solid #484848;
+}
+#box { padding: 8px; }
+#active { border-bottom: solid 2px; border-color: #78a9ff; }
+button, image { background: none; border: none; box-shadow: none; color: #b6b8bb; }
+button {
+    padding: 6px;
+    margin: 0 3px;
+    color: #f2f4f8;
+    border-radius: 6px;
+}
+button:hover { background-color: #282828; }
+button:focus { box-shadow: none; }

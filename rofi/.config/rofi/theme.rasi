@@ -1,0 +1,31 @@
+/* GERADO por `theme` — edite theme/templates/rofi-theme.rasi.tmpl */
+* {
+    bg:     #161616;
+    bg-alt: #1c1c1c;
+    fg:     #f2f4f8;
+    fg-dim: #b6b8bb;
+    accent: #78a9ff;
+    urgent: #ee5396;
+    line:   #484848;
+
+    background-color: transparent;
+    text-color:       @fg;
+    font: "JetBrainsMono Nerd Font 11";
+}
+window {
+    background-color: @bg;
+    border:           1px;
+    border-color:     @line;
+    border-radius:    8px;
+    width:            42%;
+    padding:          16px;
+}
+inputbar { spacing: 10px; padding: 0 0 14px 0; children: [ prompt, entry ]; }
+prompt   { text-color: @accent; }
+entry    { placeholder: "buscar"; placeholder-color: @fg-dim; cursor: text; }
+listview { lines: 10; columns: 1; scrollbar: false; spacing: 2px; fixed-height: false; }
+element  { padding: 8px 10px; border-radius: 6px; spacing: 10px; }
+element selected { background-color: @accent; text-color: @bg; }
+element-icon { size: 24px; vertical-align: 0.5; }
+element-text { vertical-align: 0.5; }
+error-message { padding: 10px; border-radius: 6px; background-color: @urgent; text-color: @bg; }

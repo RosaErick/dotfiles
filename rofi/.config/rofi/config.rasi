@@ -1,0 +1,13 @@
+configuration {
+    modes: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Adwaita";
+    drun-display-format: "{name}";
+    display-drun: "Apps";
+    display-run:  "Exec";
+    display-window: "Janelas";
+    terminal: "ghostty";
+    kb-cancel: "Escape,super+r";
+}
+
+@theme "theme"

@@ -1,0 +1,30 @@
+# Carbonfox — paleta IBM Carbon (EdenEast/nightfox.nvim)
+name = "carbonfox"
+
+[colors]
+bg        = "#161616"   # fundo principal
+bg_alt    = "#1c1c1c"   # fundo de painel / elemento
+bg_high   = "#282828"   # destaque, hover
+sel       = "#2a2a2a"   # seleção
+line      = "#484848"   # bordas, separadores
+
+fg        = "#f2f4f8"   # texto principal
+fg_dim    = "#b6b8bb"   # texto secundário
+fg_mute   = "#6f6f6f"   # texto apagado
+
+red       = "#ee5396"
+green     = "#25be6a"
+yellow    = "#08bdba"
+blue      = "#78a9ff"
+magenta   = "#be95ff"
+cyan      = "#33b1ff"
+
+accent    = "#78a9ff"   # cor de destaque da UI
+urgent    = "#ee5396"   # crítico / erro
+
+[opts]
+# 'e6' = 90% opaco. Use 'ff' pra sólido.
+alpha     = "e6"
+radius    = "8px"
+font      = "JetBrainsMono Nerd Font"
+font_size = "13px"

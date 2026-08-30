@@ -1,0 +1,17 @@
+/* GERADO por `theme` a partir de theme/templates/waybar-style.css.tmpl
+   NAO EDITE ESTE ARQUIVO — edite o template. */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+window#waybar { background: #161616e6; color: #f2f4f8; }
+#workspaces button { padding: 0 8px; color: #6f6f6f; }
+#workspaces button.active { color: #f2f4f8; box-shadow: inset 0 -2px #78a9ff; }
+#workspaces button:hover { background: #282828; }
+#window { color: #b6b8bb; }
+#pulseaudio, #network, #cpu, #memory, #clock, #tray { padding: 0 10px; }
+#clock { color: #78a9ff; font-weight: bold; }
+#network.disconnected { color: #ee5396; }
