@@ -22,13 +22,13 @@
 /* A barra em si nao existe visualmente: so as teclas flutuam. */
 window#waybar {
     background: transparent;
-    color: #adb8b8;
+    color: #f2f4f8;
 }
 
 tooltip {
-    background: #002d38;
-    color: #adb8b8;
-    border: 1px solid #586e74;
+    background: #1c1c1c;
+    color: #f2f4f8;
+    border: 1px solid #484848;
     border-radius: 8px;
 }
 tooltip label { padding: 4px; }
@@ -42,11 +42,11 @@ tooltip label { padding: 4px; }
 .modules-right,
 .modules-left,
 #window {
-    background: rgba(0,20,26, 0.82);
-    color: #adb8b8;
+    background: rgba(22,22,22, 0.82);
+    color: #f2f4f8;
     margin: 4px 0 8px 0;
     border-radius: 11px;
-    border-bottom: 4px solid rgba(0,22,28, 0.85);
+    border-bottom: 4px solid rgba(14,14,14, 0.85);
 }
 
 .modules-right { padding: 0 6px; }
@@ -66,7 +66,7 @@ tooltip label { padding: 4px; }
 #custom-power {
     background: transparent;
     border: none;
-    color: #adb8b8;
+    color: #f2f4f8;
     padding: 0 11px;
     margin: 0;
     border-radius: 8px;
@@ -74,21 +74,21 @@ tooltip label { padding: 4px; }
 
 /* ---- acentos ---------------------------------------------------------- */
 #custom-launcher {
-    background: #278bd3;
-    color: #00141a;
+    background: #fa4d56;
+    color: #161616;
     padding: 0 12px;
     margin: 5px 4px 5px 2px;
     border-radius: 8px;
     font-size: 15px;
 }
-#custom-launcher:hover { background: #2aa298; }
+#custom-launcher:hover { background: #33b1ff; }
 
 /* Sem bloco chapado: em repouso e so o glifo. O fundo cresce no hover,
    com transicao — bloco solido de cor saturada pesa demais numa barra
    translucida. */
 #custom-power {
     background: transparent;
-    color: #dc312e;
+    color: #ee5396;
     padding: 0 12px;
     margin: 5px 2px 5px 4px;
     border-radius: 8px;
@@ -96,15 +96,15 @@ tooltip label { padding: 4px; }
     transition: background-color 180ms ease, color 180ms ease;
 }
 #custom-power:hover {
-    background: rgba(220,49,46, 0.18);
-    color: #dc312e;
+    background: rgba(238,83,150, 0.18);
+    color: #ee5396;
 }
 
 /* ---- workspaces: numerais CJK, o ativo afunda ------------------------- */
 #workspaces { padding: 0 4px; }
 
 #workspaces button {
-    color: #647a82;
+    color: #6f6f6f;
     background: transparent;
     min-width: 26px;              /* largura fixa: glifos CJK tem larguras diferentes */
     padding: 0;
@@ -121,47 +121,47 @@ tooltip label { padding: 4px; }
 /* area sem janela nenhuma: quase invisivel, so marca que o slot existe.
    Sem borda inferior — nao e uma "tecla", e um espaco vazio. */
 #workspaces button.empty {
-    color: #586e74;
+    color: #484848;
     background: transparent;
     border-bottom-color: transparent;
 }
 #workspaces button.empty:hover {
-    color: #818a8a;
-    background: #073541;
+    color: #b5b7ba;
+    background: #282828;
 }
 
 /* area corrente de um monitor que NAO esta focado: estado intermediario,
    senao no dual-monitor a outra tela parece nao ter nada aberto. */
 #workspaces button.visible {
-    color: #278bd3;
-    background: #073541;
-    border-bottom-color: #134569;
+    color: #fa4d56;
+    background: #282828;
+    border-bottom-color: #7d262b;
 }
 
 #workspaces button:hover {
-    color: #adb8b8;
-    background: #586e74;
-    border-bottom-color: #00161c;
+    color: #f2f4f8;
+    background: #484848;
+    border-bottom-color: #0e0e0e;
 }
 
 /* Estado ativo vem por ultimo de proposito: o waybar aplica .visible junto
    com .active na area corrente, e com a mesma especificidade a ultima regra
    vence. Se subir, a area ativa volta a parecer so "visivel". */
 #workspaces button.active {
-    color: #00141a;
-    background: #278bd3;
-    border-bottom-color: #134569;
+    color: #161616;
+    background: #fa4d56;
+    border-bottom-color: #7d262b;
 }
 
 #workspaces button.urgent {
-    color: #00141a;
-    background: #dc312e;
-    border-bottom-color: #6e1817;
+    color: #161616;
+    background: #ee5396;
+    border-bottom-color: #77294b;
 }
 
 /* ---- titulo da janela: discreto, so contexto -------------------------- */
 #window {
-    color: #818a8a;
+    color: #b5b7ba;
     font-weight: normal;
     padding: 0 16px;
 }
@@ -169,7 +169,7 @@ window#waybar.empty #window {
     background: transparent;
     border-bottom-color: transparent;
 }
-#window { font-weight: normal; color: #818a8a; }
+#window { font-weight: normal; color: #b5b7ba; }
 
 /* ---- indicadores ------------------------------------------------------
  * Principio: cor carrega significado, nao enfeite.
@@ -181,22 +181,22 @@ window#waybar.empty #window {
 /* Valores em branco: a cor identifica o modulo pelo ICONE (markup Pango no
    config), nao pintando o numero. Numero colorido perde legibilidade. */
 #cpu, #memory, #network, #language {
-    color: #adb8b8;
+    color: #f2f4f8;
     padding: 0 10px;
 }
 
 #clock {
-    color: #278bd3;
+    color: #fa4d56;
     font-size: 14px;
 }
 
 /* estados — aqui a cor significa alguma coisa */
-#pulseaudio.muted     { color: #647a82; }
-#network.disconnected { color: #dc312e; border-bottom-color: #6e1817; }
+#pulseaudio.muted     { color: #6f6f6f; }
+#network.disconnected { color: #ee5396; border-bottom-color: #77294b; }
 #memory.critical,
-#cpu.critical         { color: #dc312e; border-bottom-color: #6e1817; }
+#cpu.critical         { color: #ee5396; border-bottom-color: #77294b; }
 #memory.warning,
-#cpu.warning          { color: #b28600; }
+#cpu.warning          { color: #08bdba; }
 
 #tray { padding: 0 10px; }
 #tray > .passive { -gtk-icon-effect: dim; }
@@ -214,14 +214,14 @@ window#waybar.empty #window {
     border: none;
     margin: 0;
     padding: 0 8px;
-    color: #adb8b8;
+    color: #f2f4f8;
 }
 #audio #custom-audio-out,
-#audio #custom-audio-in { color: #d33682; }
-#audio #pulseaudio.muted { color: #647a82; }
+#audio #custom-audio-in { color: #be95ff; }
+#audio #pulseaudio.muted { color: #6f6f6f; }
 
 #audio #custom-audio-out:hover,
-#audio #custom-audio-in:hover { color: #adb8b8; }
+#audio #custom-audio-in:hover { color: #f2f4f8; }
 
 /* estado escondido: o waybar aplica children-class nos filhos recolhidos */
 #audio .audio-item {
@@ -237,8 +237,8 @@ window#waybar.empty #window {
 #audio slider {
     min-width: 0;
     min-height: 0;
-    background: #d33682;
-    border: 2px solid #073541;
+    background: #be95ff;
+    border: 2px solid #282828;
     border-radius: 8px;
     box-shadow: none;
 }
@@ -246,11 +246,11 @@ window#waybar.empty #window {
     min-width: 110px;
     min-height: 6px;
     border-radius: 3px;
-    background: #586e74;
+    background: #484848;
     margin: 0 6px;
 }
 #audio highlight {
     min-height: 6px;
     border-radius: 3px;
-    background: #d33682;
+    background: #be95ff;
 }

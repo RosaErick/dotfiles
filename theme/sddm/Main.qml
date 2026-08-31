@@ -12,15 +12,15 @@ Rectangle {
     id: root
     width: 1920
     height: 1080
-    color: "#00141a"
+    color: "#161616"
 
-    property color cAccent:  "#278bd3"
-    property color cFg:      "#adb8b8"
-    property color cFgDim:   "#818a8a"
-    property color cFgMute:  "#647a82"
-    property color cSurface: "#073541"
-    property color cLine:    "#586e74"
-    property color cErr:     "#dc312e"
+    property color cAccent:  "#fa4d56"
+    property color cFg:      "#f2f4f8"
+    property color cFgDim:   "#b5b7ba"
+    property color cFgMute:  "#6f6f6f"
+    property color cSurface: "#282828"
+    property color cLine:    "#484848"
+    property color cErr:     "#ee5396"
     property string fonte:   "JetBrainsMono Nerd Font"
 
     property int sessaoIdx: sessionModel.lastIndex

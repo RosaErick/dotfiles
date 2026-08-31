@@ -12,6 +12,7 @@ Arch Linux + Hyprland. Everything themed from a single palette file.
 | **Terminal** | Ghostty (primary), Kitty |
 | **Shell** | Zsh + Powerlevel10k · Fish + Tide |
 | **Files** | Yazi (`SUPER+E`), Nautilus (`SUPER+SHIFT+E`) |
+| **Editor** | Neovim + [LazyVim](https://github.com/LazyVim/LazyVim) |
 | **Notifications** | Mako |
 | **Lock / idle** | Hyprlock + Hypridle |
 | **Wallpaper** | Hyprpaper |

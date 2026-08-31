@@ -1,9 +1,9 @@
 # GERADO por `theme` — edite theme/templates/mako-config.tmpl
 font=JetBrainsMono Nerd Font 10
-background-color=#00141ae6
-text-color=#adb8b8
-border-color=#278bd3
-progress-color=over #073541
+background-color=#161616e6
+text-color=#f2f4f8
+border-color=#fa4d56
+progress-color=over #282828
 border-size=2
 border-radius=6
 padding=12
@@ -13,5 +13,5 @@ anchor=top-right
 max-visible=5
 
 [urgency=critical]
-border-color=#dc312e
+border-color=#ee5396
 default-timeout=0

@@ -1,19 +1,19 @@
 /* GERADO por `theme` — edite theme/templates/gtk.css.tmpl
    Reforca a paleta por cima do adw-gtk-theme. Cobre a maioria dos widgets,
    nao todos: apps GTK nao expoem tudo por @define-color. */
-@define-color window_bg_color #00141a;
-@define-color window_fg_color #adb8b8;
-@define-color view_bg_color #002d38;
-@define-color view_fg_color #adb8b8;
-@define-color headerbar_bg_color #002d38;
-@define-color headerbar_fg_color #adb8b8;
-@define-color popover_bg_color #002d38;
-@define-color popover_fg_color #adb8b8;
-@define-color card_bg_color #073541;
-@define-color card_fg_color #adb8b8;
-@define-color accent_bg_color #278bd3;
-@define-color accent_fg_color #00141a;
-@define-color accent_color #278bd3;
-@define-color destructive_bg_color #dc312e;
-@define-color destructive_color #dc312e;
-@define-color borders #586e74;
+@define-color window_bg_color #161616;
+@define-color window_fg_color #f2f4f8;
+@define-color view_bg_color #1c1c1c;
+@define-color view_fg_color #f2f4f8;
+@define-color headerbar_bg_color #1c1c1c;
+@define-color headerbar_fg_color #f2f4f8;
+@define-color popover_bg_color #1c1c1c;
+@define-color popover_fg_color #f2f4f8;
+@define-color card_bg_color #282828;
+@define-color card_fg_color #f2f4f8;
+@define-color accent_bg_color #fa4d56;
+@define-color accent_fg_color #161616;
+@define-color accent_color #fa4d56;
+@define-color destructive_bg_color #ee5396;
+@define-color destructive_color #ee5396;
+@define-color borders #484848;
