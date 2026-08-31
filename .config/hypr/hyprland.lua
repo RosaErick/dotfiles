@@ -404,6 +404,16 @@ hl.window_rule({
 })
 
 -- Layer rules also return a handle.
+-- Blur atras do rofi. Por padrao o blur do Hyprland so vale para JANELAS;
+-- layer surfaces (rofi, waybar, notificacoes) precisam de regra explicita.
+-- Sem isto o rofi translucido mostra o fundo nitido, nao desfocado.
+hl.layer_rule({
+    name  = "blur-rofi",
+    match = { namespace = "^rofi$" },
+    blur  = true,
+    ignore_alpha = 0.2,   -- nao desfoca sob areas quase transparentes
+})
+
 -- local overlayLayerRule = hl.layer_rule({
 --     name  = "no-anim-overlay",
 --     match = { namespace = "^my-overlay$" },

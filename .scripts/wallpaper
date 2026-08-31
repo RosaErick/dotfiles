@@ -41,11 +41,11 @@ MODOS = [("cover", "preencher a tela (corta as bordas)"),
 
 
 def paleta():
-    p = {"accent": "#78a9ff", "bg_raw": "22,22,22"}
+    p = {"accent": "#78a9ff", "bg_raw": "22,22,22", "alpha_rofi": "0.82"}
     try:
         atual = (DOTS / "theme/.current").read_text().strip()
         with open(DOTS / f"theme/palettes/{atual}.toml", "rb") as f:
-            c = tomllib.load(f).get("colors", {})
+            d = tomllib.load(f); c = {**d.get("colors", {}), **d.get("opts", {})}
         if "accent" in c:
             p["accent"] = c["accent"]
         if "bg" in c:
@@ -58,7 +58,7 @@ def paleta():
 
 def rofi(entradas, prompt, tema_extra="", icones=False):
     p = paleta()
-    tema = (f"window {{ background-color: rgba({p['bg_raw']}, 1.0); }} "
+    tema = (f"window {{ background-color: rgba({p['bg_raw']}, {p['alpha_rofi']}); }} "
             f"element selected {{ background-color: {p['accent']}; "
             f"                    text-color: rgba({p['bg_raw']}, 1.0); }} "
             + tema_extra)

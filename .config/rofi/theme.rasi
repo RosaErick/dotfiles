@@ -13,7 +13,7 @@
     font: "JetBrainsMono Nerd Font 11";
 }
 window {
-    background-color: @bg;
+    background-color: rgba(22,22,22, 0.82);
     border:           1px;
     border-color:     @line;
     border-radius:    8px;

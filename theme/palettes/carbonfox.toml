@@ -29,6 +29,10 @@ alpha     = "0.90"
 alpha_hex = "e6"
 # overlays grandes (grade de apps) pedem mais opacidade pra ler bem
 alpha_solid = "0.97"
+# rofi: mais transparente porque o Hyprland desfoca atras dele
+# (layer_rule "blur-rofi" no hyprland.lua). Sem o blur, baixar isto
+# deixa o texto ilegivel sobre o fundo nitido.
+alpha_rofi  = "0.82"
 radius    = "8px"
 font      = "JetBrainsMono Nerd Font"
 font_size = "13px"

@@ -60,11 +60,11 @@ CATEGORIAS = [
 def paleta():
     """Cores do tema ativo; cai num padrao escuro se algo faltar."""
     p = {"accent": "#78a9ff", "fg": "#f2f4f8", "fg_dim": "#b6b8bb",
-         "fg_mute": "#6f6f6f", "bg_raw": "22,22,22"}
+         "fg_mute": "#6f6f6f", "bg_raw": "22,22,22", "alpha_rofi": "0.82"}
     try:
         atual = (DOTS / "theme/.current").read_text().strip()
         with open(DOTS / f"theme/palettes/{atual}.toml", "rb") as f:
-            c = tomllib.load(f).get("colors", {})
+            d = tomllib.load(f); c = {**d.get("colors", {}), **d.get("opts", {})}
         p.update({k: v for k, v in c.items() if k in p})
         if "bg" in c:
             r, g, b = (int(c["bg"][i:i + 2], 16) for i in (1, 3, 5))
@@ -191,7 +191,7 @@ def main():
 
     tema = (
         f"window {{ width: 52%; padding: 14px; "
-        f"background-color: rgba({p['bg_raw']}, 1.0); }} "
+        f"background-color: rgba({p['bg_raw']}, {p['alpha_rofi']}); }} "
         "inputbar { padding: 0 0 8px 0; } "
         f"listview {{ lines: {por_col}; columns: 2; flow: vertical; "
         "spacing: 0px; scrollbar: false; } "

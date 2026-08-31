@@ -14,7 +14,7 @@
 }
 
 window {
-    background-color: rgba(22,22,22, 0.97);
+    background-color: rgba(22,22,22, 0.82);
     border:           1px;
     border-color:     @line;
     border-radius:    8px;
