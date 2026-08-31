@@ -1,0 +1,10 @@
+#!/bin/sh
+# Captura de tela. Existe para resolver a pasta de imagens em tempo de
+# execucao: "~/Imagens" so vale em sistema em portugues, e o caminho fixo
+# no hyprland.lua quebrava em qualquer outro locale.
+set -e
+DIR=$(xdg-user-dir PICTURES 2>/dev/null || true)
+[ -n "$DIR" ] && [ "$DIR" != "$HOME" ] || DIR="$HOME/Pictures"
+DIR="$DIR/Screenshots"
+mkdir -p "$DIR"
+exec hyprshot -z -o "$DIR" -m "${1:-region}"

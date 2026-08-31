@@ -317,7 +317,7 @@ hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("makoctl dismiss -a"))  -- limpa noti
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))     -- bloqueia a tela
 
 -- Capturas de tela (hyprshot: salva na pasta e copia pro clipboard)
-local shots = 'hyprshot -z -o "$HOME/Imagens/Capturas de tela" -m '
+local shots = scripts .. "screenshot "   -- resolve a pasta via xdg-user-dir
 hl.bind("Print",                  hl.dsp.exec_cmd(shots .. "region"))  -- selecionar regiao
 hl.bind("SHIFT + Print",          hl.dsp.exec_cmd(shots .. "window"))  -- uma janela
 hl.bind(mainMod .. " + Print",    hl.dsp.exec_cmd(shots .. "output"))  -- monitor inteiro

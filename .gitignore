@@ -21,3 +21,22 @@ theme/.current
 
 # wallpaper do login: copia da imagem atual, nao versionar
 theme/sddm/background.jpg
+
+# Saidas do `theme`: a fonte da verdade e a paleta + o template.
+# Versionar o gerado sujava o git a cada troca de tema e divergia do
+# hyprpaper.conf, que ja era ignorado. O install.sh roda `theme` para
+# que um clone novo tenha configs validos.
+.config/btop/themes/current.theme
+.config/ghostty/themes/current
+.config/gtk-3.0/gtk.css
+.config/gtk-4.0/gtk.css
+.config/hypr/colors.lua
+.config/kitty/theme.conf
+.config/mako/config
+.config/nwg-dock-hyprland/style.css
+.config/rofi/grid.rasi
+.config/rofi/theme.rasi
+.config/waybar/config.jsonc
+.config/waybar/style.css
+.config/yazi/theme.toml
+theme/sddm/Main.qml

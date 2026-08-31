@@ -25,7 +25,20 @@ import sys
 import tomllib
 from pathlib import Path
 
-DIR = Path.home() / "Imagens/wallpapers"
+def _pasta_wallpapers():
+    """Resolve via xdg-user-dir: "Imagens" so existe em sistema em portugues."""
+    try:
+        r = subprocess.run(["xdg-user-dir", "PICTURES"],
+                           capture_output=True, text=True, timeout=5)
+        base = Path(r.stdout.strip())
+        if r.returncode == 0 and base.is_dir() and base != Path.home():
+            return base / "wallpapers"
+    except Exception:
+        pass
+    return Path.home() / "Pictures" / "wallpapers"
+
+
+DIR = _pasta_wallpapers()
 HYPR = Path.home() / ".config/hypr"
 ESTADO = HYPR / "wallpapers.json"
 CONF = HYPR / "hyprpaper.conf"

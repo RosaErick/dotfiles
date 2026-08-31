@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 # Fonte unica do comando do dock. Usado pelo systemd (nwg-dock.service) e
 # pelo `theme` ao recarregar. Nao duplique estes flags em outro lugar.
 #
@@ -12,8 +13,9 @@
 ICON=56
 MENU="rofi -show drun -theme grid"
 
-MONITORES=$(hyprctl monitors -j | python3 -c 'import json,sys; print(" ".join(m["name"] for m in json.load(sys.stdin)))')
-[ -n "$MONITORES" ] || MONITORES=""
+MONITORES=$(hyprctl monitors -j 2>/dev/null \
+    | python3 -c 'import json,sys; print(" ".join(m["name"] for m in json.load(sys.stdin)))' \
+    2>/dev/null) || MONITORES=""
 
 if [ -z "$MONITORES" ]; then
     exec nwg-dock-hyprland -d -i "$ICON" -c "$MENU"
@@ -22,4 +24,4 @@ fi
 for m in $MONITORES; do
     nwg-dock-hyprland -d -m -o "$m" -i "$ICON" -c "$MENU" &
 done
-wait
+wait || true   # instancia que cai nao deve derrubar as outras

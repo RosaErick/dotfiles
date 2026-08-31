@@ -103,11 +103,21 @@ and `_dim` (75%) variants, plus `_raw` (`r,g,b`) and `_hex` forms. The bar's
 ## Install
 
 ```sh
+sudo pacman -S --needed hyprland hyprpaper hyprlock hypridle hyprpolkitagent \
+  waybar rofi mako ghostty kitty yazi btop nautilus nwg-dock-hyprland \
+  nwg-displays nwg-look grim slurp hyprshot wl-clipboard sddm \
+  zsh zsh-autosuggestions zsh-syntax-highlighting fish fisher \
+  eza bat fd ripgrep fzf zoxide ghq lazygit neovim stow \
+  papirus-icon-theme adw-gtk-theme ttf-ibm-plex ttf-jetbrains-mono-nerd \
+  pavucontrol networkmanager brightnessctl playerctl xdg-user-dirs \
+  resvg poppler poppler-data imagemagick ffmpeg
+
 git clone <repo> ~/.dotfiles && cd ~/.dotfiles
 ./install.sh
-theme carbonfox
-systemctl --user enable --now waybar hyprpaper mako hypridle nwg-dock hyprpolkitagent
 ```
+
+`install.sh` renders the theme, creates the wallpaper folder and enables the
+user services. Log out and back in so `environment.d` applies.
 
 ## Keybindings
 

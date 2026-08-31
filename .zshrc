@@ -79,6 +79,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+
+# PATH: uma definicao so. O environment.d cobre servicos systemd e tudo
+# que nasce da sessao grafica, mas TTY puro nao le systemd --user — por
+# isso o rc do shell tambem precisa definir.
+export PATH="$HOME/.scripts:$HOME/.local/bin:$PATH"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -119,7 +125,6 @@ command -v mise >/dev/null && eval "$(mise activate zsh)"
 
 
 
-export PATH="$HOME/.local/bin:$PATH"
 
 # ── Histórico ─────────────────────────────────────────────────────
 HISTSIZE=100000
@@ -171,4 +176,3 @@ bindkey '^ ' autosuggest-accept
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # scripts dos dotfiles
-export PATH="$HOME/.scripts:$PATH"
