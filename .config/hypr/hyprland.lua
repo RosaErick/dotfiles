@@ -149,17 +149,21 @@ hl.config({
         -- Vidro fosco escuro: o segredo nao e a opacidade, e escurecer e
         -- dessaturar o que passa pelo blur. Sem isso o wallpaper "tinge"
         -- a janela em vez de virar fundo neutro, e o texto perde contraste.
+        -- Reproduz o blur do craftzdog (macOS: background-blur-radius = 20).
+        -- No Hyprland o raio efetivo e ~ size * 2^passes, entao 5*2^2 = 20.
+        -- Os demais parametros ficam NEUTROS porque o blur do macOS e um
+        -- gaussiano puro: nao escurece, nao adiciona ruido, nao dessatura.
         blur = {
             enabled     = true,
-            size        = 8,
-            passes      = 4,
+            size        = 5,
+            passes      = 2,
             new_optimizations = true,
             xray        = false,
-            brightness  = 0.80,   -- escurece o que esta atras (menor = mais escuro)
-            contrast    = 1.05,
-            noise       = 0.02,   -- graozinho: mata o "banding" do desfoque
-            vibrancy    = 0.10,   -- menos saturacao: cor do wallpaper nao vaza
-            vibrancy_darkness = 0.35,
+            brightness  = 1.0,
+            contrast    = 1.0,
+            noise       = 0.0,
+            vibrancy    = 0.0,
+            vibrancy_darkness = 0.0,
         },
     },
 
