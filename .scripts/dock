@@ -1,21 +1,114 @@
-#!/bin/sh
-# Fonte unica do comando do dock. Usado pelo systemd (nwg-dock.service) e
-# pelo `theme` ao recarregar. Nao duplique estes flags em outro lugar.
-#
-# O nwg-dock so desenha em UM monitor por instancia: sem -o ele escolhe um
-# e os outros ficam com o hotspot ativo mas sem dock. Por isso subimos uma
-# instancia por saida, com -m para pular a checagem de instancia unica.
-ICON=56
-MENU="rofi -show drun -theme grid"
+#!/usr/bin/python3
+"""Dock do Hyprland, uma instancia por monitor, resiliente a mudancas.
 
-MONITORES=$(hyprctl monitors -j | python3 -c 'import json,sys; print(" ".join(m["name"] for m in json.load(sys.stdin)))')
-[ -n "$MONITORES" ] || MONITORES=""
+O nwg-dock desenha em UM monitor por instancia: sem -o ele escolhe um e os
+outros ficam com o hotspot ativo mas sem dock. Por isso subimos uma
+instancia por saida.
 
-if [ -z "$MONITORES" ]; then
-    exec nwg-dock-hyprland -d -i "$ICON" -c "$MENU"
-fi
+E preciso reagir a monitor ligado/desligado: enumerar so no start deixa a
+tela que voltou sem dock ate reiniciar o servico. Este script escuta o
+socket de eventos do Hyprland e re-sobe as instancias quando algo muda.
+"""
+import json
+import os
+import signal
+import socket
+import subprocess
+import sys
 
-for m in $MONITORES; do
-    nwg-dock-hyprland -d -m -o "$m" -i "$ICON" -c "$MENU" &
-done
-wait
+ICONE = "56"
+MENU = "rofi -show drun -theme grid"
+
+processos = []
+
+
+def monitores():
+    r = subprocess.run(["hyprctl", "monitors", "-j"], capture_output=True, text=True)
+    try:
+        return [m["name"] for m in json.loads(r.stdout)]
+    except Exception:
+        return []
+
+
+def parar():
+    for p in processos:
+        try:
+            p.terminate()
+        except Exception:
+            pass
+    for p in processos:
+        try:
+            p.wait(timeout=3)
+        except Exception:
+            p.kill()
+    processos.clear()
+
+
+atual = []
+
+
+def subir():
+    global atual
+    parar()
+    mons = monitores()
+    atual = mons
+    if not mons:
+        processos.append(subprocess.Popen(
+            ["nwg-dock-hyprland", "-d", "-i", ICONE, "-c", MENU]))
+        return
+    for m in mons:
+        processos.append(subprocess.Popen(
+            ["nwg-dock-hyprland", "-d", "-m", "-o", m, "-i", ICONE, "-c", MENU]))
+    print(f"dock em: {', '.join(mons)}", flush=True)
+
+
+def encerrar(*_):
+    parar()
+    sys.exit(0)
+
+
+def main():
+    signal.signal(signal.SIGTERM, encerrar)
+    signal.signal(signal.SIGINT, encerrar)
+    subir()
+
+    his = os.environ.get("HYPRLAND_INSTANCE_SIGNATURE", "")
+    rt = os.environ.get("XDG_RUNTIME_DIR", "/run/user/1000")
+    caminho = f"{rt}/hypr/{his}/.socket2.sock"
+    if not his or not os.path.exists(caminho):
+        print("socket de eventos indisponivel; sem reacao a monitores", flush=True)
+        for p in processos:
+            p.wait()
+        return
+
+    s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    s.connect(caminho)
+    # Timeout curto de proposito: a cada expiracao conferimos a lista de
+    # monitores. O evento e o caminho rapido; a conferencia e a rede de
+    # seguranca, porque nem toda mudanca de topologia emite evento
+    # (desligar a tela pelo botao nem sempre gera monitorremoved).
+    s.settimeout(4)
+    resto = b""
+    while True:
+        try:
+            dados = s.recv(4096)
+            if not dados:
+                break
+            resto += dados
+            while b"\n" in resto:
+                linha, resto = resto.split(b"\n", 1)
+                evento = linha.decode(errors="replace").split(">>")[0]
+                if evento.startswith(("monitoradded", "monitorremoved")):
+                    if monitores() != atual:
+                        subir()
+        except socket.timeout:
+            # duas condicoes: a topologia mudou, OU alguma instancia morreu.
+            # A segunda e o caso real de desligar a tela: a lista de monitores
+            # pode voltar identica, mas o processo daquela saida ja se foi.
+            morreu = any(pr.poll() is not None for pr in processos)
+            if morreu or monitores() != atual:
+                subir()
+
+
+if __name__ == "__main__":
+    main()
