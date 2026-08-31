@@ -33,11 +33,30 @@ tooltip {
 }
 tooltip label { padding: 4px; }
 
-/* ---- a tecla: base compartilhada -------------------------------------- */
+/* ---- ilhas: esquerda, centro, direita ---------------------------------
+ * A direita e UMA barra, nao pilulas soltas: os modulos ficam sem fundo e
+ * quem carrega o vidro e o container .modules-right. O Hyprland desfoca
+ * atras dela pela layer_rule "blur-waybar" (o blur nao alcanca layer
+ * surfaces sem regra explicita).
+ */
+.modules-right,
+.modules-left,
+#window {
+    background: rgba(22,22,22, 0.82);
+    color: #f2f4f8;
+    margin: 4px 0 8px 0;
+    border-radius: 11px;
+    border-bottom: 4px solid rgba(14,14,14, 0.85);
+}
+
+.modules-right { padding: 0 6px; }
+.modules-left  { padding: 0 6px; }
+#window        { padding: 0 16px; }
+
+/* dentro da barra os modulos sao so conteudo: sem fundo, sem sombra */
 #custom-launcher,
 #workspaces,
 #audio,
-#window,
 #cpu,
 #memory,
 #network,
@@ -45,31 +64,33 @@ tooltip label { padding: 4px; }
 #clock,
 #tray,
 #custom-power {
-    background: #282828;      /* mais claro que o fundo da tela... */
+    background: transparent;
+    border: none;
     color: #f2f4f8;
-    padding: 0 12px;
-    margin: 4px 0 8px 0;          /* 8px embaixo = espaco pra "sombra" */
-    border-radius: 9px;
-    border-bottom: 4px solid #0e0e0e;  /* ...pra sombra ter contraste */
+    padding: 0 11px;
+    margin: 0;
+    border-radius: 8px;
 }
 
 /* ---- acentos ---------------------------------------------------------- */
 #custom-launcher {
     background: #78a9ff;
     color: #161616;
-    border-bottom-color: #3c547f;
-    padding: 0 14px;
+    padding: 0 12px;
+    margin: 5px 4px 5px 2px;
+    border-radius: 8px;
     font-size: 15px;
 }
-#custom-launcher:hover { background: #33b1ff; border-bottom-color: #19587f; }
+#custom-launcher:hover { background: #33b1ff; }
 
 #custom-power {
     background: #ee5396;
     color: #161616;
-    border-bottom-color: #77294b;
-    padding: 0 13px;
+    padding: 0 11px;
+    margin: 5px 2px 5px 4px;
+    border-radius: 8px;
 }
-#custom-power:hover { background: #be95ff; border-bottom-color: #5f4a7f; }
+#custom-power:hover { background: #be95ff; }
 
 /* ---- workspaces: numerais CJK, o ativo afunda ------------------------- */
 #workspaces { padding: 0 4px; }
@@ -140,6 +161,7 @@ window#waybar.empty #window {
     background: transparent;
     border-bottom-color: transparent;
 }
+#window { font-weight: normal; color: #b5b7ba; }
 
 /* ---- indicadores ------------------------------------------------------
  * Principio: cor carrega significado, nao enfeite.

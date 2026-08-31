@@ -33,11 +33,30 @@ tooltip {
 }
 tooltip label { padding: 4px; }
 
-/* ---- a tecla: base compartilhada -------------------------------------- */
+/* ---- ilhas: esquerda, centro, direita ---------------------------------
+ * A direita e UMA barra, nao pilulas soltas: os modulos ficam sem fundo e
+ * quem carrega o vidro e o container .modules-right. O Hyprland desfoca
+ * atras dela pela layer_rule "blur-waybar" (o blur nao alcanca layer
+ * surfaces sem regra explicita).
+ */
+.modules-right,
+.modules-left,
+#window {
+    background: rgba({{bg_raw}}, {{alpha_rofi}});
+    color: {{fg}};
+    margin: 4px 0 8px 0;
+    border-radius: 11px;
+    border-bottom: 4px solid rgba({{bg_alt_dark_raw}}, 0.85);
+}
+
+.modules-right { padding: 0 6px; }
+.modules-left  { padding: 0 6px; }
+#window        { padding: 0 16px; }
+
+/* dentro da barra os modulos sao so conteudo: sem fundo, sem sombra */
 #custom-launcher,
 #workspaces,
 #audio,
-#window,
 #cpu,
 #memory,
 #network,
@@ -45,31 +64,33 @@ tooltip label { padding: 4px; }
 #clock,
 #tray,
 #custom-power {
-    background: {{bg_high}};      /* mais claro que o fundo da tela... */
+    background: transparent;
+    border: none;
     color: {{fg}};
-    padding: 0 12px;
-    margin: 4px 0 8px 0;          /* 8px embaixo = espaco pra "sombra" */
-    border-radius: 9px;
-    border-bottom: 4px solid {{bg_alt_dark}};  /* ...pra sombra ter contraste */
+    padding: 0 11px;
+    margin: 0;
+    border-radius: 8px;
 }
 
 /* ---- acentos ---------------------------------------------------------- */
 #custom-launcher {
     background: {{accent}};
     color: {{bg}};
-    border-bottom-color: {{accent_dark}};
-    padding: 0 14px;
+    padding: 0 12px;
+    margin: 5px 4px 5px 2px;
+    border-radius: 8px;
     font-size: 15px;
 }
-#custom-launcher:hover { background: {{cyan}}; border-bottom-color: {{cyan_dark}}; }
+#custom-launcher:hover { background: {{cyan}}; }
 
 #custom-power {
     background: {{red}};
     color: {{bg}};
-    border-bottom-color: {{red_dark}};
-    padding: 0 13px;
+    padding: 0 11px;
+    margin: 5px 2px 5px 4px;
+    border-radius: 8px;
 }
-#custom-power:hover { background: {{magenta}}; border-bottom-color: {{magenta_dark}}; }
+#custom-power:hover { background: {{magenta}}; }
 
 /* ---- workspaces: numerais CJK, o ativo afunda ------------------------- */
 #workspaces { padding: 0 4px; }
@@ -140,6 +161,7 @@ window#waybar.empty #window {
     background: transparent;
     border-bottom-color: transparent;
 }
+#window { font-weight: normal; color: {{fg_dim}}; }
 
 /* ---- indicadores ------------------------------------------------------
  * Principio: cor carrega significado, nao enfeite.

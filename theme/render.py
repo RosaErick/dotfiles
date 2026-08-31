@@ -65,8 +65,13 @@ def load_palette(name):
             r, g, b = (int(val[i:i + 2], 16) for i in (1, 3, 5))
             vars_[f"{key}_raw"] = f"{r},{g},{b}"
             vars_[f"{key}_hex"] = val.lstrip("#")
-            vars_[f"{key}_dark"] = escurecer(val, 0.50)
-            vars_[f"{key}_dim"] = escurecer(val, 0.75)
+            for suf, fator in (("dark", 0.50), ("dim", 0.75)):
+                d = escurecer(val, fator)
+                vars_[f"{key}_{suf}"] = d
+                # derivadas tambem ganham _raw: templates precisam delas em
+                # rgba(...) quando a cor entra com transparencia.
+                dr, dg, db = (int(d[i:i + 2], 16) for i in (1, 3, 5))
+                vars_[f"{key}_{suf}_raw"] = f"{dr},{dg},{db}"
     return data.get("name", name), vars_
 
 

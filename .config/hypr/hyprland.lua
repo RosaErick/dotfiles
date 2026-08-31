@@ -412,6 +412,13 @@ hl.window_rule({
 -- layer surfaces (rofi, waybar, notificacoes) precisam de regra explicita.
 -- Sem isto o rofi translucido mostra o fundo nitido, nao desfocado.
 hl.layer_rule({
+    name  = "blur-waybar",
+    match = { namespace = "^waybar$" },
+    blur  = true,
+    ignore_alpha = 0.4,   -- so desfoca sob as ilhas; o resto da barra e vazio
+})
+
+hl.layer_rule({
     name  = "blur-rofi",
     match = { namespace = "^rofi$" },
     blur  = true,
