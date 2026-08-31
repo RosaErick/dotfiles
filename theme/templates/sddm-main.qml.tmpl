@@ -1,9 +1,12 @@
 // GERADO por `theme` — edite theme/templates/sddm-main.qml.tmpl
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
-// Nao importar SddmComponents: ele traz um ComboBox proprio que sobrescreve
-// o do QtQuick.Controls e nao tem "textRole" — o tema falha ao carregar.
+//
+// IMPORTS COM VERSAO, DE PROPOSITO: no login real o SDDM lanca o greeter
+// Qt5 (/usr/bin/sddm-greeter), que rejeita import sem versao com
+// "Library import requires a version" e cai no tema embutido.
+//
+// SO PRIMITIVAS DO QtQuick: o Qt5 desta maquina nao tem QtQuick.Controls
+// (qt5-quickcontrols2 nao instalado). Nada de TextField/Button/ComboBox.
+import QtQuick 2.15
 
 Rectangle {
     id: root
@@ -18,8 +21,10 @@ Rectangle {
     property color cSurface: "{{bg_high}}"
     property color cLine:    "{{line}}"
     property color cErr:     "{{red}}"
+    property string fonte:   "{{font}}"
 
-    // ── fundo: wallpaper escurecido, ou cor chapada se nao houver ────────
+    property int sessaoIdx: sessionModel.lastIndex
+
     Image {
         id: wallpaper
         anchors.fill: parent
@@ -30,146 +35,166 @@ Rectangle {
     }
     Rectangle {
         anchors.fill: parent
-        color: "{{bg}}"
+        color: root.color
         opacity: wallpaper.visible ? 0.72 : 1.0
     }
 
-    // ── relogio ──────────────────────────────────────────────────────────
-    ColumnLayout {
+    // ── relogio ─────────────────────────────────────────────────────────
+    Column {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: parent.height * 0.16
-        spacing: 2
+        spacing: 4
 
         Text {
-            Layout.alignment: Qt.AlignHCenter
-            color: cFg
-            font.family: "{{font}}"
-            font.pointSize: 64
+            id: hora
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: root.cFg
+            font.family: root.fonte
+            font.pointSize: 62
             font.weight: Font.Light
             text: Qt.formatTime(new Date(), "HH:mm")
-            Timer {
-                interval: 1000; running: true; repeat: true
-                onTriggered: parent.text = Qt.formatTime(new Date(), "HH:mm")
-            }
         }
         Text {
-            Layout.alignment: Qt.AlignHCenter
-            color: cFgMute
-            font.family: "{{font}}"
-            font.pointSize: 13
-            // toLocaleDateString com Qt.locale() respeita o idioma do sistema;
-            // Qt.formatDate usa nomes em ingles e o resultado sai misturado.
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: root.cFgMute
+            font.family: root.fonte
+            font.pointSize: 12
             text: new Date().toLocaleDateString(Qt.locale(), "dddd, d 'de' MMMM")
+        }
+        Timer {
+            interval: 1000; running: true; repeat: true
+            onTriggered: hora.text = Qt.formatTime(new Date(), "HH:mm")
         }
     }
 
-    // ── cartao de login ──────────────────────────────────────────────────
+    // ── cartao ──────────────────────────────────────────────────────────
     Rectangle {
         id: card
-        width: 380
+        width: 360
+        height: coluna.height + 44
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: parent.height * 0.10
-        height: form.implicitHeight + 44
         radius: 14
-        color: Qt.rgba(root.cSurface.r, root.cSurface.g, root.cSurface.b, 0.82)
+        color: Qt.rgba(root.cSurface.r, root.cSurface.g, root.cSurface.b, 0.85)
         border.width: 1
-        border.color: cLine
+        border.color: root.cLine
 
-        ColumnLayout {
-            id: form
+        Column {
+            id: coluna
             anchors.centerIn: parent
             width: parent.width - 44
             spacing: 14
 
             Text {
-                Layout.alignment: Qt.AlignHCenter
-                color: cFg
-                font.family: "{{font}}"
-                font.pointSize: 14
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: root.cFg
+                font.family: root.fonte
+                font.pointSize: 13
                 font.bold: true
-                text: userModel.count > 0
-                      ? userModel.data(userModel.index(userList.currentIndex, 0), Qt.UserRole + 1)
-                      : "usuario"
+                // lastUser vem vazio em --test-mode; o fallback le o modelo
+                text: userModel.lastUser !== "" ? userModel.lastUser
+                      : (userModel.count > 0
+                         ? userModel.data(userModel.index(0, 0), Qt.UserRole + 1)
+                         : "")
             }
 
-            ComboBox {
-                id: userList
-                Layout.fillWidth: true
-                visible: userModel.count > 1
-                model: userModel
-                currentIndex: userModel.lastIndex
-                textRole: "name"
-            }
+            // campo de senha
+            Rectangle {
+                width: parent.width
+                height: 42
+                radius: 8
+                color: root.color
+                border.width: 2
+                border.color: senha.activeFocus ? root.cAccent : root.cLine
+                Behavior on border.color { ColorAnimation { duration: 140 } }
 
-            TextField {
-                id: password
-                Layout.fillWidth: true
-                echoMode: TextInput.Password
-                placeholderText: "senha"
-                font.family: "{{font}}"
-                font.pointSize: 11
-                color: cFg
-                placeholderTextColor: cFgMute
-                padding: 12
-                focus: true
-                background: Rectangle {
-                    radius: 8
-                    color: "{{bg}}"
-                    border.width: 2
-                    border.color: password.activeFocus ? cAccent : cLine
-                    Behavior on border.color { ColorAnimation { duration: 140 } }
+                TextInput {
+                    id: senha
+                    anchors.fill: parent
+                    anchors.leftMargin: 12
+                    anchors.rightMargin: 12
+                    verticalAlignment: TextInput.AlignVCenter
+                    echoMode: TextInput.Password
+                    passwordCharacter: "•"
+                    color: root.cFg
+                    font.family: root.fonte
+                    font.pointSize: 11
+                    focus: true
+                    selectByMouse: true
+                    onAccepted: root.entrar()
                 }
-                onAccepted: entrar()
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: 12
+                    text: "senha"
+                    color: root.cFgMute
+                    font.family: root.fonte
+                    font.pointSize: 11
+                    visible: senha.text.length === 0
+                }
             }
 
             Text {
                 id: aviso
-                Layout.fillWidth: true
+                width: parent.width
                 horizontalAlignment: Text.AlignHCenter
-                color: cErr
-                font.family: "{{font}}"
+                color: root.cErr
+                font.family: root.fonte
                 font.pointSize: 10
                 text: ""
                 visible: text !== ""
             }
 
-            Button {
-                Layout.fillWidth: true
-                text: "entrar"
-                font.family: "{{font}}"
-                font.pointSize: 11
-                onClicked: entrar()
-                contentItem: Text {
-                    text: parent.text
-                    color: "{{bg}}"
-                    font: parent.font
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
+            // botao entrar
+            Rectangle {
+                width: parent.width
+                height: 40
+                radius: 8
+                color: areaEntrar.pressed ? Qt.darker(root.cAccent, 1.2)
+                     : areaEntrar.containsMouse ? Qt.lighter(root.cAccent, 1.1)
+                     : root.cAccent
+                Behavior on color { ColorAnimation { duration: 140 } }
+                Text {
+                    anchors.centerIn: parent
+                    text: "entrar"
+                    color: root.color
+                    font.family: root.fonte
+                    font.pointSize: 11
+                    font.bold: true
                 }
-                background: Rectangle {
-                    radius: 8
-                    implicitHeight: 40
-                    color: parent.down ? Qt.darker(cAccent, 1.2)
-                         : parent.hovered ? Qt.lighter(cAccent, 1.1) : cAccent
-                    Behavior on color { ColorAnimation { duration: 140 } }
+                MouseArea {
+                    id: areaEntrar
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onClicked: root.entrar()
                 }
             }
 
-            ComboBox {
-                id: sessionList
-                Layout.fillWidth: true
-                model: sessionModel
-                currentIndex: sessionModel.lastIndex
-                textRole: "name"
-                font.family: "{{font}}"
+            // seletor de sessao: clicar alterna entre as disponiveis
+            Text {
+                id: sessaoTxt
+                width: parent.width
+                horizontalAlignment: Text.AlignHCenter
+                color: areaSessao.containsMouse ? root.cFg : root.cFgMute
+                font.family: root.fonte
                 font.pointSize: 10
+                text: sessionModel.data(sessionModel.index(root.sessaoIdx, 0), Qt.UserRole + 4)
+                      + (sessionModel.rowCount() > 1 ? "  ⇄" : "")
+                Behavior on color { ColorAnimation { duration: 140 } }
+                MouseArea {
+                    id: areaSessao
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onClicked: root.sessaoIdx = (root.sessaoIdx + 1) % sessionModel.rowCount()
+                }
             }
         }
     }
 
-    // ── energia ──────────────────────────────────────────────────────────
+    // ── energia ─────────────────────────────────────────────────────────
     Row {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -178,34 +203,29 @@ Rectangle {
 
         Repeater {
             model: [
-                { glifo: "5", acao: "suspend", ok: sddm.canSuspend },
-                { glifo: "9", acao: "reboot",  ok: sddm.canReboot  },
-                { glifo: "5", acao: "poweroff", ok: sddm.canPowerOff }
+                { glifo: "", acao: "reboot",   ok: sddm.canReboot   },
+                { glifo: "", acao: "poweroff", ok: sddm.canPowerOff }
             ]
             delegate: Rectangle {
                 visible: modelData.ok
                 width: 44; height: 44; radius: 10
-                color: mouse.containsMouse
+                color: areaEnergia.containsMouse
                        ? Qt.rgba(root.cErr.r, root.cErr.g, root.cErr.b, 0.18)
                        : "transparent"
                 Behavior on color { ColorAnimation { duration: 160 } }
                 Text {
                     anchors.centerIn: parent
                     text: modelData.glifo
-                    color: mouse.containsMouse ? root.cErr : root.cFgDim
-                    font.family: "{{font}}"
-                    font.pointSize: 15
+                    color: areaEnergia.containsMouse ? root.cErr : root.cFgDim
+                    font.family: root.fonte
+                    font.pointSize: 14
                     Behavior on color { ColorAnimation { duration: 160 } }
                 }
                 MouseArea {
-                    id: mouse
+                    id: areaEnergia
                     anchors.fill: parent
                     hoverEnabled: true
-                    onClicked: {
-                        if (modelData.acao === "suspend") sddm.suspend()
-                        else if (modelData.acao === "reboot") sddm.reboot()
-                        else sddm.powerOff()
-                    }
+                    onClicked: modelData.acao === "reboot" ? sddm.reboot() : sddm.powerOff()
                 }
             }
         }
@@ -213,18 +233,15 @@ Rectangle {
 
     function entrar() {
         aviso.text = ""
-        sddm.login(userList.visible
-                   ? userList.currentText
-                   : userModel.data(userModel.index(userModel.lastIndex, 0), Qt.UserRole + 1),
-                   password.text, sessionList.currentIndex)
+        sddm.login(userModel.lastUser, senha.text, root.sessaoIdx)
     }
 
     Connections {
         target: sddm
         function onLoginFailed() {
             aviso.text = "senha incorreta"
-            password.text = ""
-            password.focus = true
+            senha.text = ""
+            senha.forceActiveFocus()
         }
     }
 }

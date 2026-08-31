@@ -2,7 +2,10 @@
 Name=Carbonfox
 Description=Gerado a partir da paleta dos dotfiles
 Author=Erick Rosa
-Type=qml
+License=MIT
+Type=sddm-theme
 Version=1.0
 MainScript=Main.qml
 ConfigFile=theme.conf
+Theme-Id=carbonfox
+Theme-API=2.0
