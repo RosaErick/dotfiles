@@ -56,6 +56,7 @@ Zsh is the login shell; fish is installed alongside (`fish` to enter it).
 - [fzf](https://github.com/junegunn/fzf) — fuzzy finder
 - [zoxide](https://github.com/ajeetdsouza/zoxide) — cd that learns
 - [ghq](https://github.com/x-motemen/ghq) — repository manager
+- [lazygit](https://github.com/jesseduffield/lazygit) — git TUI
 - [yazi](https://github.com/sxyazi/yazi) — file manager
 - [btop](https://github.com/aristocratos/btop) — resource monitor
 
