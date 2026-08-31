@@ -2,8 +2,10 @@
 # Recarregar sem reiniciar: ctrl+shift+,
 
 # ── Fonte ─────────────────────────────────────────────────────────
-# MesloLGS NF é a exigida pelo powerlevel10k (glifos do prompt).
-font-family = MesloLGS NF
+# Plex Mono desenha o texto; a Nerd Font entra por glifo, cobrindo os
+# icones do prompt (powerlevel10k/tide) que a Plex nao tem.
+font-family = IBM Plex Mono
+font-family = JetBrainsMono Nerd Font
 font-size = 12
 adjust-cell-height = 12%
 
