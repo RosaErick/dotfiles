@@ -1,12 +1,12 @@
 /* GERADO por `theme` — edite theme/templates/rofi-grid.rasi.tmpl
    Grade de aplicativos: SUPER+D. Tema autocontido (-theme substitui tudo). */
 * {
-    bg:     #161616;
-    bg-alt: #1c1c1c;
-    fg:     #f2f4f8;
-    fg-dim: #b5b7ba;
-    accent: #fa4d56;
-    line:   #484848;
+    bg:     #00141a;
+    bg-alt: #002d38;
+    fg:     #adb8b8;
+    fg-dim: #818a8a;
+    accent: #278bd3;
+    line:   #586e74;
 
     background-color: transparent;
     text-color:       @fg;
@@ -14,7 +14,7 @@
 }
 
 window {
-    background-color: rgba(22,22,22, 0.82);
+    background-color: rgba(0,20,26, 0.82);
     border:           1px;
     border-color:     @line;
     border-radius:    8px;

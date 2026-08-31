@@ -53,14 +53,14 @@
     "cpu": {
         "states": { "warning": 75, "critical": 92 },
         "interval": 3,
-        "format": "<span color='#33b1ff'>󰻠</span> {usage}%",
+        "format": "<span color='#2aa298'>󰻠</span> {usage}%",
         "tooltip-format": "CPU {usage}%   —   clique abre o monitor",
         "on-click": "taskmanager"
     },
     "memory": {
         "states": { "warning": 80, "critical": 93 },
         "interval": 10,
-        "format": "<span color='#33b1ff'>󰍛</span> {percentage}%  {used:0.1f}/{total:0.0f}G",
+        "format": "<span color='#2aa298'>󰍛</span> {percentage}%  {used:0.1f}/{total:0.0f}G",
         "tooltip-format": "RAM {used:0.1f}G / {total:0.1f}G  ({percentage}%)",
         "on-click": "taskmanager"
     },
@@ -93,24 +93,24 @@
     },
 
     "pulseaudio": {
-        "format": "<span color='#be95ff'>{icon}</span> {volume}%",
-        "format-muted": "<span color='#6f6f6f'>󰝟</span> mudo",
+        "format": "<span color='#d33682'>{icon}</span> {volume}%",
+        "format-muted": "<span color='#647a82'>󰝟</span> mudo",
         "format-icons": { "headphone": "󰋋", "headset": "󰋎", "default": ["󰕿", "󰖀", "󰕾"] },
         "on-click": "pavucontrol",
         "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
         "scroll-step": 5
     },
     "network": {
-        "format-ethernet": "<span color='#25be6a'>󰈀</span>",
-        "format-wifi": "<span color='#25be6a'>󰖩</span> {signalStrength}%",
-        "format-disconnected": "<span color='#ee5396'>󰖪</span>",
+        "format-ethernet": "<span color='#859900'>󰈀</span>",
+        "format-wifi": "<span color='#859900'>󰖩</span> {signalStrength}%",
+        "format-disconnected": "<span color='#dc312e'>󰖪</span>",
         "tooltip-format-ethernet": "{ifname}   {ipaddr}",
         "tooltip-format-wifi": "{essid}   {ipaddr}   {signalStrength}%",
         "tooltip-format-disconnected": "sem rede",
         "on-click": "nm-connection-editor"
     },
     "hyprland/language": {
-        "format": "<span color='#08bdba'>󰌌</span> {}",
+        "format": "<span color='#b28600'>󰌌</span> {}",
         "format-en": "US",
         "format-pt": "BR",
         "on-click": "hyprctl switchxkblayout current next",

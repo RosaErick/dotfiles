@@ -1,0 +1,34 @@
+# Solarized Osaka — paleta do colorscheme de Neovim do craftzdog.
+# Cores extraidas de craftzdog/solarized-osaka.nvim (lua/solarized-osaka/colors.lua),
+# que as define em HSL; aqui ja convertidas para hex.
+name = "solarized-osaka"
+
+[colors]
+bg        = "#00141a"   # base04 — o mais escuro
+bg_alt    = "#002d38"   # base03 — fundo padrao do tema no Neovim
+bg_high   = "#073541"   # base02 — destaque, hover
+sel       = "#0a3d4a"   # selecao
+line      = "#586e74"   # base01 — bordas, separadores
+
+fg        = "#adb8b8"   # base1
+fg_dim    = "#9fabad"   # base0
+fg_mute   = "#647a82"   # base00
+
+red       = "#dc312e"
+green     = "#859900"
+yellow    = "#b28600"
+blue      = "#278bd3"
+magenta   = "#d33682"
+cyan      = "#2aa298"
+
+accent    = "#278bd3"   # o azul e a assinatura do Solarized
+urgent    = "#dc312e"
+
+[opts]
+alpha       = "0.90"
+alpha_hex   = "e6"
+alpha_solid = "0.97"
+alpha_rofi  = "0.82"
+radius      = "8px"
+font        = "JetBrainsMono Nerd Font"
+font_size   = "13px"
