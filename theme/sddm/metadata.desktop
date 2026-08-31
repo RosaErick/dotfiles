@@ -1,0 +1,8 @@
+[SddmGreeterTheme]
+Name=Carbonfox
+Description=Gerado a partir da paleta dos dotfiles
+Author=Erick Rosa
+Type=qml
+Version=1.0
+MainScript=Main.qml
+ConfigFile=theme.conf

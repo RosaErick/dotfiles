@@ -1,0 +1,23 @@
+#!/bin/sh
+# Instala o tema de login gerado em theme/sddm/ e aponta o SDDM para ele.
+# Precisa de root: o SDDM roda como usuario proprio e nao le o seu home.
+#
+# Se o tema quebrar, o SDDM cai no padrao — nao trava o login. Para reverter:
+#   sudo rm /etc/sddm.conf.d/10-carbonfox.conf
+set -e
+ORIGEM="$HOME/.dotfiles/theme/sddm"
+DESTINO=/usr/share/sddm/themes/carbonfox
+
+[ -f "$ORIGEM/Main.qml" ] || { echo "rode 'theme <paleta>' antes"; exit 1; }
+
+sudo rm -rf "$DESTINO"
+sudo mkdir -p "$DESTINO"
+sudo cp "$ORIGEM"/Main.qml "$ORIGEM"/metadata.desktop "$ORIGEM"/theme.conf "$DESTINO/"
+[ -f "$ORIGEM/background.jpg" ] && sudo cp "$ORIGEM/background.jpg" "$DESTINO/"
+sudo chmod -R a+rX "$DESTINO"
+
+sudo mkdir -p /etc/sddm.conf.d
+printf '[Theme]\nCurrent=carbonfox\n' | sudo tee /etc/sddm.conf.d/10-carbonfox.conf >/dev/null
+
+echo "instalado em $DESTINO"
+echo "config: /etc/sddm.conf.d/10-carbonfox.conf"

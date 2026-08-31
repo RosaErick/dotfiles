@@ -18,3 +18,6 @@ theme/.current
 # gerado pelo seletor de wallpaper (estado da maquina)
 .config/hypr/hyprpaper.conf
 .config/hypr/wallpapers.json
+
+# wallpaper do login: copia da imagem atual, nao versionar
+theme/sddm/background.jpg

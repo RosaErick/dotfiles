@@ -34,6 +34,7 @@ TARGETS = {
     "btop.theme.tmpl":        ".config/btop/themes/current.theme",
     "yazi-theme.toml.tmpl":   ".config/yazi/theme.toml",
     "kitty-theme.conf.tmpl":  ".config/kitty/theme.conf",
+    "sddm-main.qml.tmpl":     "theme/sddm/Main.qml",
 }
 
 # gtk-4.0 recebe copia identica do gtk-3.0
