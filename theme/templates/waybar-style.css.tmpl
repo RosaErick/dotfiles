@@ -83,14 +83,22 @@ tooltip label { padding: 4px; }
 }
 #custom-launcher:hover { background: {{cyan}}; }
 
+/* Sem bloco chapado: em repouso e so o glifo. O fundo cresce no hover,
+   com transicao — bloco solido de cor saturada pesa demais numa barra
+   translucida. */
 #custom-power {
-    background: {{red}};
-    color: {{bg}};
-    padding: 0 11px;
+    background: transparent;
+    color: {{red}};
+    padding: 0 12px;
     margin: 5px 2px 5px 4px;
     border-radius: 8px;
+    font-size: 15px;
+    transition: background-color 180ms ease, color 180ms ease;
 }
-#custom-power:hover { background: {{magenta}}; }
+#custom-power:hover {
+    background: rgba({{red_raw}}, 0.18);
+    color: {{red}};
+}
 
 /* ---- workspaces: numerais CJK, o ativo afunda ------------------------- */
 #workspaces { padding: 0 4px; }

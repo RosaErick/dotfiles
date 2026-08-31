@@ -19,7 +19,9 @@ blue      = "#78a9ff"
 magenta   = "#be95ff"
 cyan      = "#33b1ff"
 
-accent    = "#78a9ff"   # cor de destaque da UI
+accent    = "#fa4d56"   # cor de destaque da UI
+                        # Carbon red-50 — mesma familia do resto da paleta,
+                        # entao combina por construcao e nao por acaso.
 urgent    = "#ee5396"   # crítico / erro
 
 [opts]

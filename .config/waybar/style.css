@@ -74,7 +74,7 @@ tooltip label { padding: 4px; }
 
 /* ---- acentos ---------------------------------------------------------- */
 #custom-launcher {
-    background: #78a9ff;
+    background: #fa4d56;
     color: #161616;
     padding: 0 12px;
     margin: 5px 4px 5px 2px;
@@ -83,14 +83,22 @@ tooltip label { padding: 4px; }
 }
 #custom-launcher:hover { background: #33b1ff; }
 
+/* Sem bloco chapado: em repouso e so o glifo. O fundo cresce no hover,
+   com transicao — bloco solido de cor saturada pesa demais numa barra
+   translucida. */
 #custom-power {
-    background: #ee5396;
-    color: #161616;
-    padding: 0 11px;
+    background: transparent;
+    color: #ee5396;
+    padding: 0 12px;
     margin: 5px 2px 5px 4px;
     border-radius: 8px;
+    font-size: 15px;
+    transition: background-color 180ms ease, color 180ms ease;
 }
-#custom-power:hover { background: #be95ff; }
+#custom-power:hover {
+    background: rgba(238,83,150, 0.18);
+    color: #ee5396;
+}
 
 /* ---- workspaces: numerais CJK, o ativo afunda ------------------------- */
 #workspaces { padding: 0 4px; }
@@ -125,9 +133,9 @@ tooltip label { padding: 4px; }
 /* area corrente de um monitor que NAO esta focado: estado intermediario,
    senao no dual-monitor a outra tela parece nao ter nada aberto. */
 #workspaces button.visible {
-    color: #78a9ff;
+    color: #fa4d56;
     background: #282828;
-    border-bottom-color: #3c547f;
+    border-bottom-color: #7d262b;
 }
 
 #workspaces button:hover {
@@ -141,8 +149,8 @@ tooltip label { padding: 4px; }
    vence. Se subir, a area ativa volta a parecer so "visivel". */
 #workspaces button.active {
     color: #161616;
-    background: #78a9ff;
-    border-bottom-color: #3c547f;
+    background: #fa4d56;
+    border-bottom-color: #7d262b;
 }
 
 #workspaces button.urgent {
@@ -178,7 +186,7 @@ window#waybar.empty #window {
 }
 
 #clock {
-    color: #78a9ff;
+    color: #fa4d56;
     font-size: 14px;
 }
 

@@ -4,7 +4,7 @@
     bg-alt: #1c1c1c;
     fg:     #f2f4f8;
     fg-dim: #b5b7ba;
-    accent: #78a9ff;
+    accent: #fa4d56;
     urgent: #ee5396;
     line:   #484848;
 

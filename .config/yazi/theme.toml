@@ -1,8 +1,8 @@
 # GERADO por `theme` — edite theme/templates/yazi-theme.toml.tmpl
 
 [mgr]
-cwd             = { fg = "#78a9ff" }
-hovered         = { fg = "#161616", bg = "#78a9ff" }
+cwd             = { fg = "#fa4d56" }
+hovered         = { fg = "#161616", bg = "#fa4d56" }
 preview_hovered = { underline = true }
 
 find_keyword  = { fg = "#08bdba", bold = true }
@@ -13,7 +13,7 @@ marker_cut      = { fg = "#ee5396",     bg = "#ee5396" }
 marker_marked   = { fg = "#33b1ff",    bg = "#33b1ff" }
 marker_selected = { fg = "#be95ff", bg = "#be95ff" }
 
-tab_active   = { fg = "#161616", bg = "#78a9ff" }
+tab_active   = { fg = "#161616", bg = "#fa4d56" }
 tab_inactive = { fg = "#b5b7ba", bg = "#282828" }
 tab_width    = 1
 
@@ -21,8 +21,8 @@ border_symbol = "│"
 border_style  = { fg = "#484848" }
 
 [mode]
-normal_main = { fg = "#161616", bg = "#78a9ff",  bold = true }
-normal_alt  = { fg = "#78a9ff", bg = "#282828" }
+normal_main = { fg = "#161616", bg = "#fa4d56",  bold = true }
+normal_alt  = { fg = "#fa4d56", bg = "#282828" }
 select_main = { fg = "#161616", bg = "#25be6a",   bold = true }
 select_alt  = { fg = "#25be6a",  bg = "#282828" }
 unset_main  = { fg = "#161616", bg = "#be95ff", bold = true }
@@ -34,24 +34,24 @@ sep_left  = { open = "", close = "" }
 sep_right = { open = "", close = "" }
 
 [select]
-border   = { fg = "#78a9ff" }
+border   = { fg = "#fa4d56" }
 active   = { fg = "#be95ff" }
 inactive = {}
 
 [input]
-border   = { fg = "#78a9ff" }
+border   = { fg = "#fa4d56" }
 title    = {}
 value    = {}
 selected = { reversed = true }
 
 [pick]
-border   = { fg = "#78a9ff" }
+border   = { fg = "#fa4d56" }
 active   = { fg = "#be95ff" }
 inactive = {}
 
 [confirm]
-border  = { fg = "#78a9ff" }
-title   = { fg = "#78a9ff" }
+border  = { fg = "#fa4d56" }
+title   = { fg = "#fa4d56" }
 content = {}
 list    = {}
 
@@ -64,6 +64,6 @@ rules = [
   { mime = "application/gzip",  fg = "#ee5396" },
   { mime = "application/x-tar", fg = "#ee5396" },
   { mime = "application/pdf",   fg = "#ee5396" },
-  { url = "*/", fg = "#78a9ff" },
+  { url = "*/", fg = "#fa4d56" },
   { url = "*",  fg = "#f2f4f8" },
 ]

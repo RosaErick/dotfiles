@@ -5,7 +5,7 @@ window {
     border: 1px solid #484848;
 }
 #box { padding: 8px; }
-#active { border-bottom: solid 2px; border-color: #78a9ff; }
+#active { border-bottom: solid 2px; border-color: #fa4d56; }
 button, image { background: none; border: none; box-shadow: none; color: #b5b7ba; }
 button {
     padding: 6px;
