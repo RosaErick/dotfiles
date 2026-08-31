@@ -1,4 +1,21 @@
 #!/bin/sh
-# Fonte unica do comando do dock. Usado pelo systemd (nwg-dock.service)
-# e pelo `theme` ao recarregar. Nao duplique estes flags em outro lugar.
-exec nwg-dock-hyprland -d -i 40 -c "rofi -show drun -theme grid"
+# Fonte unica do comando do dock. Usado pelo systemd (nwg-dock.service) e
+# pelo `theme` ao recarregar. Nao duplique estes flags em outro lugar.
+#
+# O nwg-dock so desenha em UM monitor por instancia: sem -o ele escolhe um
+# e os outros ficam com o hotspot ativo mas sem dock. Por isso subimos uma
+# instancia por saida, com -m para pular a checagem de instancia unica.
+ICON=56
+MENU="rofi -show drun -theme grid"
+
+MONITORES=$(hyprctl monitors -j | python3 -c 'import json,sys; print(" ".join(m["name"] for m in json.load(sys.stdin)))')
+[ -n "$MONITORES" ] || MONITORES=""
+
+if [ -z "$MONITORES" ]; then
+    exec nwg-dock-hyprland -d -i "$ICON" -c "$MENU"
+fi
+
+for m in $MONITORES; do
+    nwg-dock-hyprland -d -m -o "$m" -i "$ICON" -c "$MENU" &
+done
+wait

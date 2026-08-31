@@ -1,8 +1,10 @@
 /* GERADO por `theme` — edite theme/templates/dock-style.css.tmpl */
+/* Mesma receita de vidro da waybar e do rofi. O blur vem da layer_rule
+   "blur-dock" no hyprland.lua — sem ela o fundo apareceria nitido. */
 window {
-    background: rgba({{bg_raw}}, {{alpha}});
-    border-radius: {{radius}};
-    border: 1px solid {{line}};
+    background: rgba({{bg_raw}}, {{alpha_rofi}});
+    border-radius: 14px;
+    border: 1px solid rgba({{line_raw}}, 0.6);
 }
 #box { padding: 8px; }
 #active { border-bottom: solid 2px; border-color: {{accent}}; }
