@@ -305,6 +305,7 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))  -- arquivos
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("nautilus"))  -- arquivos (GUI)
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())  -- tela cheia (a waybar some junto)
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))  -- lancador (lista)
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("rofi -show drun -theme grid"))  -- grade de aplicativos
 

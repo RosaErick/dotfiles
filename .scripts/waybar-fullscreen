@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+"""Esconde a waybar enquanto houver uma janela em fullscreen.
+
+No wlroots a camada "top" e desenhada acima de TODA janela, fullscreen
+inclusive: a barra cobre o conteudo e engole os cliques daquela faixa. O
+Hyprland nao tem regra nativa para isso, entao escutamos o socket de eventos.
+
+Sem estado proprio de proposito. `hide`/`show` sao idempotentes, entao a
+barra e sempre funcao do ultimo evento recebido — perder um sinal nao deixa
+a barra invertida para sempre, como aconteceria com `toggle`.
+"""
+import os
+import socket
+import subprocess
+import sys
+
+his = os.environ.get("HYPRLAND_INSTANCE_SIGNATURE")
+if not his:
+    sys.exit("waybar-fullscreen: HYPRLAND_INSTANCE_SIGNATURE nao definida")
+
+runtime = os.environ.get("XDG_RUNTIME_DIR") or f"/run/user/{os.getuid()}"
+sock = f"{runtime}/hypr/{his}/.socket2.sock"
+
+
+def sinaliza(sig):
+    # -x casa o nome exato: -f pegaria a linha de comando deste proprio script
+    subprocess.run(["pkill", "-x", "--signal", sig, "waybar"], check=False)
+
+
+s = socket.socket(socket.AF_UNIX)
+s.connect(sock)
+
+buf = b""
+while True:
+    dados = s.recv(4096)
+    if not dados:
+        break  # Hyprland encerrou; o servico morre junto com a sessao
+    buf += dados
+    while b"\n" in buf:
+        linha, buf = buf.split(b"\n", 1)
+        evento = linha.decode(errors="replace")
+        # fullscreen>>1 ao entrar, fullscreen>>0 ao sair — inclusive quando a
+        # janela em fullscreen e fechada (verificado no Hyprland 0.56.2).
+        if evento.startswith("fullscreen>>"):
+            sinaliza("USR1" if evento.endswith("1") else "USR2")

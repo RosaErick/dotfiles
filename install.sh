@@ -37,6 +37,6 @@ fi
 
 systemctl --user daemon-reload
 systemctl --user enable --now \
-    waybar hyprpaper mako hypridle nwg-dock hyprpolkitagent
+    waybar waybar-fullscreen hyprpaper mako hypridle nwg-dock hyprpolkitagent
 
 echo "done. log out and back in so environment.d applies."

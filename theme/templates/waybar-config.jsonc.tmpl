@@ -6,6 +6,12 @@
     // com o efeito 3D de tecla do summer-day-and-night (MathisP75),
     // na paleta do nosso tema. O visual mora em theme/templates/waybar-style.css.tmpl
     "layer": "top",
+    // A camada "top" fica acima de toda janela, fullscreen inclusive — por
+    // isso o .scripts/waybar-fullscreen esconde a barra por sinal. Sinais
+    // explicitos, nao "toggle": o estado vira funcao do ultimo evento e
+    // nunca da contagem deles.
+    "on-sigusr1": "hide",
+    "on-sigusr2": "show",
     "position": "top",
     "height": 42,
     "margin-top": 8,

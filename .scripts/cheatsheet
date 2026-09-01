@@ -27,6 +27,7 @@ IGNORAR = re.compile(r'^XF86')
 ACOES = [
     (r'window\.close\(\)',                      "fechar janela"),
     (r'window\.float\(',                        "alternar flutuante"),
+    (r'window\.fullscreen\(\)',                 "tela cheia"),
     (r'window\.pseudo\(\)',                     "alternar pseudo-tile"),
     (r'window\.drag\(\)',                       "arrastar janela"),
     (r'window\.resize\(\)',                     "redimensionar janela"),

@@ -1,0 +1,15 @@
+[Unit]
+Description=Esconde a waybar quando uma janela entra em fullscreen
+PartOf=graphical-session.target
+After=graphical-session.target waybar.service
+ConditionEnvironment=HYPRLAND_INSTANCE_SIGNATURE
+
+[Service]
+Type=simple
+ExecStart=%h/.scripts/waybar-fullscreen
+Slice=session.slice
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=graphical-session.target
