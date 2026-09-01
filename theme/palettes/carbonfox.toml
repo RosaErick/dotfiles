@@ -36,8 +36,9 @@ alpha_solid = "0.97"
 # deixa o texto ilegivel sobre o fundo nitido.
 alpha_rofi  = "0.82"
 radius    = "8px"
-font      = "IBM Plex Mono"
-# Plex Mono nao tem glifos Nerd Font; o fallback cobre icones da barra,
-# do rofi e do prompt. A ordem importa: fontconfig resolve por glifo.
+# BlexMono e a propria IBM Plex Mono com os glifos Nerd Font embutidos:
+# uma familia so cobre texto e icones. O font_alt fica como rede se o
+# pacote ttf-ibmplex-mono-nerd sumir.
+font      = "BlexMono Nerd Font"
 font_alt  = "JetBrainsMono Nerd Font"
 font_size = "13px"

@@ -30,7 +30,7 @@ alpha_hex   = "e6"
 alpha_solid = "0.97"
 alpha_rofi  = "0.82"
 radius      = "8px"
-font      = "IBM Plex Mono"
+font      = "BlexMono Nerd Font"
 # Plex Mono nao tem glifos Nerd Font; o fallback cobre icones da barra,
 # do rofi e do prompt. A ordem importa: fontconfig resolve por glifo.
 font_alt  = "JetBrainsMono Nerd Font"

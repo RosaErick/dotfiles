@@ -2,9 +2,10 @@
 # Recarregar sem reiniciar: ctrl+shift+,
 
 # ── Fonte ─────────────────────────────────────────────────────────
-# Plex Mono desenha o texto; a Nerd Font entra por glifo, cobrindo os
-# icones do prompt (powerlevel10k/tide) que a Plex nao tem.
-font-family = IBM Plex Mono
+# BlexMono e a Plex Mono com os glifos Nerd Font embutidos: uma familia
+# cobre texto e icones do prompt (powerlevel10k/tide). A segunda linha e
+# so rede de seguranca se o pacote sumir.
+font-family = BlexMono Nerd Font
 font-family = JetBrainsMono Nerd Font
 font-size = 12
 adjust-cell-height = 12%
