@@ -107,6 +107,20 @@ def reload_apps():
                        capture_output=True, text=True)
     print(f"  dock: {'ok' if r.returncode == 0 else 'FALHOU — ' + r.stderr.strip()[:60]}")
     print("  ghostty/rofi: releem sozinhos na proxima janela")
+    # A tela de login vive em /usr/share e so root escreve la, entao ela nao
+    # acompanha a troca de tema. Ficar defasada e silencioso: o SDDM cai no
+    # tema embutido no proximo boot e voce so descobre no login. Avisa.
+    inst = Path("/usr/share/sddm/themes/carbonfox/Main.qml")
+    novo_qml = ROOT / "theme/sddm/Main.qml"
+    if novo_qml.exists():
+        try:
+            atual = inst.read_text() if inst.exists() else None
+        except OSError:
+            atual = None
+        if atual != novo_qml.read_text():
+            print("  login: DEFASADO — rode 'sddm-install' (precisa de sudo)")
+        else:
+            print("  login: ok")
 
 
 def main():

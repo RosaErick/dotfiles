@@ -7,8 +7,8 @@ Arch Linux + Hyprland. Everything themed from a single palette file.
 | | |
 |---|---|
 | **Compositor** | Hyprland (Lua config) |
-| **Bar** | Waybar — custom design |
-| **Launcher** | Rofi — list + app grid |
+| **Bar** | Waybar, custom design |
+| **Launcher** | Rofi, list + app grid |
 | **Terminal** | Ghostty (primary), Kitty |
 | **Shell** | Zsh + Powerlevel10k · Fish + Tide |
 | **Files** | Yazi (`SUPER+E`), Nautilus (`SUPER+SHIFT+E`) |
@@ -22,7 +22,7 @@ Arch Linux + Hyprland. Everything themed from a single palette file.
 ## Layout
 
 ```
-.config/     mirrors ~/.config — one folder per app
+.config/     mirrors ~/.config, one folder per app
 .scripts/    executables, symlinked to ~/.scripts (on PATH)
 .config/environment.d/  puts ~/.scripts on PATH for systemd user services
 theme/       palettes + templates + the render engine
@@ -36,33 +36,33 @@ Zsh is the login shell; fish is installed alongside (`fish` to enter it).
 
 **Zsh**
 
-- [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) — framework
-- [powerlevel10k](https://github.com/romkatv/powerlevel10k) — prompt
-- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) — ghost-text completion from history
-- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) — colors commands as you type
+- [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh): framework
+- [powerlevel10k](https://github.com/romkatv/powerlevel10k): prompt
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions): ghost-text completion from history
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting): colors commands as you type
 
 **Fish**
 
-- [fisher](https://github.com/jorgebucaran/fisher) — plugin manager
-- [tide](https://github.com/IlanCosman/tide) — prompt
-- [fzf.fish](https://github.com/PatrickF1/fzf.fish) — fuzzy search keybindings
+- [fisher](https://github.com/jorgebucaran/fisher): plugin manager
+- [tide](https://github.com/IlanCosman/tide): prompt
+- [fzf.fish](https://github.com/PatrickF1/fzf.fish): fuzzy search keybindings
 
 **Shared CLI**
 
-- [eza](https://github.com/eza-community/eza) — ls replacement
-- [bat](https://github.com/sharkdp/bat) — cat replacement
-- [fd](https://github.com/sharkdp/fd) — find replacement
-- [ripgrep](https://github.com/BurntSushi/ripgrep) — grep replacement
-- [fzf](https://github.com/junegunn/fzf) — fuzzy finder
-- [zoxide](https://github.com/ajeetdsouza/zoxide) — cd that learns
-- [ghq](https://github.com/x-motemen/ghq) — repository manager
-- [lazygit](https://github.com/jesseduffield/lazygit) — git TUI
-- [yazi](https://github.com/sxyazi/yazi) — file manager
-- [btop](https://github.com/aristocratos/btop) — resource monitor
+- [eza](https://github.com/eza-community/eza): ls replacement
+- [bat](https://github.com/sharkdp/bat): cat replacement
+- [fd](https://github.com/sharkdp/fd): find replacement
+- [ripgrep](https://github.com/BurntSushi/ripgrep): grep replacement
+- [fzf](https://github.com/junegunn/fzf): fuzzy finder
+- [zoxide](https://github.com/ajeetdsouza/zoxide): cd that learns
+- [ghq](https://github.com/x-motemen/ghq): repository manager
+- [lazygit](https://github.com/jesseduffield/lazygit): git TUI
+- [yazi](https://github.com/sxyazi/yazi): file manager
+- [btop](https://github.com/aristocratos/btop): resource monitor
 
 ## Scripts
 
-`.scripts/` — on `PATH` in three places, because three different things
+`.scripts/` sits on `PATH` in three places, because three different things
 launch them: both shells (`.zshrc`, `config.fish`), Hyprland (via an absolute
 path in `hyprland.lua`), and systemd user services (`environment.d`).
 Miss any one and the buttons that call a script fail silently.
@@ -70,11 +70,11 @@ Miss any one and the buttons that call a script fail silently.
 | | |
 |---|---|
 | `theme` | render palette across all apps |
-| `wallpaper` | thumbnail picker — image, monitor, fit mode |
+| `wallpaper` | thumbnail picker for image, monitor, fit mode |
 | `cheatsheet` | keybinding overlay, parsed from the Hyprland config |
 | `powermenu` | lock / suspend / logout / reboot / shutdown |
 | `audio-device` | pick output/input, moves live streams too |
-| `taskmanager` · `files` · `dock` | thin wrappers — swap the app in one line |
+| `taskmanager` · `files` · `dock` | thin wrappers, swap the app in one line |
 | `sddm-install` | install the generated login theme (needs root) |
 
 ## Theming
@@ -94,7 +94,7 @@ Mako, Ghostty, Kitty, GTK 3/4, btop, Yazi, the dock, and Hyprland's
 window borders.
 
 **New theme** = copy a palette, change the hex values, run `theme <name>`.
-Never edit generated files — they carry a header pointing at their template.
+Never edit generated files. They carry a header pointing at their template.
 
 Derived values are computed, not hand-picked: every color gets `_dark` (50%)
 and `_dim` (75%) variants, plus `_raw` (`r,g,b`) and `_hex` forms. The bar's
@@ -122,8 +122,8 @@ user services. Log out and back in so `environment.d` applies.
 ## Keybindings
 
 `SUPER + /` opens a searchable cheat sheet, generated by reading
-`hyprland.lua` — it can't go stale. The full list lives there; below is just
-enough to get in.
+`hyprland.lua`, so it can't go stale. The full list lives there; below is
+just enough to get in.
 
 | Key | |
 |---|---|
@@ -136,9 +136,9 @@ enough to get in.
 
 - This is a personal setup and a work in progress. It's shaped around my
   machine and my habits, and it changes often. Read it, fork it, take what's
-  useful — use it at your own risk.
+  useful. Use it at your own risk.
 - Monitor layout (`monitors.lua`, `workspaces.lua`) is generated by
-  nwg-displays and gitignored — it's machine-specific.
+  nwg-displays and gitignored, because it's machine-specific.
 - Fish is installed but zsh stays the login shell. Run `fish` to try it.
 - Both shells have autosuggestions and syntax highlighting.
 - No hardcoded home paths: configs use `$HOME` (hyprlang), `os.getenv("HOME")`
