@@ -6,18 +6,19 @@ Arch Linux + Hyprland. Everything themed from a single palette file.
 
 | | |
 |---|---|
-| **Compositor** | Hyprland (Lua config) |
-| **Bar** | Waybar, custom design |
-| **Launcher** | Rofi, list + app grid |
-| **Terminal** | Ghostty (primary), Kitty |
-| **Shell** | Zsh + Powerlevel10k · Fish + Tide |
-| **Files** | Yazi (`SUPER+E`), Nautilus (`SUPER+SHIFT+E`) |
-| **Editor** | Neovim + [LazyVim](https://github.com/LazyVim/LazyVim) |
-| **Notifications** | Mako |
-| **Lock / idle** | Hyprlock + Hypridle |
-| **Wallpaper** | Hyprpaper |
-| **Dock** | nwg-dock, auto-hide |
-| **Monitors** | nwg-displays (GUI) |
+| **Compositor** | [Hyprland](https://github.com/hyprwm/Hyprland) (Lua config) |
+| **Bar** | [Waybar](https://github.com/Alexays/Waybar), custom design |
+| **Launcher** | [Rofi](https://github.com/davatorium/rofi), list + app grid |
+| **Terminal** | [Ghostty](https://github.com/ghostty-org/ghostty) (primary), [Kitty](https://github.com/kovidgoyal/kitty) |
+| **Font** | [BlexMono Nerd Font](https://github.com/ryanoasis/nerd-fonts) (IBM Plex Mono + Nerd glyphs) |
+| **Shell** | [Zsh](https://github.com/zsh-users/zsh) + Powerlevel10k · [Fish](https://github.com/fish-shell/fish-shell) + Tide |
+| **Files** | Yazi (`SUPER+E`), [Nautilus](https://gitlab.gnome.org/GNOME/nautilus) (`SUPER+SHIFT+E`) |
+| **Editor** | [Neovim](https://github.com/neovim/neovim) + [LazyVim](https://github.com/LazyVim/LazyVim) |
+| **Notifications** | [Mako](https://github.com/emersion/mako) |
+| **Lock / idle** | [Hyprlock](https://github.com/hyprwm/hyprlock) + [Hypridle](https://github.com/hyprwm/hypridle) |
+| **Wallpaper** | [Hyprpaper](https://github.com/hyprwm/hyprpaper) |
+| **Dock** | [nwg-dock](https://github.com/nwg-piotr/nwg-dock-hyprland), auto-hide |
+| **Monitors** | [nwg-displays](https://github.com/nwg-piotr/nwg-displays) (GUI) |
 
 ## Layout
 
@@ -108,7 +109,7 @@ sudo pacman -S --needed hyprland hyprpaper hyprlock hypridle hyprpolkitagent \
   nwg-displays nwg-look grim slurp hyprshot wl-clipboard sddm \
   zsh zsh-autosuggestions zsh-syntax-highlighting fish fisher \
   eza bat fd ripgrep fzf zoxide ghq lazygit neovim stow \
-  papirus-icon-theme adw-gtk-theme ttf-ibm-plex ttf-jetbrains-mono-nerd \
+  papirus-icon-theme adw-gtk-theme ttf-ibmplex-mono-nerd ttf-jetbrains-mono-nerd \
   pavucontrol networkmanager brightnessctl playerctl xdg-user-dirs \
   resvg poppler poppler-data imagemagick ffmpeg
 
