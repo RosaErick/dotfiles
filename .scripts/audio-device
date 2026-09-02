@@ -56,15 +56,21 @@ def main():
 
     # sem operador % aqui: o CSS ja usa "%" e colide com a formatacao
     tema = "window { width: 34%; } listview { lines: " + str(min(len(devs), 8)) + "; }"
+    # "-format i" devolve o indice da linha, nao o texto. Casar por texto
+    # quebrava: o .strip() da resposta comia o prefixo de alinhamento que o
+    # proprio script poe, o index() nao achava e a funcao saia calada.
     r = subprocess.run(
-        ["rofi", "-dmenu", "-i", "-p", titulo, "-theme-str", tema],
+        ["rofi", "-dmenu", "-i", "-p", titulo, "-theme-str", tema, "-format", "i"],
         input="\n".join(linhas), capture_output=True, text=True)
     escolha = r.stdout.strip()
     if not escolha:
+        return                       # Esc: fluxo normal, sai quieto
+    if not escolha.isdigit() or int(escolha) >= len(devs):
+        # sem "-u critical": no mako a critica nunca expira e fica grudada
+        subprocess.run(["notify-send", "-t", "5000", "Audio",
+                        f"resposta inesperada do rofi: {escolha!r}"])
         return
-    idx = linhas.index(escolha) if escolha in linhas else -1
-    if idx < 0:
-        return
+    idx = int(escolha)
     alvo = devs[idx]["name"]
 
     subprocess.run(["pactl", set_cmd, alvo])
