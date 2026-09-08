@@ -12,16 +12,18 @@ set -eu
 #   systemctl --user restart nwg-dock
 ICON=56
 MENU="rofi -show drun -theme grid"
+# Gerado pelo `theme` com a cor de destaque da paleta ativa.
+LAUNCHER_ICON="$HOME/.dotfiles/theme/dock/launcher.svg"
 
 MONITORES=$(hyprctl monitors -j 2>/dev/null \
     | python3 -c 'import json,sys; print(" ".join(m["name"] for m in json.load(sys.stdin)))' \
     2>/dev/null) || MONITORES=""
 
 if [ -z "$MONITORES" ]; then
-    exec nwg-dock-hyprland -d -i "$ICON" -c "$MENU"
+    exec nwg-dock-hyprland -d -i "$ICON" -c "$MENU" -ico "$LAUNCHER_ICON"
 fi
 
 for m in $MONITORES; do
-    nwg-dock-hyprland -d -m -o "$m" -i "$ICON" -c "$MENU" &
+    nwg-dock-hyprland -d -m -o "$m" -i "$ICON" -c "$MENU" -ico "$LAUNCHER_ICON" &
 done
 wait || true   # instancia que cai nao deve derrubar as outras

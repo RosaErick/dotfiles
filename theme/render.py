@@ -28,6 +28,7 @@ TARGETS = {
     "rofi-grid.rasi.tmpl":    ".config/rofi/grid.rasi",
     "mako-config.tmpl":       ".config/mako/config",
     "dock-style.css.tmpl":    ".config/nwg-dock-hyprland/style.css",
+    "dock-launcher.svg.tmpl": "theme/dock/launcher.svg",
     "ghostty-theme.tmpl":     ".config/ghostty/themes/current",
     "gtk.css.tmpl":           ".config/gtk-3.0/gtk.css",
     "hypr-colors.lua.tmpl":   ".config/hypr/colors.lua",
@@ -101,7 +102,7 @@ def reload_apps():
     for label, cmd in steps:
         r = subprocess.run(cmd, capture_output=True, text=True)
         print(f"  {label}: {'ok' if r.returncode == 0 else 'FALHOU — ' + r.stderr.strip()[:60]}")
-    # dock nao recarrega CSS a quente: reinicia pelo systemd.
+    # dock nao recarrega CSS nem o SVG do launcher a quente: reinicia pelo systemd.
     # Os flags moram so em .scripts/dock — nao duplicar aqui.
     r = subprocess.run(["systemctl", "--user", "restart", "nwg-dock.service"],
                        capture_output=True, text=True)

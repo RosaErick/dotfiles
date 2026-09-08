@@ -94,6 +94,10 @@ Twelve targets stay in sync: Waybar (config + CSS), Rofi (list + grid),
 Mako, Ghostty, Kitty, GTK 3/4, btop, Yazi, the dock, and Hyprland's
 window borders.
 
+The dock's Applications icon uses `accent` from the active palette, with
+an `accent_dark` shadow. `theme/templates/dock-launcher.svg.tmpl` generates
+`theme/dock/launcher.svg`, which `.scripts/dock` loads with `-ico`.
+
 **New theme** = copy a palette, change the hex values, run `theme <name>`.
 Never edit generated files. They carry a header pointing at their template.
 

@@ -7,6 +7,8 @@ theme/.current
 .config/fish/functions/
 .config/fish/completions/
 .config/fish/conf.d/
+# ...menos o tide.fish, que e escrito a mao (cores do prompt).
+!.config/fish/conf.d/tide.fish
 .config/fish/themes/
 .config/fish/fish_variables
 
@@ -39,4 +41,5 @@ theme/sddm/background.jpg
 .config/waybar/config.jsonc
 .config/waybar/style.css
 .config/yazi/theme.toml
+theme/dock/launcher.svg
 theme/sddm/Main.qml

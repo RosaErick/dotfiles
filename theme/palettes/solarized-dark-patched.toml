@@ -1,0 +1,39 @@
+# Solarized Dark Patched — cores extraidas de /usr/share/ghostty/themes/,
+# que e a fonte que o proprio Ghostty usa. Nao foram digitadas a mao.
+#
+# O bg NAO e o do tema (#001e27): e o #031219 que o craftzdog sobrepoe no
+# ghostty/config dele. Um pouco mais escuro e mais azul, e o que da o
+# contraste do vidro fosco quando o blur do Hyprland passa por tras.
+# Para o tema puro, troque bg por "#001e27".
+name = "solarized-dark-patched"
+
+[colors]
+bg        = "#031219"   # fundo principal (override do craftzdog)
+bg_alt    = "#001e27"   # background real do tema — painel / elemento
+bg_high   = "#002831"   # palette 0 — destaque, hover
+sel       = "#002831"   # selection-background
+line      = "#475b62"   # palette 8 — bordas, separadores
+
+fg        = "#819090"   # palette 14 — texto principal
+fg_dim    = "#708284"   # foreground do tema — texto secundário
+fg_mute   = "#536870"   # palette 11 — texto apagado
+
+red       = "#d11c24"
+green     = "#738a05"
+yellow    = "#a57706"
+blue      = "#2176c7"
+magenta   = "#c61c6f"
+cyan      = "#259286"
+
+accent    = "#2176c7"   # o azul e a assinatura do Solarized
+urgent    = "#d11c24"
+
+[opts]
+alpha       = "0.90"
+alpha_hex   = "e6"
+alpha_solid = "0.97"
+alpha_rofi  = "0.82"
+radius      = "8px"
+font      = "BlexMono Nerd Font"
+font_alt  = "JetBrainsMono Nerd Font"
+font_size   = "13px"
