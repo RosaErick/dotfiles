@@ -35,6 +35,7 @@ TARGETS = {
     "btop.theme.tmpl":        ".config/btop/themes/current.theme",
     "yazi-theme.toml.tmpl":   ".config/yazi/theme.toml",
     "kitty-theme.conf.tmpl":  ".config/kitty/theme.conf",
+    "tmux.conf.tmpl":         ".config/tmux/tmux.conf",
     "sddm-main.qml.tmpl":     "theme/sddm/Main.qml",
 }
 
@@ -107,6 +108,15 @@ def reload_apps():
     r = subprocess.run(["systemctl", "--user", "restart", "nwg-dock.service"],
                        capture_output=True, text=True)
     print(f"  dock: {'ok' if r.returncode == 0 else 'FALHOU — ' + r.stderr.strip()[:60]}")
+    # tmux so aplica em servidor rodando. Sem sessao aberta (ou sem o tmux
+    # instalado) nao e erro: nao ha o que recarregar, a proxima sessao ja
+    # nasce com o arquivo novo.
+    try:
+        r = subprocess.run(["tmux", "source-file", str(ROOT / ".config/tmux/tmux.conf")],
+                           capture_output=True, text=True)
+        print(f"  tmux: {'ok' if r.returncode == 0 else 'sem sessao aberta'}")
+    except FileNotFoundError:
+        print("  tmux: nao instalado")
     print("  ghostty/rofi: releem sozinhos na proxima janela")
     # A tela de login vive em /usr/share e so root escreve la, entao ela nao
     # acompanha a troca de tema. Ficar defasada e silencioso: o SDDM cai no

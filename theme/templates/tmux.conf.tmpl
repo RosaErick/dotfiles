@@ -37,18 +37,18 @@ bind -r L resize-pane -R 10
 # zoom (C-b z) ja e padrao do tmux, nao precisa bind.
 
 # ── Cores: vem da paleta ativa ────────────────────────────────────
-set -g status-style "bg=#001e27,fg=#606c6c"
-set -g status-left "#[bg=#2176c7,fg=#031219,bold] #S #[default] "
-set -g status-right "#[fg=#536870]%H:%M "
+set -g status-style "bg={{bg_alt}},fg={{fg_dim}}"
+set -g status-left "#[bg={{accent}},fg={{bg}},bold] #S #[default] "
+set -g status-right "#[fg={{fg_mute}}]%H:%M "
 set -g status-left-length 30
 
-setw -g window-status-current-style "bg=#002831,fg=#2176c7,bold"
-setw -g window-status-style "fg=#536870"
+setw -g window-status-current-style "bg={{bg_high}},fg={{accent}},bold"
+setw -g window-status-style "fg={{fg_mute}}"
 
 # A borda ativa usa o mesmo amarelo da borda de janela do Hyprland, entao
 # pane e janela falam a mesma linguagem visual.
-set -g pane-border-style "fg=#475b62"
-set -g pane-active-border-style "fg=#a57706"
+set -g pane-border-style "fg={{line}}"
+set -g pane-active-border-style "fg={{yellow}}"
 
-set -g message-style "bg=#002831,fg=#819090"
-set -g mode-style "bg=#002831,fg=#819090"
+set -g message-style "bg={{bg_high}},fg={{fg}}"
+set -g mode-style "bg={{sel}},fg={{fg}}"

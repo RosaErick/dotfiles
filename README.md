@@ -10,6 +10,7 @@ Arch Linux + Hyprland. Everything themed from a single palette file.
 | **Bar** | [Waybar](https://github.com/Alexays/Waybar), custom design |
 | **Launcher** | [Rofi](https://github.com/davatorium/rofi), list + app grid |
 | **Terminal** | [Ghostty](https://github.com/ghostty-org/ghostty) (primary), [Kitty](https://github.com/kovidgoyal/kitty) |
+| **Multiplexer** | [tmux](https://github.com/tmux/tmux), both terminals open into it |
 | **Font** | [BlexMono Nerd Font](https://github.com/ryanoasis/nerd-fonts) (IBM Plex Mono + Nerd glyphs) |
 | **Shell** | [Zsh](https://github.com/zsh-users/zsh) + Powerlevel10k · [Fish](https://github.com/fish-shell/fish-shell) + Tide |
 | **Files** | Yazi (`SUPER+E`), [Nautilus](https://gitlab.gnome.org/GNOME/nautilus) (`SUPER+SHIFT+E`) |
@@ -90,9 +91,9 @@ theme --list        # available palettes
 `theme/palettes/*.toml` holds the colors. `theme/render.py` fills the
 templates and reloads the running apps.
 
-Twelve targets stay in sync: Waybar (config + CSS), Rofi (list + grid),
-Mako, Ghostty, Kitty, GTK 3/4, btop, Yazi, the dock, and Hyprland's
-window borders.
+Fifteen targets stay in sync: Waybar (config + CSS), Rofi (list + grid),
+Mako, Ghostty, Kitty, tmux, GTK 3/4, btop, Yazi, the dock (CSS + launcher
+icon), SDDM, and Hyprland's window borders.
 
 The dock's Applications icon uses `accent` from the active palette, with
 an `accent_dark` shadow. `theme/templates/dock-launcher.svg.tmpl` generates
@@ -103,7 +104,8 @@ Never edit generated files. They carry a header pointing at their template.
 
 Derived values are computed, not hand-picked: every color gets `_dark` (50%)
 and `_dim` (75%) variants, plus `_raw` (`r,g,b`) and `_hex` forms. The bar's
-3D shadows and Hyprland's gradient borders come from those.
+3D shadows and the dock's launcher shadow come from those. Hyprland's active
+border is a single flat color (`yellow`), not a gradient.
 
 ## Install
 
@@ -136,6 +138,22 @@ just enough to get in.
 | `SUPER + Q` | Terminal |
 | `SUPER + R` | Launcher |
 | `CTRL+ALT+DEL` | Session menu |
+
+### tmux
+
+Both terminals open straight into a session (`new-session -A -s main`, so a
+second window attaches instead of spawning a rival session). If tmux is ever
+missing the terminal falls back to zsh rather than failing to open.
+
+Splitting used to be Ghostty's job. It moved here, so the two stopped
+competing for the same keys. Prefix is `C-b`.
+
+| Key | |
+|---|---|
+| `C-b \|` / `C-b -` | Split right / down, inheriting the current directory |
+| `C-b h/j/k/l` | Move between panes |
+| `C-b H/J/K/L` | Resize, repeatable without re-pressing the prefix |
+| `C-b z` | Zoom pane |
 
 ## Notes
 
