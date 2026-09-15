@@ -42,10 +42,10 @@ cursor-style-blink = false
 mouse-hide-while-typing = true
 
 # ── Shell integration ─────────────────────────────────────────────
-# Abre direto numa sessao tmux, reaproveitando a existente (-A anexa se ja
-# houver, cria se nao). O guard com `command -v` faz o terminal cair no zsh
+# Abre direto numa nova sessao tmux, independente em cada janela ou aba.
+# O guard com `command -v` faz o terminal cair no zsh
 # se o tmux sumir, em vez de simplesmente nao abrir.
-command = /bin/sh -c 'command -v tmux >/dev/null && exec tmux new-session -A -s main || exec zsh -l'
+command = /bin/sh -c 'command -v tmux >/dev/null && exec tmux new-session || exec zsh -l'
 # Marca prompts (salto ctrl+shift+seta), herda o cwd em split/aba nova,
 # muda o cursor no modo vi, destaca comando com sudo.
 shell-integration = zsh
