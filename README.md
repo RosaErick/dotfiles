@@ -164,11 +164,6 @@ just enough to get in.
 
 ### tmux
 
-Configuration imported from [craftzdog/dotfiles](https://github.com/craftzdog/dotfiles/tree/bf2867469b8b7f0260e974a47297a7df61d53052/.config/tmux)
-(commit `bf2867469b8b7f0260e974a47297a7df61d53052`). The five tmux files keep
-the upstream layout, colors, options and bindings. The only Linux adaptation
-is `xdg-open` in place of macOS `open` for the directory-opening shortcut.
-
 Ghostty creates an independent tmux session for every new window or tab.
 Kitty still attaches to the shared `main` session. Both fall back to zsh if
 tmux is missing.
