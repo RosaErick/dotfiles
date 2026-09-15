@@ -6,11 +6,14 @@ theme/.current
 # fish: gerado pelo fisher e pelo proprio shell
 .config/fish/functions/
 .config/fish/completions/
-.config/fish/conf.d/
-# ...menos o tide.fish, que e escrito a mao (cores do prompt).
+.config/fish/conf.d/*
+# ...menos o tide.fish, que preserva o layout e as cores do prompt.
 !.config/fish/conf.d/tide.fish
 .config/fish/themes/
 .config/fish/fish_variables
+
+# Plugins do tmux sao instalados pelo TPM, nao versionados como codigo local.
+.config/tmux/plugins/
 
 # zsh: historico e backups nao entram no repo
 .zsh_history

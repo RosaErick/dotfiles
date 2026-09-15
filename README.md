@@ -1,6 +1,6 @@
 # dotfiles
 
-Arch Linux + Hyprland. Everything themed from a single palette file.
+Arch Linux + Hyprland. Desktop apps share one palette; tmux uses craftzdog's Solarized layout.
 
 ## What's in here
 
@@ -49,6 +49,25 @@ Zsh is the login shell; fish is installed alongside (`fish` to enter it).
 - [tide](https://github.com/IlanCosman/tide): prompt
 - [fzf.fish](https://github.com/PatrickF1/fzf.fish): fuzzy search keybindings
 
+The complete Tide prompt (layout, colors, icons and item options) lives in
+`.config/fish/conf.d/tide.fish`. Fish loads it automatically, including the
+background shells Tide uses to draw the prompt. Edit this file to change the
+versioned appearance; `fish_variables`, runtime caches and Fisher's installed
+plugin files stay local.
+
+On a fresh machine, install the plugins listed in `fish_plugins`:
+
+```sh
+fish -c 'fisher update'
+```
+
+After editing the prompt file, open a new fish shell, or run in fish:
+
+```fish
+source ~/.config/fish/conf.d/tide.fish
+tide reload
+```
+
 **Shared CLI**
 
 - [eza](https://github.com/eza-community/eza): ls replacement
@@ -91,9 +110,12 @@ theme --list        # available palettes
 `theme/palettes/*.toml` holds the colors. `theme/render.py` fills the
 templates and reloads the running apps.
 
-Fifteen targets stay in sync: Waybar (config + CSS), Rofi (list + grid),
-Mako, Ghostty, Kitty, tmux, GTK 3/4, btop, Yazi, the dock (CSS + launcher
+Desktop targets stay in sync: Waybar (config + CSS), Rofi (list + grid),
+Mako, Ghostty, Kitty, GTK 3/4, btop, Yazi, the dock (CSS + launcher
 icon), SDDM, and Hyprland's window borders.
+
+tmux keeps the fixed Solarized theme from craftzdog; `theme` does not render
+or reload its configuration.
 
 The dock's Applications icon uses `accent` from the active palette, with
 an `accent_dark` shadow. `theme/templates/dock-launcher.svg.tmpl` generates
@@ -113,7 +135,7 @@ border is a single flat color (`yellow`), not a gradient.
 sudo pacman -S --needed hyprland hyprpaper hyprlock hypridle hyprpolkitagent \
   waybar rofi mako ghostty kitty yazi btop nautilus nwg-dock-hyprland \
   nwg-displays nwg-look grim slurp hyprshot wl-clipboard sddm \
-  zsh zsh-autosuggestions zsh-syntax-highlighting fish fisher \
+  zsh zsh-autosuggestions zsh-syntax-highlighting fish fisher tmux git \
   eza bat fd ripgrep fzf zoxide ghq lazygit neovim stow \
   papirus-icon-theme adw-gtk-theme ttf-ibmplex-mono-nerd ttf-jetbrains-mono-nerd \
   pavucontrol networkmanager brightnessctl playerctl xdg-user-dirs \
@@ -123,8 +145,9 @@ git clone <repo> ~/.dotfiles && cd ~/.dotfiles
 ./install.sh
 ```
 
-`install.sh` renders the theme, creates the wallpaper folder and enables the
-user services. Log out and back in so `environment.d` applies.
+`install.sh` installs TPM and tmux-pain-control if missing, renders the theme,
+creates the wallpaper folder and enables the user services. Log out and back
+in so `environment.d` applies.
 
 ## Keybindings
 
@@ -141,19 +164,37 @@ just enough to get in.
 
 ### tmux
 
-Both terminals open straight into a session (`new-session -A -s main`, so a
-second window attaches instead of spawning a rival session). If tmux is ever
-missing the terminal falls back to zsh rather than failing to open.
+Configuration imported from [craftzdog/dotfiles](https://github.com/craftzdog/dotfiles/tree/bf2867469b8b7f0260e974a47297a7df61d53052/.config/tmux)
+(commit `bf2867469b8b7f0260e974a47297a7df61d53052`). The five tmux files keep
+the upstream layout, colors, options and bindings. The only Linux adaptation
+is `xdg-open` in place of macOS `open` for the directory-opening shortcut.
 
-Splitting used to be Ghostty's job. It moved here, so the two stopped
-competing for the same keys. Prefix is `C-b`.
+Ghostty creates an independent tmux session for every new window or tab.
+Kitty still attaches to the shared `main` session. Both fall back to zsh if
+tmux is missing.
+
+The prefix is **Ctrl+T**: press it, release it, then press the next key.
+The status bar shows session/window/pane, username, each window's directory
+and hostname. Window/pane numbering starts at 0 in a fresh server. Mouse
+support follows the upstream default (off).
 
 | Key | |
 |---|---|
-| `C-b \|` / `C-b -` | Split right / down, inheriting the current directory |
-| `C-b h/j/k/l` | Move between panes |
-| `C-b H/J/K/L` | Resize, repeatable without re-pressing the prefix |
-| `C-b z` | Zoom pane |
+| `C-t c` | New window in the current directory |
+| `C-t \|` / `C-t -` | Split right / down, inheriting the current directory |
+| `C-t h/j/k/l` | Move between panes |
+| `C-t H/J/K/L` | Resize panes |
+| `C-t z` | Zoom pane |
+| `C-t n/p/w` | Next / previous window / window list |
+| `C-t r` | Reload tmux configuration |
+| `C-t g` | Lazygit popup |
+| `C-t y` | Claude Code popup in a separate session |
+| `C-t o` | Open the current directory in the file manager |
+| `C-t e` | Close all other panes in the current window |
+
+Plugins live outside Git in `~/.config/tmux/plugins/`. TPM manages
+`tmux-pain-control`; use `C-t I` to install missing plugins and `C-t U` to
+update them. Run `./install.sh` to provision both on a fresh clone.
 
 ## Notes
 

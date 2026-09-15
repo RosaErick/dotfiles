@@ -11,6 +11,15 @@ mkdir -p ~/.config ~/.scripts
 stow -d "$REPO" -t ~/.config  --restow .config
 stow -d "$REPO" -t ~/.scripts --restow .scripts
 
+# Dependencias da configuracao tmux do craftzdog. Clonar apenas se ausentes.
+for plugin in tpm tmux-pain-control; do
+    if [ ! -d "$HOME/.config/tmux/plugins/$plugin" ]; then
+        mkdir -p "$HOME/.config/tmux/plugins"
+        git clone --depth 1 "https://github.com/tmux-plugins/$plugin.git" \
+            "$HOME/.config/tmux/plugins/$plugin"
+    fi
+done
+
 # These two live in $HOME. stow does not guard them, so back up anything
 # that is a real file before replacing it — losing someone's .zshrc silently
 # is not an acceptable failure mode.

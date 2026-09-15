@@ -67,7 +67,7 @@ quit-after-last-window-closed = true
 
 # ── Keybinds ──────────────────────────────────────────────────────
 # Dividir tela e tarefa do tmux, nao do Ghostty: os binds de split sairam
-# daqui para nao competir com os panes. Com o prefixo C-b: | e - dividem,
+# daqui para nao competir com os panes. Com o prefixo C-t: | e - dividem,
 # h/j/k/l navegam, H/J/K/L redimensionam (ver .config/tmux/tmux.conf).
 keybind = ctrl+shift+x=close_surface
 
