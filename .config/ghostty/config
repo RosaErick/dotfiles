@@ -2,9 +2,9 @@
 # Recarregar sem reiniciar: ctrl+shift+,
 
 # ── Fonte ─────────────────────────────────────────────────────────
-# BlexMono e a Plex Mono com os glifos Nerd Font embutidos: uma familia
-# cobre texto e icones do prompt (powerlevel10k/tide). A segunda linha e
-# so rede de seguranca se o pacote sumir.
+# A primeira familia e a principal; as seguintes cobrem glifos ausentes.
+# PlemolJP Console NF e a variante Nerd Font usada pelo craftzdog.
+font-family = PlemolJP Console NF
 font-family = BlexMono Nerd Font
 font-family = JetBrainsMono Nerd Font
 font-size = 12

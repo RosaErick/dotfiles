@@ -1,4 +1,8 @@
-# Prompt Tide: layout, cores e icones preservados da configuracao atual.
+# Tide: cores de craftzdog/dotfiles, commit bf2867469b8b7f0260e974a47297a7df61d53052.
+# Layout reconstruido a partir de images/screenshot-1.png do mesmo repositorio:
+# duas linhas, moldura esquerda, diretorio/Git e status/relogio a direita.
+# O upstream publica as cores em .config/fish/conf.d/tide.fish, mas nao
+# as escolhas universais do assistente tide configure. Elas ficam explicitas aqui.
 # Fonte da verdade versionada; edite aqui para manter o prompt reproduzivel.
 # Carregado tambem no fish nao interativo usado pelo renderizador do Tide.
 # Nao incluir caches _tide_* nem o arquivo de estado fish_variables.
@@ -18,7 +22,7 @@ set -g tide_character_vi_icon_visual V
 set -g tide_cmd_duration_bg_color C4A000
 set -g tide_cmd_duration_color 000000
 set -g tide_cmd_duration_decimals 0
-set -g tide_cmd_duration_icon 
+set -g tide_cmd_duration_icon ''
 set -g tide_cmd_duration_threshold 3000
 set -g tide_context_always_display false
 set -g tide_context_bg_color 444444
@@ -82,10 +86,10 @@ set -g tide_jobs_number_threshold 1000
 set -g tide_kubectl_bg_color 326CE5
 set -g tide_kubectl_color 000000
 set -g tide_kubectl_icon 󱃾
-set -g tide_left_prompt_frame_enabled false
-set -g tide_left_prompt_items vi_mode os pwd git
-set -g tide_left_prompt_prefix ''
-set -g tide_left_prompt_separator_diff_color 
+set -g tide_left_prompt_frame_enabled true
+set -g tide_left_prompt_items pwd git newline
+set -g tide_left_prompt_prefix 
+set -g tide_left_prompt_separator_diff_color 
 set -g tide_left_prompt_separator_same_color 
 set -g tide_left_prompt_suffix 
 set -g tide_nix_shell_bg_color 7EBAE4
@@ -109,7 +113,7 @@ set -g tide_prompt_color_separator_same_color 949494
 set -g tide_prompt_icon_connection ' '
 set -g tide_prompt_min_cols 34
 set -g tide_prompt_pad_items true
-set -g tide_prompt_transient_enabled true
+set -g tide_prompt_transient_enabled false
 set -g tide_pulumi_bg_color F7BF2A
 set -g tide_pulumi_color 000000
 set -g tide_pulumi_icon 
@@ -117,8 +121,8 @@ set -g tide_pwd_bg_color 444444
 set -g tide_pwd_color_anchors E4E4E4
 set -g tide_pwd_color_dirs E4E4E4
 set -g tide_pwd_color_truncated_dirs BCBCBC
-set -g tide_pwd_icon 
-set -g tide_pwd_icon_home 
+set -g tide_pwd_icon ''
+set -g tide_pwd_icon_home ''
 set -g tide_pwd_icon_unwritable 
 set -g tide_pwd_markers .bzr .citc .git .hg .node-version .python-version .ruby-version .shorten_folder_marker .svn .terraform bun.lockb Cargo.toml composer.json CVS go.mod package.json build.zig
 set -g tide_python_bg_color 444444
@@ -127,9 +131,9 @@ set -g tide_python_icon 󰌠
 set -g tide_right_prompt_frame_enabled false
 set -g tide_right_prompt_items status cmd_duration context jobs direnv bun node python rustc java php pulumi ruby go gcloud kubectl distrobox toolbox terraform aws nix_shell crystal elixir zig time
 set -g tide_right_prompt_prefix 
-set -g tide_right_prompt_separator_diff_color 
+set -g tide_right_prompt_separator_diff_color 
 set -g tide_right_prompt_separator_same_color 
-set -g tide_right_prompt_suffix ''
+set -g tide_right_prompt_suffix 
 set -g tide_ruby_bg_color B31209
 set -g tide_ruby_color 000000
 set -g tide_ruby_icon 

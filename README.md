@@ -11,7 +11,7 @@ Arch Linux + Hyprland. Desktop apps share one palette; tmux uses craftzdog's Sol
 | **Launcher** | [Rofi](https://github.com/davatorium/rofi), list + app grid |
 | **Terminal** | [Ghostty](https://github.com/ghostty-org/ghostty) (primary), [Kitty](https://github.com/kovidgoyal/kitty) |
 | **Multiplexer** | [tmux](https://github.com/tmux/tmux), both terminals open into it |
-| **Font** | [BlexMono Nerd Font](https://github.com/ryanoasis/nerd-fonts) (IBM Plex Mono + Nerd glyphs) |
+| **Font** | [PlemolJP Console NF](https://github.com/yuru7/PlemolJP), then BlexMono Nerd Font, then JetBrainsMono Nerd Font |
 | **Shell** | [Zsh](https://github.com/zsh-users/zsh) + Powerlevel10k · [Fish](https://github.com/fish-shell/fish-shell) + Tide |
 | **Files** | Yazi (`SUPER+E`), [Nautilus](https://gitlab.gnome.org/GNOME/nautilus) (`SUPER+SHIFT+E`) |
 | **Editor** | [Neovim](https://github.com/neovim/neovim) + [LazyVim](https://github.com/LazyVim/LazyVim) |
@@ -55,6 +55,13 @@ background shells Tide uses to draw the prompt. Edit this file to change the
 versioned appearance; `fish_variables`, runtime caches and Fisher's installed
 plugin files stay local.
 
+The prompt uses craftzdog's [Tide colors](https://github.com/craftzdog/dotfiles/blob/bf2867469b8b7f0260e974a47297a7df61d53052/.config/fish/conf.d/tide.fish).
+Its two-line layout is reconstructed from the repository's
+[terminal screenshot](https://github.com/craftzdog/dotfiles/blob/bf2867469b8b7f0260e974a47297a7df61d53052/images/screenshot-1.png):
+directory and Git on the left, status and time on the right, a left frame,
+rounded outer ends and slanted internal separators. Upstream does not publish
+the complete `tide configure` choices, so those choices are explicit locally.
+
 On a fresh machine, install the plugins listed in `fish_plugins`:
 
 ```sh
@@ -67,6 +74,22 @@ After editing the prompt file, open a new fish shell, or run in fish:
 source ~/.config/fish/conf.d/tide.fish
 tide reload
 ```
+
+**Terminal fonts**
+
+Ghostty uses this fallback order: `PlemolJP Console NF`, `BlexMono Nerd Font`,
+`JetBrainsMono Nerd Font`. Kitty uses the same primary font and the Fontconfig
+rules in `.config/fontconfig/conf.d/50-terminal-fonts.conf` for fallbacks;
+these rules also set the user's generic `monospace` preference.
+
+Install the Nerd Font release [PlemolJP NF v3.1.0](https://github.com/yuru7/PlemolJP/releases/tag/v3.1.0):
+extract the TTF files in `PlemolJPConsole_NF` into
+`~/.local/share/fonts/PlemolJPConsoleNF/`, then run `fc-cache -f`.
+The archive is `PlemolJP_NF_v3.1.0.zip`; its SHA-256 is
+`015142b7ce4fb497ea6eb14567c435b69450eb5028fb7d29c032d1ffb3854abb`.
+Font binaries stay outside the dotfiles repository. The package list below
+installs BlexMono and JetBrainsMono. Reload Ghostty with `Ctrl+Shift+R` after
+changing its configuration; restart Kitty to pick up Fontconfig changes.
 
 **Shared CLI**
 
