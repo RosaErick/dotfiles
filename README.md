@@ -9,10 +9,27 @@ configs shared across Linux and macOS. Hyprland desktop configs live separately.
 
 ### Shells and CLI tools
 
-- [Fish + Tide](packages/common/fish/) — Single-line prompt, colors, aliases, fzf, zoxide, and Fisher plugin manifest
-- [Zsh + Powerlevel10k](packages/common/zsh/) — Prompt, history, aliases, fzf, zoxide, autosuggestions, and syntax highlighting
+- [Fish + Tide](packages/common/fish/) — Single-line prompt, colors, and Neovim as the default editor
+- [Zsh + Powerlevel10k](packages/common/zsh/) — Customized prompt with instant prompt support
+- **Fisher** — Fish plugin manager; Fisher, Tide, and fzf.fish are listed in the versioned [plugin manifest](packages/common/fish/.config/fish/fish_plugins)
+- **Oh My Zsh** — Zsh framework with the Git plugin enabled
+- **fzf / fzf.fish** — Interactive search for history and files; Zsh also configures file previews with bat and directory previews with eza
+- **zoxide (`z` / `zi`)** — Directory jumping in both shells, with interactive selection through `zi`
+- **eza** — `ls`, `ll`, `la`, and `lt` aliases with icons, Git status, and tree views; Fish also adds `tree`
+- **bat** — `cat` replacement in Fish and file previews in Zsh's fzf integration
+- **fd** — File search backend for fzf, including hidden files and excluding `.git`
+- **ghq + fzf** — Fish's `r` command selects a local Git repository and changes into it
+- **zsh-autosuggestions** — Suggestions from history and completions; `Ctrl+Space` accepts a suggestion
+- **zsh-syntax-highlighting** — Highlights commands as you type
+- **Zsh history** — Up to 100,000 entries, duplicate removal, and incremental saving
+- **mise** — Optional Zsh activation when installed; installation and runtime versions are not managed here
+- **Shell environment** — Shared script and local binary paths; Fish also adds `~/go/bin`
 - [btop](packages/common/btop/) — Resource monitor settings and a theme matching the palette
 - [Yazi](themes/templates/common/yazi-theme.toml.tmpl) — Theme for the terminal file manager
+
+Shell integrations live in [config.fish](packages/common/fish/.config/fish/config.fish)
+and [.zshrc](packages/common/zsh/.zshrc). Plugin installation is defined in
+[install-plugins.sh](scripts/install-plugins.sh); downloaded plugin code stays outside Git.
 
 ### Editor
 

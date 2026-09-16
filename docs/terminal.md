@@ -1,50 +1,50 @@
-# Terminais e tmux
+# Terminals and tmux
 
-Configurações em `packages/common/{ghostty,kitty,tmux}/`.
-Ghostty abre uma sessão tmux independente por janela/aba. Kitty conecta à
-sessão compartilhada `main`. Ambos usam Zsh se o tmux não estiver instalado.
+Configurations live in `packages/common/{ghostty,kitty,tmux}/`.
+Ghostty opens an independent tmux session per window/tab. Kitty connects to
+the shared `main` session. Both use Zsh if tmux is not installed.
 
-## Fontes
+## Fonts
 
-Preferência: **PlemolJP Console NF → BlexMono Nerd Font → JetBrainsMono Nerd Font**.
-Ghostty declara essa ordem diretamente. Kitty usa PlemolJP como principal;
-no Linux, `packages/linux/fontconfig/` configura os fallbacks.
-O fallback equivalente do Kitty no macOS ainda precisa de validação.
+Preference: **PlemolJP Console NF → BlexMono Nerd Font → JetBrainsMono Nerd Font**.
+Ghostty declares this order directly. Kitty uses PlemolJP as its primary font;
+on Linux, `packages/linux/fontconfig/` configures fallbacks.
+The equivalent Kitty fallback on macOS still needs validation.
 
-Instale [PlemolJP NF v3.1.0](https://github.com/yuru7/PlemolJP/releases/tag/v3.1.0).
-Extraia os TTFs de `PlemolJPConsole_NF` do arquivo `PlemolJP_NF_v3.1.0.zip`:
+Install [PlemolJP NF v3.1.0](https://github.com/yuru7/PlemolJP/releases/tag/v3.1.0).
+Extract the TTFs from `PlemolJPConsole_NF` in the `PlemolJP_NF_v3.1.0.zip` archive:
 
-- Linux: `~/.local/share/fonts/PlemolJPConsoleNF/`, depois `fc-cache -f`.
-- macOS: instale pelo Catálogo de Fontes ou em `~/Library/Fonts/`.
+- Linux: `~/.local/share/fonts/PlemolJPConsoleNF/`, then `fc-cache -f`.
+- macOS: install through Font Book or in `~/Library/Fonts/`.
 
-SHA-256 do arquivo: `015142b7ce4fb497ea6eb14567c435b69450eb5028fb7d29c032d1ffb3854abb`.
-Instale também as duas fontes de fallback; o bootstrap Arch já as inclui.
-Os binários das fontes não entram no Git.
+Archive SHA-256: `015142b7ce4fb497ea6eb14567c435b69450eb5028fb7d29c032d1ffb3854abb`.
+Also install both fallback fonts; the Arch bootstrap already includes them.
+Font binaries stay outside Git.
 
 ## tmux
 
-Prefixo: **Ctrl+T**, solte e pressione a próxima tecla.
+Prefix: **Ctrl+T**, release it, then press the next key.
 
-| Tecla após o prefixo | Ação |
+| Key after the prefix | Action |
 |---|---|
-| `c` | Nova janela |
-| `\|` / `-` | Dividir à direita / abaixo |
-| `h/j/k/l` | Mudar de painel |
-| `H/J/K/L` | Redimensionar |
-| `z` | Ampliar/restaurar painel |
-| `n/p/w` | Próxima/anterior/lista de janelas |
-| `r` | Recarregar configuração |
+| `c` | New window |
+| `\|` / `-` | Split right / down |
+| `h/j/k/l` | Switch panes |
+| `H/J/K/L` | Resize |
+| `z` | Zoom/restore pane |
+| `n/p/w` | Next/previous/window list |
+| `r` | Reload configuration |
 | `g` | Lazygit |
-| `y` | Claude Code em popup; requer o CLI instalado |
-| `o` | Abrir diretório no gerenciador de arquivos |
-| `e` | Fechar os outros painéis |
-| `[` | Histórico pelo teclado; `q` sai |
+| `y` | Claude Code popup; requires the CLI to be installed |
+| `o` | Open directory in the file manager |
+| `e` | Close the other panes |
+| `[` | Browse history with the keyboard; `q` exits |
 
-Mouse habilitado: a roda rola o histórico no shell. Em aplicativos como
-Neovim, a rolagem é tratada pelo aplicativo. `q` sai do modo de cópia.
+Mouse enabled: the wheel scrolls shell history. In applications such as
+Neovim, scrolling is handled by the application. `q` exits copy mode.
 
-O tema fixo Solarized e o layout são baseados em
+The fixed Solarized theme and layout are based on
 [craftzdog/dotfiles](https://github.com/craftzdog/dotfiles).
-`platform/` adapta a abertura de diretórios para `open` ou `xdg-open`.
-Plugins TPM ficam em `~/.config/tmux/plugins/`, fora do Git; `Ctrl+T I`
-instala e `Ctrl+T U` atualiza.
+`platform/` adapts directory opening to `open` or `xdg-open`.
+TPM plugins live in `~/.config/tmux/plugins/`, outside Git; `Ctrl+T I`
+installs them and `Ctrl+T U` updates them.

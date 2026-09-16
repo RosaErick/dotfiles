@@ -9,10 +9,27 @@ terminais compartilhados entre Linux e macOS. Desktop Hyprland separado.
 
 ### Shells e ferramentas CLI
 
-- [Fish + Tide](../packages/common/fish/) — Prompt em uma linha, cores, aliases, fzf, zoxide e manifesto de plugins Fisher
-- [Zsh + Powerlevel10k](../packages/common/zsh/) — Prompt, histórico, aliases, fzf, zoxide, autosuggestions e syntax highlighting
+- [Fish + Tide](../packages/common/fish/) — Prompt em uma linha, cores e Neovim como editor padrão
+- [Zsh + Powerlevel10k](../packages/common/zsh/) — Prompt personalizado com suporte a instant prompt
+- **Fisher** — Gerenciador de plugins do Fish; Fisher, Tide e fzf.fish estão no [manifesto versionado](../packages/common/fish/.config/fish/fish_plugins)
+- **Oh My Zsh** — Framework do Zsh com o plugin Git habilitado
+- **fzf / fzf.fish** — Busca interativa no histórico e em arquivos; no Zsh, inclui prévias de arquivos com bat e de diretórios com eza
+- **zoxide (`z` / `zi`)** — Navegação por diretórios nos dois shells, com seleção interativa pelo `zi`
+- **eza** — Aliases `ls`, `ll`, `la` e `lt` com ícones, status Git e visualização em árvore; o Fish também adiciona `tree`
+- **bat** — Substitui `cat` no Fish e mostra prévias de arquivos na integração fzf do Zsh
+- **fd** — Busca de arquivos usada pelo fzf, incluindo ocultos e excluindo `.git`
+- **ghq + fzf** — Comando `r` no Fish para selecionar e entrar em um repositório Git local
+- **zsh-autosuggestions** — Sugestões do histórico e das completions; `Ctrl+Espaço` aceita uma sugestão
+- **zsh-syntax-highlighting** — Destaque dos comandos durante a digitação
+- **Histórico do Zsh** — Até 100 mil entradas, remoção de duplicatas e gravação incremental
+- **mise** — Ativação opcional no Zsh quando instalado; a instalação e as versões dos runtimes não são gerenciadas aqui
+- **Ambiente dos shells** — Caminhos para scripts e binários locais; o Fish também adiciona `~/go/bin`
 - [btop](../packages/common/btop/) — Monitor de recursos e tema integrado à paleta
 - [Yazi](../themes/templates/common/yazi-theme.toml.tmpl) — Tema do gerenciador de arquivos no terminal
+
+As integrações ficam em [config.fish](../packages/common/fish/.config/fish/config.fish)
+e [.zshrc](../packages/common/zsh/.zshrc). A instalação dos plugins está em
+[install-plugins.sh](../scripts/install-plugins.sh); o código baixado dos plugins fica fora do Git.
 
 ### Editor
 

@@ -1,23 +1,23 @@
 # Editor
 
-Neovim com LazyVim: `packages/common/nvim/.config/nvim/`.
+Neovim with LazyVim: `packages/common/nvim/.config/nvim/`.
 
-- `lua/config/`: opções, atalhos e inicialização.
-- `lua/plugins/`: plugins e personalizações.
-- `lazy-lock.json`: versões dos plugins, mantidas no Git.
+- `lua/config/`: options, keybindings, and initialization.
+- `lua/plugins/`: plugins and customizations.
+- `lazy-lock.json`: plugin versions, tracked in Git.
 
-O autocomplete usa Blink: `Tab`/`Shift+Tab` percorrem sugestões; `Enter`
-confirma após selecionar uma. `Ctrl+Espaço` abre as sugestões.
+Autocompletion uses Blink: `Tab`/`Shift+Tab` cycle through suggestions; `Enter`
+confirms after selecting one. `Ctrl+Space` opens suggestions.
 
 ## Diffview
 
-| Atalho | Ação |
+| Shortcut | Action |
 |---|---|
-| `Espaço g v` | Alterações locais |
-| `Espaço g V` | Histórico do repositório |
-| `Espaço g H` | Histórico do arquivo |
-| `Espaço g q` | Fechar Diffview |
+| `Space g v` | Local changes |
+| `Space g V` | Repository history |
+| `Space g H` | File history |
+| `Space g q` | Close Diffview |
 
-Use `:Lazy` para gerenciar plugins e `:LazyExtras` para integrações de
-linguagens. A configuração é compartilhada; dependências de cada linguagem
-precisam estar disponíveis na máquina.
+Use `:Lazy` to manage plugins and `:LazyExtras` for language integrations.
+The configuration is shared; dependencies for each language must be available
+on the machine.

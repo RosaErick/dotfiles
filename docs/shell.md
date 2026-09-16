@@ -1,28 +1,28 @@
 # Shells
 
-- **Fish + Tide:** `packages/common/fish/`. Prompt em uma linha, com diretório
-  e Git à esquerda; status, ferramentas e relógio à direita.
+- **Fish + Tide:** `packages/common/fish/`. Single-line prompt with the directory
+  and Git on the left; status, tools, and clock on the right.
 - **Zsh + Powerlevel10k:** `packages/common/zsh/`. Autosuggestions, syntax
-  highlighting, fzf, zoxide e aliases para eza.
+  highlighting, fzf, zoxide, and eza aliases.
 
-O instalador não muda seu shell de login. Execute `fish` para entrar no Fish.
-O manifesto `fish_plugins` preserva a seleção de plugins; `fish_variables`
-e arquivos baixados pelo Fisher ficam fora do Git.
+The installer does not change your login shell. Run `fish` to enter Fish.
+The `fish_plugins` manifest preserves the plugin selection; `fish_variables`
+and files downloaded by Fisher stay outside Git.
 
-Para aplicar alterações no prompt em um Fish aberto:
+To apply prompt changes in an open Fish shell:
 
 ```fish
 source ~/.config/fish/conf.d/tide.fish
 tide reload
 ```
 
-Os plugins Zsh podem vir da instalação compartilhada em
-`~/.local/share/zsh/plugins/` ou dos caminhos da distribuição/Homebrew.
-`zsh-syntax-highlighting` é carregado por último.
+Zsh plugins can come from the shared installation at
+`~/.local/share/zsh/plugins/` or the distribution/Homebrew paths.
+`zsh-syntax-highlighting` is loaded last.
 
-Ajustes desta máquina podem ficar em `~/.config/fish/local.fish` e
-`~/.config/zsh/local.zsh`, fora do Git. Crie os diretórios se necessário.
+Machine-specific settings can go in `~/.config/fish/local.fish` and
+`~/.config/zsh/local.zsh`, outside Git. Create the directories if needed.
 
-As cores do Tide usam como referência
-[craftzdog/dotfiles](https://github.com/craftzdog/dotfiles), com o layout
-adaptado localmente. Edite `conf.d/tide.fish` para manter o prompt reproduzível.
+Tide colors use [craftzdog/dotfiles](https://github.com/craftzdog/dotfiles)
+as a reference, with the layout adapted locally. Edit `conf.d/tide.fish`
+to keep the prompt reproducible.

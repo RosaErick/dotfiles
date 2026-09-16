@@ -1,8 +1,8 @@
-# Temas
+# Themes
 
-`themes/palettes/` guarda as cores; `themes/templates/` separa templates
-compartilhados, Linux e Hyprland. `themes/render.py` gera os arquivos nos
-pacotes correspondentes. Edite os templates, não as saídas ignoradas pelo Git.
+`themes/palettes/` stores colors; `themes/templates/` separates shared, Linux,
+and Hyprland templates. `themes/render.py` generates files in the corresponding
+packages. Edit the templates, not the outputs ignored by Git.
 
 ```sh
 theme --list
@@ -10,20 +10,21 @@ theme carbonfox
 theme solarized-dark-patched --no-reload
 ```
 
-O comando usa os pacotes registrados pelo instalador. No perfil macOS,
-por exemplo, não gera Waybar nem tenta executar systemctl. A recarga do
-desktop só ocorre em Linux, numa sessão Hyprland, para os pacotes selecionados.
+The command uses the packages registered by the installer. In the macOS
+profile, for example, it does not generate Waybar files or try to run systemctl.
+Desktop reloading only happens on Linux, in a Hyprland session, for the selected
+packages.
 
-Para validar outra combinação sem escrever arquivos:
+To validate another combination without writing files:
 
 ```sh
 python3 themes/render.py carbonfox --profile macos --check
 ```
 
-Os perfis são aditivos; `theme` considera todos os pacotes registrados.
-A paleta atual fica em `themes/.current`, fora do Git. Fish, tmux e o tema
-do editor mantêm suas configurações próprias.
+Profiles are additive; `theme` considers all registered packages.
+The current palette is stored in `themes/.current`, outside Git. Fish, tmux,
+and the editor theme keep their own configurations.
 
-Para uma nova paleta, copie um TOML e altere as cores. O renderizador calcula
-as variantes escuras e os formatos RGB/hex usados pelos templates.
-O SDDM só recebe uma atualização quando você executa `sddm-install`.
+For a new palette, copy a TOML file and change the colors. The renderer computes
+the darker variants and RGB/hex formats used by the templates.
+SDDM is only updated when you run `sddm-install`.

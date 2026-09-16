@@ -1,88 +1,88 @@
-# Instalação
+# Installation
 
-## Dependências
+## Dependencies
 
-Use Git, GNU Stow e Python 3.11 ou superior. Clone a repo em `~/.dotfiles`;
-os scripts do desktop usam esse caminho.
+Use Git, GNU Stow, and Python 3.11 or later. Clone the repo into `~/.dotfiles`;
+the desktop scripts use this path.
 
-No Arch, escolha as dependências de CLI ou do desktop completo:
+On Arch, choose the CLI or full desktop dependencies:
 
 ```sh
 ./bootstrap/arch/install.sh cli
-# ou:
+# or:
 ./bootstrap/arch/install.sh desktop
 ```
 
-No macOS, instale Homebrew e execute:
+On macOS, install Homebrew and run:
 
 ```sh
 ./bootstrap/macos/install.sh
 ```
 
-Em outros Linux, instale os equivalentes com o gerenciador da distribuição.
-As listas em `bootstrap/arch/` servem como referência; nomes podem variar.
-Os bootstraps instalam dependências, sem trocar o shell de login.
+On other Linux distributions, install the equivalents with the distribution's
+package manager. The lists in `bootstrap/arch/` serve as a reference; names may
+vary. The bootstrap scripts install dependencies without changing the login shell.
 
-## Configurações
+## Configuration
 
 ```sh
 ./install.sh --profile arch-hyprland --dry-run
 ./install.sh --profile arch-hyprland
 ```
 
-Perfis: `cli`, `macos`, `linux-desktop`, `arch-hyprland`.
-`@include` reutiliza outro perfil; cada linha restante identifica um pacote
-relativo a `packages/`. O desktop Hyprland também pode ser usado em outra
-distribuição criando um perfil com esses mesmos pacotes.
+Profiles: `cli`, `macos`, `linux-desktop`, `arch-hyprland`.
+`@include` reuses another profile; each remaining line identifies a package
+relative to `packages/`. The Hyprland desktop can also be used on another
+distribution by creating a profile with the same packages.
 
-O instalador verifica conflitos com Stow antes de criar os links. Arquivos
-preexistentes de outro dono causam erro: faça backup e resolva o conflito.
-Ele não usa `--adopt` nem substitui arquivos pessoais automaticamente.
-Perfis são aditivos: aplicar outro não remove pacotes já instalados.
+The installer checks for conflicts with Stow before creating links. Existing
+files owned elsewhere cause an error: back them up and resolve the conflict.
+It does not use `--adopt` or automatically replace personal files.
+Profiles are additive: applying another does not remove installed packages.
 
-`--target /caminho` permite testar os links em um diretório existente.
-`--theme nome` escolhe a paleta; a primeira instalação usa Carbonfox.
-O estado da instalação fica em `~/.local/state/dotfiles/install.json`.
+`--target /path` lets you test links in an existing directory.
+`--theme name` selects the palette; the first installation uses Carbonfox.
+Installation state is stored in `~/.local/state/dotfiles/install.json`.
 
 ## Plugins
 
-Depois dos links, execute explicitamente a etapa que baixa plugins:
+After creating the links, explicitly run the plugin download step:
 
 ```sh
 ./scripts/install-plugins.sh
 ```
 
-Ela instala Oh My Zsh, Powerlevel10k, plugins do Zsh, TPM e tmux-pain-control
-quando ausentes, e executa `fisher update` para o Fish. Os checkouts existentes
-de Zsh/tmux não são atualizados. O LazyVim instala os plugins ao abrir `nvim`.
-Fontes têm instruções em [Terminais](terminal.md).
+It installs Oh My Zsh, Powerlevel10k, Zsh plugins, TPM, and tmux-pain-control
+when missing, and runs `fisher update` for Fish. Existing Zsh/tmux checkouts
+are not updated. LazyVim installs plugins when you open `nvim`.
+Font instructions are in [Terminals](terminal.md).
 
 ## Desktop
 
-Dentro da sessão Hyprland, após instalar as dependências e configurações:
+Inside the Hyprland session, after installing dependencies and configurations:
 
 ```sh
 ~/.scripts/desktop-services
 ```
 
-Essa etapa ativa os serviços do usuário. Saia e entre novamente para aplicar
-`environment.d`. Escolha o wallpaper com `wallpaper`; use `nwg-displays`
-para configurar os monitores. O tema do SDDM é opcional: `sddm-install`.
+This step enables user services. Log out and back in to apply `environment.d`.
+Choose a wallpaper with `wallpaper`; use `nwg-displays` to configure monitors.
+The SDDM theme is optional: `sddm-install`.
 
-## Manutenção e migração
+## Maintenance and migration
 
-Cada pacote espelha os caminhos no home e possui seus próprios arquivos.
-Não crie dois pacotes que escrevam no mesmo destino. Diferenças pequenas de
-sistema ficam junto do aplicativo, como `tmux/platform/`.
+Each package mirrors paths in the home directory and owns its files.
+Do not create two packages that write to the same destination. Small system
+differences stay alongside the application, such as `tmux/platform/`.
 
-A migração desta máquina atualizou os links antigos para `packages/` e
-preservou a paleta ativa. Em outra instalação com a estrutura anterior,
-remova apenas os links que apontam para os caminhos antigos antes de aplicar
-o novo perfil; o instalador acusa esses conflitos e não faz a migração sozinho.
-Caches, plugins baixados, monitores, históricos e configurações locais não
-fazem parte dos pacotes versionados.
+The migration on this machine updated the old links to `packages/` and
+preserved the active palette. On another installation with the previous
+structure, remove only the links pointing to the old paths before applying
+the new profile; the installer reports these conflicts and does not perform
+the migration automatically. Caches, downloaded plugins, monitor settings,
+history, and local settings are not part of the versioned packages.
 
-Verificação sem alterar o home real:
+Verification without changing the real home directory:
 
 ```sh
 python3 -m unittest discover -s tests -v
