@@ -1,82 +1,70 @@
 # Dotfiles
 
-Meu ambiente de desenvolvimento: Fish/Zsh, Neovim com LazyVim, tmux e
-terminais compartilhados entre Linux e macOS. Desktop Hyprland separado.
+**English** · [Português (Brasil)](docs/README.pt-BR.md)
 
-## Configurações incluídas
+My development environment: Fish/Zsh, Neovim with LazyVim, tmux, and terminal
+configs shared across Linux and macOS. Hyprland desktop configs live separately.
 
-### Shells e ferramentas CLI
+## Contents
 
-| Configuração | O que inclui |
-|---|---|
-| [Fish + Tide](packages/common/fish/) | Prompt em uma linha, cores, aliases, fzf, zoxide e manifesto de plugins Fisher |
-| [Zsh + Powerlevel10k](packages/common/zsh/) | Prompt, histórico, aliases, fzf, zoxide, autosuggestions e syntax highlighting |
-| [btop](packages/common/btop/) | Monitor de recursos e tema integrado à paleta |
-| [Yazi](themes/templates/common/yazi-theme.toml.tmpl) | Tema do gerenciador de arquivos no terminal |
+### Shells and CLI tools
+
+- [Fish + Tide](packages/common/fish/) — Single-line prompt, colors, aliases, fzf, zoxide, and Fisher plugin manifest
+- [Zsh + Powerlevel10k](packages/common/zsh/) — Prompt, history, aliases, fzf, zoxide, autosuggestions, and syntax highlighting
+- [btop](packages/common/btop/) — Resource monitor settings and a theme matching the palette
+- [Yazi](themes/templates/common/yazi-theme.toml.tmpl) — Theme for the terminal file manager
 
 ### Editor
 
-| Configuração | O que inclui |
-|---|---|
-| [Neovim + LazyVim](packages/common/nvim/) | Opções, atalhos, autocmds e versões dos plugins |
-| [Blink](packages/common/nvim/.config/nvim/lua/plugins/completion.lua) | Autocomplete do editor, navegação com Tab e documentação das sugestões |
-| [Diffview](packages/common/nvim/.config/nvim/lua/plugins/diffview.lua) | Comparação de alterações Git e histórico de arquivos no editor |
+- [Neovim + LazyVim](packages/common/nvim/) — Options, keybindings, autocommands, and pinned plugin versions
+- [Blink](packages/common/nvim/.config/nvim/lua/plugins/completion.lua) — Autocompletion, Tab navigation, and completion documentation
+- [Diffview](packages/common/nvim/.config/nvim/lua/plugins/diffview.lua) — Git diffs and file history inside the editor
 
-### Terminais e sessões
+### Terminals and sessions
 
-| Configuração | O que inclui |
-|---|---|
-| [Ghostty](packages/common/ghostty/) | Fontes e fallbacks, cores, transparência, atalhos e sessão tmux independente |
-| [Kitty](packages/common/kitty/) | Fonte, cores, transparência, abas e conexão à sessão tmux `main` |
-| [tmux](packages/common/tmux/) | Painéis, atalhos, mouse, barra Solarized, popups e adaptações Linux/macOS |
+- [Ghostty](packages/common/ghostty/) — Fonts and fallbacks, colors, transparency, keybindings, and independent tmux sessions
+- [Kitty](packages/common/kitty/) — Font, colors, transparency, tabs, and connection to the shared `main` tmux session
+- [tmux](packages/common/tmux/) — Panes, keybindings, mouse support, Solarized status bar, popups, and Linux/macOS adaptations
 
-### Fontes e aparência
+### Fonts and appearance
 
-| Configuração | O que inclui |
-|---|---|
-| [Fontconfig](packages/linux/fontconfig/) | Preferência de fontes: PlemolJP Console NF, BlexMono e JetBrainsMono Nerd Font no Linux |
-| [GTK 3/4](packages/linux/gtk/) | Aparência dos aplicativos GTK e CSS gerado pela paleta |
-| [Temas compartilhados](themes/) | Comando `theme`, renderizador e paletas Carbonfox, Solarized Osaka e Solarized Dark Patched |
+- [Fontconfig](packages/linux/fontconfig/) — Linux font preferences: PlemolJP Console NF, BlexMono, and JetBrainsMono Nerd Font
+- [GTK 3/4](packages/linux/gtk/) — GTK application appearance and CSS generated from the palette
+- [Shared themes](themes/) — The `theme` command, renderer, and Carbonfox, Solarized Osaka, and Solarized Dark Patched palettes
 
-### Desktop Hyprland
+### Hyprland desktop
 
-| Configuração | O que inclui |
-|---|---|
-| [Hyprland](packages/desktops/hyprland/compositor/.config/hypr/hyprland.lua) | Janelas, atalhos, regras, ambiente e carregamento das configurações de monitores |
-| [Waybar](themes/templates/hyprland/) | Módulos e estilo da barra, com ocultação em fullscreen |
-| [Rofi](packages/desktops/hyprland/rofi/) | Launcher em lista, grade de aplicativos e tema |
-| [Mako](themes/templates/hyprland/mako-config.tmpl) | Aparência e opções das notificações |
-| [nwg-dock](packages/desktops/hyprland/scripts/.scripts/dock) | Inicialização, estilo, ícone do launcher e serviço do dock |
+- [Hyprland](packages/desktops/hyprland/compositor/.config/hypr/hyprland.lua) — Windows, keybindings, rules, environment, and loading of monitor settings
+- [Waybar](themes/templates/hyprland/) — Bar modules and styling, with fullscreen auto-hide
+- [Rofi](packages/desktops/hyprland/rofi/) — List launcher, application grid, and theme
+- [Mako](themes/templates/hyprland/mako-config.tmpl) — Notification appearance and settings
+- [nwg-dock](packages/desktops/hyprland/scripts/.scripts/dock) — Dock startup, styling, launcher icon, and service
 
-### Sessão e automação
+### Session and automation
 
-| Configuração | O que inclui |
-|---|---|
-| [Hypridle](packages/desktops/hyprland/compositor/.config/hypr/hypridle.conf) | Ações de inatividade da sessão |
-| [Hyprlock](packages/desktops/hyprland/compositor/.config/hypr/hyprlock.conf) | Aparência e comportamento da tela de bloqueio |
-| [Hyprpaper / wallpaper](packages/desktops/hyprland/scripts/.scripts/wallpaper) | Seletor de imagem, monitor e ajuste; gera a configuração local do wallpaper |
-| [SDDM](themes/sddm/) | Tema da tela de login e script de instalação no sistema |
-| [Serviços e ambiente](packages/desktops/hyprland/services/) | Unidades systemd do dock e fullscreen, além do PATH para scripts |
-| [Scripts do desktop](packages/desktops/hyprland/scripts/) | Áudio, screenshots, menu da sessão, consulta de atalhos, arquivos e gerenciador de tarefas |
+- [Hypridle](packages/desktops/hyprland/compositor/.config/hypr/hypridle.conf) — Session idle actions
+- [Hyprlock](packages/desktops/hyprland/compositor/.config/hypr/hyprlock.conf) — Lock screen appearance and behavior
+- [Hyprpaper / wallpaper](packages/desktops/hyprland/scripts/.scripts/wallpaper) — Image, monitor, and fit selection; generates local wallpaper settings
+- [SDDM](themes/sddm/) — Login screen theme and system installation script
+- [Services and environment](packages/desktops/hyprland/services/) — systemd units for the dock and fullscreen handling, plus script PATH setup
+- [Desktop scripts](packages/desktops/hyprland/scripts/) — Audio, screenshots, session menu, shortcut lookup, files, and task manager
 
-As configurações geradas são mantidas pelos templates; os links acima apontam
-para a fonte que deve ser editada. Monitores, wallpaper selecionado, caches e
-plugins baixados ficam fora do Git. As fontes são instaladas separadamente.
+Generated configs are maintained through templates; the links above point to
+the sources to edit. Monitor settings, selected wallpaper, caches, and downloaded
+plugins stay outside Git. Fonts are installed separately.
 
-## Perfis
+## Profiles
 
-| Perfil | Inclui |
-|---|---|
-| `cli` | Shells, editor, tmux, btop e Yazi |
-| `macos` | CLI + Ghostty e Kitty |
-| `linux-desktop` | CLI + terminais, Fontconfig e GTK |
-| `arch-hyprland` | Linux desktop + Hyprland, barra, dock e scripts |
+- `cli` — Shells, editor, tmux, btop, and Yazi
+- `macos` — CLI + Ghostty and Kitty
+- `linux-desktop` — CLI + terminals, Fontconfig, and GTK
+- `arch-hyprland` — Linux desktop + Hyprland, bar, dock, and scripts
 
-Validado neste Arch. macOS e outros Linux ainda precisam de teste real.
+Validated on this Arch setup. macOS and other Linux distributions still need testing on those systems.
 
-## Instalação
+## Installation
 
-Com Git, GNU Stow e Python 3.11+ instalados, clone em `~/.dotfiles`:
+With Git, GNU Stow, and Python 3.11+ installed, clone into `~/.dotfiles`:
 
 ```sh
 cd ~/.dotfiles
@@ -84,19 +72,20 @@ cd ~/.dotfiles
 ./install.sh --profile cli
 ```
 
-Escolha o perfil da tabela. O instalador cria links e gera os temas;
-dependências, plugins e serviços têm etapas próprias em [Instalação](docs/installation.md).
+Choose one of the profiles above. The installer creates symlinks and generates
+themes; dependencies, plugins, and services have separate steps in the
+[installation guide](docs/installation.md) (Portuguese).
 
-## Organização
+## Repository layout
 
-- `packages/common/`: configurações compartilhadas, por aplicativo.
-- `packages/linux/`: integrações Linux.
-- `packages/desktops/hyprland/`: desktop e seus serviços.
-- `profiles/`: seleção de pacotes por ambiente.
-- `bootstrap/`: dependências do Arch e macOS.
-- `themes/`: paletas, templates e renderizador.
-- `docs/`: uso e manutenção.
+- `packages/common/`: shared configs, organized by application.
+- `packages/linux/`: Linux integrations.
+- `packages/desktops/hyprland/`: desktop and its services.
+- `profiles/`: package selection for each environment.
+- `bootstrap/`: Arch and macOS dependencies.
+- `themes/`: palettes, templates, and renderer.
+- `docs/`: usage and maintenance guides (Portuguese).
 
 [Shells](docs/shell.md) · [Editor](docs/editor.md) ·
-[Terminais e tmux](docs/terminal.md) · [Desktop](docs/desktop.md) ·
-[Temas](docs/theming.md)
+[Terminals and tmux](docs/terminal.md) · [Desktop](docs/desktop.md) ·
+[Themes](docs/theming.md)
