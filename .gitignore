@@ -1,48 +1,53 @@
 # gerado por nwg-displays, especifico desta maquina
-.config/hypr/monitors.lua
-.config/hypr/workspaces.lua
-theme/.current
+packages/desktops/hyprland/compositor/.config/hypr/monitors.lua
+packages/desktops/hyprland/compositor/.config/hypr/workspaces.lua
+themes/.current
 
 # fish: gerado pelo fisher e pelo proprio shell
-.config/fish/functions/
-.config/fish/completions/
-.config/fish/conf.d/*
+packages/common/fish/.config/fish/functions/
+packages/common/fish/.config/fish/completions/
+packages/common/fish/.config/fish/conf.d/*
 # ...menos o tide.fish, que preserva o layout e as cores do prompt.
-!.config/fish/conf.d/tide.fish
-.config/fish/themes/
-.config/fish/fish_variables
+!packages/common/fish/.config/fish/conf.d/tide.fish
+packages/common/fish/.config/fish/themes/
+packages/common/fish/.config/fish/fish_variables
 
 # Plugins do tmux sao instalados pelo TPM, nao versionados como codigo local.
-.config/tmux/plugins/
+packages/common/tmux/.config/tmux/plugins/
 
 # zsh: historico e backups nao entram no repo
 .zsh_history
 *.bak*
-.config/hypr/wallpaper
+packages/desktops/hyprland/compositor/.config/hypr/wallpaper
 
 # gerado pelo seletor de wallpaper (estado da maquina)
-.config/hypr/hyprpaper.conf
-.config/hypr/wallpapers.json
+packages/desktops/hyprland/compositor/.config/hypr/hyprpaper.conf
+packages/desktops/hyprland/compositor/.config/hypr/wallpapers.json
 
 # wallpaper do login: copia da imagem atual, nao versionar
-theme/sddm/background.jpg
+themes/sddm/background.jpg
 
 # Saidas do `theme`: a fonte da verdade e a paleta + o template.
 # Versionar o gerado sujava o git a cada troca de tema e divergia do
 # hyprpaper.conf, que ja era ignorado. O install.sh roda `theme` para
 # que um clone novo tenha configs validos.
-.config/btop/themes/current.theme
-.config/ghostty/themes/current
-.config/gtk-3.0/gtk.css
-.config/gtk-4.0/gtk.css
-.config/hypr/colors.lua
-.config/kitty/theme.conf
-.config/mako/config
-.config/nwg-dock-hyprland/style.css
-.config/rofi/grid.rasi
-.config/rofi/theme.rasi
-.config/waybar/config.jsonc
-.config/waybar/style.css
-.config/yazi/theme.toml
-theme/dock/launcher.svg
-theme/sddm/Main.qml
+packages/common/btop/.config/btop/themes/current.theme
+packages/common/ghostty/.config/ghostty/themes/current
+packages/linux/gtk/.config/gtk-3.0/gtk.css
+packages/linux/gtk/.config/gtk-4.0/gtk.css
+packages/desktops/hyprland/compositor/.config/hypr/colors.lua
+packages/common/kitty/.config/kitty/theme.conf
+packages/desktops/hyprland/mako/.config/mako/config
+packages/desktops/hyprland/dock/.config/nwg-dock-hyprland/style.css
+packages/desktops/hyprland/rofi/.config/rofi/grid.rasi
+packages/desktops/hyprland/rofi/.config/rofi/theme.rasi
+packages/desktops/hyprland/waybar/.config/waybar/config.jsonc
+packages/desktops/hyprland/waybar/.config/waybar/style.css
+packages/common/yazi/.config/yazi/theme.toml
+themes/dock/launcher.svg
+themes/sddm/Main.qml
+
+__pycache__/
+*.pyc
+packages/common/zsh/.config/zsh/local.zsh
+packages/common/fish/.config/fish/local.fish

@@ -1,0 +1,2 @@
+# Keep generated-only packages in Git; metadata is not linked.
+^/\.stow-local-ignore$

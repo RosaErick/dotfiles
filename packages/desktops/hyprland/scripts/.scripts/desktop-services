@@ -1,0 +1,6 @@
+#!/bin/sh
+# Run explicitly inside the configured Hyprland session.
+set -eu
+[ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ] || { echo 'Run inside Hyprland.' >&2; exit 1; }
+systemctl --user daemon-reload
+systemctl --user enable --now waybar waybar-fullscreen hyprpaper mako hypridle nwg-dock hyprpolkitagent

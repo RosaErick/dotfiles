@@ -1,0 +1,22 @@
+-- GERADO por `theme` — edite themes/templates/hyprland/hypr-colors.lua.tmpl
+-- Carregado pelo hyprland.lua via require("colors")
+--
+-- Borda ativa: cor unica, o amarelo/ambar da paleta. Quente contra o fundo
+-- frio do Solarized, que e o contraste mais legivel sem gritar.
+-- Usar {{yellow_hex}} em vez de um hex cru faz a borda acompanhar a paleta
+-- ativa. Atencao: no carbonfox o slot `yellow` e #08bdba (um teal), entao
+-- ao trocar de paleta a borda muda de familia — se quiser ambar sempre,
+-- fixe o hex aqui.
+-- Inativa quase invisivel, so marca o limite.
+--
+-- Cor unica e uma STRING. Gradiente seria a TABELA
+-- { colors = {...}, angle = n } — nao a string "rgba(..) rgba(..) 45deg"
+-- do formato .conf.
+hl.config({
+    general = {
+        col = {
+            active_border   = "rgba({{yellow_hex}}ff)",
+            inactive_border = "rgba({{bg_high_hex}}cc)",
+        },
+    },
+})

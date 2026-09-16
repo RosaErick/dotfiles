@@ -1,6 +1,0 @@
-# Nao viram symlink no home — sao do repositorio, nao configuracao.
-^/theme$
-^/README\.md$
-^/\.git$
-^/\.gitignore$
-^/\.stow-local-ignore$

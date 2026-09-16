@@ -1,0 +1,256 @@
+/* GERADO por `theme` — edite themes/templates/hyprland/waybar-style.css.tmpl
+ *
+ * Mistura:
+ *   space_dots (vdawg-git)          -> barra transparente flutuante, sem moldura
+ *   summer-day-and-night (MathisP75) -> efeito 3D: cada modulo e uma tecla com
+ *                                       borda inferior numa versao escura da
+ *                                       propria cor; o item ativo AFUNDA.
+ *
+ * As sombras (sufixo _dark) sao calculadas pelo render.py a partir da paleta —
+ * nao ha cor escrita a mao aqui.
+ */
+
+* {
+    font-family: "{{font}}", "{{font_alt}}", monospace;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+/* A barra em si nao existe visualmente: so as teclas flutuam. */
+window#waybar {
+    background: transparent;
+    color: {{fg}};
+}
+
+tooltip {
+    background: {{bg_alt}};
+    color: {{fg}};
+    border: 1px solid {{line}};
+    border-radius: 8px;
+}
+tooltip label { padding: 4px; }
+
+/* ---- ilhas: esquerda, centro, direita ---------------------------------
+ * A direita e UMA barra, nao pilulas soltas: os modulos ficam sem fundo e
+ * quem carrega o vidro e o container .modules-right. O Hyprland desfoca
+ * atras dela pela layer_rule "blur-waybar" (o blur nao alcanca layer
+ * surfaces sem regra explicita).
+ */
+.modules-right,
+.modules-left,
+#window {
+    background: rgba({{bg_raw}}, {{alpha_rofi}});
+    color: {{fg}};
+    margin: 4px 0 8px 0;
+    border-radius: 11px;
+    border-bottom: 4px solid rgba({{bg_alt_dark_raw}}, 0.85);
+}
+
+.modules-right { padding: 0 6px; }
+.modules-left  { padding: 0 6px; }
+#window        { padding: 0 16px; }
+
+/* dentro da barra os modulos sao so conteudo: sem fundo, sem sombra */
+#custom-launcher,
+#workspaces,
+#audio,
+#cpu,
+#memory,
+#network,
+#language,
+#clock,
+#tray,
+#custom-power {
+    background: transparent;
+    border: none;
+    color: {{fg}};
+    padding: 0 11px;
+    margin: 0;
+    border-radius: 8px;
+}
+
+/* ---- acentos ---------------------------------------------------------- */
+#custom-launcher {
+    background: {{accent}};
+    color: {{bg}};
+    padding: 0 12px;
+    margin: 5px 4px 5px 2px;
+    border-radius: 8px;
+    font-size: 15px;
+}
+#custom-launcher:hover { background: {{cyan}}; }
+
+/* Sem bloco chapado: em repouso e so o glifo. O fundo cresce no hover,
+   com transicao — bloco solido de cor saturada pesa demais numa barra
+   translucida. */
+#custom-power {
+    background: transparent;
+    color: {{red}};
+    padding: 0 12px;
+    margin: 5px 2px 5px 4px;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: background-color 180ms ease, color 180ms ease;
+}
+#custom-power:hover {
+    background: rgba({{red_raw}}, 0.18);
+    color: {{red}};
+}
+
+/* ---- workspaces: numerais CJK, o ativo afunda ------------------------- */
+#workspaces { padding: 0 4px; }
+
+#workspaces button {
+    color: {{fg_mute}};
+    background: transparent;
+    min-width: 26px;              /* largura fixa: glifos CJK tem larguras diferentes */
+    padding: 0;
+    margin: 3px 2px;              /* margem simetrica: nada vaza da pilula */
+    border-radius: 6px;
+    font-size: 14px;
+    border-bottom: 2px solid transparent;
+    transition: all 160ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* o truque do summer-day-and-night: perde a borda e desce 3px,
+   entao a tecla parece pressionada pra dentro. */
+
+/* area sem janela nenhuma: quase invisivel, so marca que o slot existe.
+   Sem borda inferior — nao e uma "tecla", e um espaco vazio. */
+#workspaces button.empty {
+    color: {{line}};
+    background: transparent;
+    border-bottom-color: transparent;
+}
+#workspaces button.empty:hover {
+    color: {{fg_dim}};
+    background: {{bg_high}};
+}
+
+/* area corrente de um monitor que NAO esta focado: estado intermediario,
+   senao no dual-monitor a outra tela parece nao ter nada aberto. */
+#workspaces button.visible {
+    color: {{accent}};
+    background: {{bg_high}};
+    border-bottom-color: {{accent_dark}};
+}
+
+#workspaces button:hover {
+    color: {{fg}};
+    background: {{line}};
+    border-bottom-color: {{bg_alt_dark}};
+}
+
+/* Estado ativo vem por ultimo de proposito: o waybar aplica .visible junto
+   com .active na area corrente, e com a mesma especificidade a ultima regra
+   vence. Se subir, a area ativa volta a parecer so "visivel". */
+#workspaces button.active {
+    color: {{bg}};
+    background: {{accent}};
+    border-bottom-color: {{accent_dark}};
+}
+
+#workspaces button.urgent {
+    color: {{bg}};
+    background: {{red}};
+    border-bottom-color: {{red_dark}};
+}
+
+/* ---- titulo da janela: discreto, so contexto -------------------------- */
+#window {
+    color: {{fg_dim}};
+    font-weight: normal;
+    padding: 0 16px;
+}
+window#waybar.empty #window {
+    background: transparent;
+    border-bottom-color: transparent;
+}
+#window { font-weight: normal; color: {{fg_dim}}; }
+
+/* ---- indicadores ------------------------------------------------------
+ * Principio: cor carrega significado, nao enfeite.
+ *   - leitura normal  -> cinza claro, todos iguais: nada disputa atencao
+ *   - relogio         -> unico acento permanente, ancora visual da barra
+ *   - cor viva        -> so quando e ESTADO (caiu, mudo, urgente)
+ * Antes cada modulo tinha sua cor e o olho nao sabia onde pousar.
+ */
+/* Valores em branco: a cor identifica o modulo pelo ICONE (markup Pango no
+   config), nao pintando o numero. Numero colorido perde legibilidade. */
+#cpu, #memory, #network, #language {
+    color: {{fg}};
+    padding: 0 10px;
+}
+
+#clock {
+    color: {{accent}};
+    font-size: 14px;
+}
+
+/* estados — aqui a cor significa alguma coisa */
+#pulseaudio.muted     { color: {{fg_mute}}; }
+#network.disconnected { color: {{red}}; border-bottom-color: {{red_dark}}; }
+#memory.critical,
+#cpu.critical         { color: {{red}}; border-bottom-color: {{red_dark}}; }
+#memory.warning,
+#cpu.warning          { color: {{yellow}}; }
+
+#tray { padding: 0 10px; }
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }
+
+
+/* ---- grupo de audio (drawer: abre no hover) --------------------------- */
+/* O grupo e a tecla; os filhos sao conteudo dentro dela. */
+#audio { padding: 0 4px; }
+
+#audio #pulseaudio,
+#audio #custom-audio-out,
+#audio #custom-audio-in {
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0 8px;
+    color: {{fg}};
+}
+#audio #custom-audio-out,
+#audio #custom-audio-in { color: {{magenta}}; }
+#audio #pulseaudio.muted { color: {{fg_mute}}; }
+
+#audio #custom-audio-out:hover,
+#audio #custom-audio-in:hover { color: {{fg}}; }
+
+/* estado escondido: o waybar aplica children-class nos filhos recolhidos */
+#audio .audio-item {
+    opacity: 0;
+    min-width: 0;
+    transition: opacity 250ms ease, min-width 250ms ease;
+}
+#audio:hover .audio-item {
+    opacity: 1;
+}
+
+/* o slider: trilho fino, botao redondo na cor do tema */
+#audio slider {
+    min-width: 0;
+    min-height: 0;
+    background: {{magenta}};
+    border: 2px solid {{bg_high}};
+    border-radius: 8px;
+    box-shadow: none;
+}
+#audio trough {
+    min-width: 110px;
+    min-height: 6px;
+    border-radius: 3px;
+    background: {{line}};
+    margin: 0 6px;
+}
+#audio highlight {
+    min-height: 6px;
+    border-radius: 3px;
+    background: {{magenta}};
+}

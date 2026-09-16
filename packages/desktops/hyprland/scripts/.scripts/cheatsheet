@@ -1,0 +1,211 @@
+#!/usr/bin/env python3
+"""Tela de atalhos do Hyprland (SUPER + /).
+
+Le os binds direto de ~/.config/hypr/hyprland.lua, entao nunca desatualiza.
+As cores saem da paleta ativa em ~/.dotfiles/themes/, entao acompanha o tema.
+
+Descricao de cada atalho, em ordem de prioridade:
+  1. comentario no fim da linha  -- assim
+  2. traducao do dispatcher (ACOES)
+  3. o comando cru, como ultimo recurso
+
+  cheatsheet --print   mostra em texto puro, sem abrir janela
+"""
+import html
+import re
+import subprocess
+import sys
+import tomllib
+from pathlib import Path
+
+CONF = Path.home() / ".config/hypr/hyprland.lua"
+DOTS = Path.home() / ".dotfiles"
+
+# teclas de midia/brilho do teclado: nao entram na tela (autoexplicativas)
+IGNORAR = re.compile(r'^XF86')
+
+ACOES = [
+    (r'window\.close\(\)',                      "fechar janela"),
+    (r'window\.float\(',                        "alternar flutuante"),
+    (r'window\.fullscreen\(\)',                 "tela cheia"),
+    (r'window\.pseudo\(\)',                     "alternar pseudo-tile"),
+    (r'window\.drag\(\)',                       "arrastar janela"),
+    (r'window\.resize\(\)',                     "redimensionar janela"),
+    (r'layout\("togglesplit"\)',                "alternar split"),
+    (r'workspace\.toggle_special\("(\w+)"\)',   "area especial: {0}"),
+    (r'window\.move\(\{ workspace = "special:(\w+)" \}\)', "mover p/ area especial"),
+    (r'window\.move\(\{ workspace = i ?\}\)',   "mover janela p/ area N"),
+    (r'focus\(\{ ?workspace = i ?\}\)',         "ir p/ area N"),
+    (r'focus\(\{ workspace = "e\+1" \}\)',      "proxima area"),
+    (r'focus\(\{ workspace = "e-1" \}\)',       "area anterior"),
+    (r'focus\(\{ direction = "left" \}\)',      "focar a esquerda"),
+    (r'focus\(\{ direction = "right" \}\)',     "focar a direita"),
+    (r'focus\(\{ direction = "up" \}\)',        "focar acima"),
+    (r'focus\(\{ direction = "down" \}\)',      "focar abaixo"),
+    (r'exit\(\)',                               "encerrar sessao"),
+]
+
+# (rotulo, glifo, teste) — primeira que casar leva o bind
+CATEGORIAS = [
+    ("Aplicativos",  "󰀻", lambda k, a, d: any(x in a for x in (
+        "terminal", "fileManager", "menu", "taskmanager", "powermenu",
+        "cheatsheet", "rofi"))),
+    ("Captura",      "󰄀", lambda k, a, d: "Print" in k),
+    ("Sistema",      "󰒓", lambda k, a, d: any(x in a for x in (
+        "lock-session", "makoctl", "exit()", "hyprshutdown"))),
+    ("Areas",        "󰕰", lambda k, a, d: "workspace" in a or "area" in d),
+    ("Janelas",      "󰖯", lambda k, a, d: True),
+]
+
+
+def paleta():
+    """Cores do tema ativo; cai num padrao escuro se algo faltar."""
+    p = {"accent": "#78a9ff", "fg": "#f2f4f8", "fg_dim": "#b6b8bb",
+         "fg_mute": "#6f6f6f", "bg_raw": "22,22,22", "alpha_rofi": "0.82"}
+    try:
+        atual = (DOTS / "themes/.current").read_text().strip()
+        with open(DOTS / f"themes/palettes/{atual}.toml", "rb") as f:
+            d = tomllib.load(f); c = {**d.get("colors", {}), **d.get("opts", {})}
+        p.update({k: v for k, v in c.items() if k in p})
+        if "bg" in c:
+            r, g, b = (int(c["bg"][i:i + 2], 16) for i in (1, 3, 5))
+            p["bg_raw"] = f"{r},{g},{b}"
+    except Exception:
+        pass
+    return p
+
+
+def ler_vars(texto):
+    v = {}
+    for m in re.finditer(r'^local\s+(\w+)\s*=\s*["\']([^"\']*)["\']', texto, re.M):
+        v[m.group(1)] = m.group(2)
+    return v
+
+
+def resolver_tecla(expr, vars_):
+    partes = []
+    for p in expr.split(".."):
+        p = p.strip()
+        if len(p) > 1 and p[0] in "\"'" and p[-1] == p[0]:
+            partes.append(p[1:-1])
+        elif p in vars_:
+            partes.append(vars_[p])
+        elif p == "key":
+            partes.append("1-9")
+        else:
+            partes.append(p)
+    return "".join(partes).strip()
+
+
+def descrever(acao, comentario, vars_):
+    if comentario:
+        return comentario.strip()
+    m = re.search(r'exec_cmd\((.+)\)\s*$', acao)
+    if m:
+        alvo = m.group(1).strip()
+        if alvo in vars_:
+            return vars_[alvo]
+        if len(alvo) > 1 and alvo[0] in "\"'":
+            cmd = alvo[1:-1]
+            return cmd if len(cmd) <= 42 else cmd[:39] + "..."
+        return alvo
+    for padrao, rotulo in ACOES:
+        mm = re.search(padrao, acao)
+        if mm:
+            return rotulo.format(*mm.groups()) if mm.groups() else rotulo
+    return acao.strip()
+
+
+def coletar():
+    texto = CONF.read_text()
+    vars_ = ler_vars(texto)
+    padrao = re.compile(
+        r'hl\.bind\(\s*(?P<tecla>.+?),\s*(?P<acao>hl\.dsp\..+?)\s*'
+        r'(?:,\s*\{.*\})?\)\s*(?:--\s*(?P<cmt>.*))?$')
+    itens = []
+    for linha in texto.splitlines():
+        s = linha.strip()
+        if s.startswith("--") or "hl.bind(" not in s:
+            continue
+        s = re.sub(r'^local\s+\w+\s*=\s*', '', s)
+        m = padrao.match(s)
+        if not m:
+            continue
+        tecla = resolver_tecla(m.group("tecla"), vars_)
+        if IGNORAR.match(tecla):
+            continue
+        desc = descrever(m.group("acao"), m.group("cmt"), vars_)
+        acao = m.group("acao")
+        for rotulo, glifo, teste in CATEGORIAS:
+            if teste(tecla, acao, desc):
+                itens.append((rotulo, glifo, tecla, desc))
+                break
+    return itens
+
+
+def main():
+    if not CONF.exists():
+        sys.exit(f"nao achei {CONF}")
+    itens = coletar()
+    if not itens:
+        sys.exit("nenhum bind encontrado — o formato do hyprland.lua mudou?")
+
+    ordem = [c[0] for c in CATEGORIAS]
+    itens.sort(key=lambda x: ordem.index(x[0]))
+    larg = max(len(t) for _, _, t, _ in itens)
+
+    if "--print" in sys.argv:
+        atual = None
+        for cat, glifo, tecla, desc in itens:
+            if cat != atual:
+                print(f"\n  {cat.upper()}")
+                atual = cat
+            print(f"    {tecla.ljust(larg)}  {desc}")
+        return
+
+    p = paleta()
+    linhas, cabec, atual = [], [], None
+    for cat, glifo, tecla, desc in itens:
+        if cat != atual:
+            linhas.append(
+                f"<span foreground='{p['accent']}'><b>{glifo}  {html.escape(cat.upper())}</b></span>")
+            cabec.append(True)
+            atual = cat
+        k = html.escape(tecla).ljust(larg)
+        linhas.append(
+            f"<span foreground='{p['fg']}'>  {k}</span>"
+            f"<span foreground='{p['fg_mute']}'>  </span>"
+            f"<span foreground='{p['fg_dim']}'>{html.escape(desc)}</span>")
+        cabec.append(False)
+
+    # O fluxo vertical parte a lista no meio sem olhar o conteudo, o que pode
+    # deixar um cabecalho sozinho no fim da coluna 1 com os itens dele na 2.
+    # Empurramos o cabecalho pra proxima coluna com uma linha vazia.
+    for _ in range(12):
+        por_col = -(-len(linhas) // 2)          # teto da divisao
+        fim_col1 = por_col - 1
+        if fim_col1 < len(linhas) and cabec[fim_col1]:
+            linhas.insert(fim_col1, " ")
+            cabec.insert(fim_col1, False)
+            continue
+        break
+
+    tema = (
+        f"window {{ width: 52%; padding: 14px; "
+        f"background-color: rgba({p['bg_raw']}, {p['alpha_rofi']}); }} "
+        "inputbar { padding: 0 0 8px 0; } "
+        f"listview {{ lines: {por_col}; columns: 2; flow: vertical; "
+        "spacing: 0px; scrollbar: false; } "
+        "element { padding: 1px 6px; border-radius: 4px; } "
+        "element-text { font: \"JetBrainsMono Nerd Font 9.5\"; } "
+        "element selected { background-color: transparent; } "
+        "element selected element-text { background-color: transparent; }"
+    )
+    subprocess.run(
+        ["rofi", "-dmenu", "-i", "-markup-rows", "-no-custom",
+         "-p", "atalhos", "-theme-str", tema],
+        input="\n".join(linhas), text=True, capture_output=True)
+
+
+if __name__ == "__main__":
+    main()
