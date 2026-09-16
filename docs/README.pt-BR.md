@@ -9,23 +9,23 @@ terminais compartilhados entre Linux e macOS. Desktop Hyprland separado.
 
 ### Shells e ferramentas CLI
 
-- [Fish + Tide](../packages/common/fish/) — Prompt em uma linha, cores e Neovim como editor padrão
-- [Zsh + Powerlevel10k](../packages/common/zsh/) — Prompt personalizado com suporte a instant prompt
-- **Fisher** — Gerenciador de plugins do Fish; Fisher, Tide e fzf.fish estão no [manifesto versionado](../packages/common/fish/.config/fish/fish_plugins)
-- **Oh My Zsh** — Framework do Zsh com o plugin Git habilitado
-- **fzf / fzf.fish** — Busca interativa no histórico e em arquivos; no Zsh, inclui prévias de arquivos com bat e de diretórios com eza
-- **zoxide (`z` / `zi`)** — Navegação por diretórios nos dois shells, com seleção interativa pelo `zi`
-- **eza** — Aliases `ls`, `ll`, `la` e `lt` com ícones, status Git e visualização em árvore; o Fish também adiciona `tree`
-- **bat** — Substitui `cat` no Fish e mostra prévias de arquivos na integração fzf do Zsh
-- **fd** — Busca de arquivos usada pelo fzf, incluindo ocultos e excluindo `.git`
-- **ghq + fzf** — Comando `r` no Fish para selecionar e entrar em um repositório Git local
-- **zsh-autosuggestions** — Sugestões do histórico e das completions; `Ctrl+Espaço` aceita uma sugestão
-- **zsh-syntax-highlighting** — Destaque dos comandos durante a digitação
-- **Histórico do Zsh** — Até 100 mil entradas, remoção de duplicatas e gravação incremental
-- **mise** — Ativação opcional no Zsh quando instalado; a instalação e as versões dos runtimes não são gerenciadas aqui
+- [Fish](https://fishshell.com/) + [Tide](https://github.com/IlanCosman/tide) — Prompt em uma linha, cores e Neovim como editor padrão
+- [Zsh](https://www.zsh.org/) + [Powerlevel10k](https://github.com/romkatv/powerlevel10k) — Prompt personalizado com suporte a instant prompt
+- [Fisher](https://github.com/jorgebucaran/fisher) — Gerenciador de plugins do Fish; Fisher, Tide e fzf.fish estão no [manifesto versionado](../packages/common/fish/.config/fish/fish_plugins)
+- [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) — Framework do Zsh com o plugin Git habilitado
+- [fzf](https://github.com/junegunn/fzf) / [fzf.fish](https://github.com/PatrickF1/fzf.fish) — Busca interativa no histórico e em arquivos; no Zsh, inclui prévias de arquivos com bat e de diretórios com eza
+- [zoxide](https://github.com/ajeetdsouza/zoxide) (`z` / `zi`) — Navegação por diretórios nos dois shells, com seleção interativa pelo `zi`
+- [eza](https://github.com/eza-community/eza) — Aliases `ls`, `ll`, `la` e `lt` com ícones, status Git e visualização em árvore; o Fish também adiciona `tree`
+- [bat](https://github.com/sharkdp/bat) — Substitui `cat` no Fish e mostra prévias de arquivos na integração fzf do Zsh
+- [fd](https://github.com/sharkdp/fd) — Busca de arquivos usada pelo fzf, incluindo ocultos e excluindo `.git`
+- [ghq](https://github.com/x-motemen/ghq) + [fzf](https://github.com/junegunn/fzf) — Comando `r` no Fish para selecionar e entrar em um repositório Git local
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) — Sugestões do histórico e das completions; `Ctrl+Espaço` aceita uma sugestão
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) — Destaque dos comandos durante a digitação
+- [Histórico do Zsh](https://zsh.sourceforge.io/Doc/Release/Options.html#History) — Até 100 mil entradas, remoção de duplicatas e gravação incremental
+- [mise](https://mise.jdx.dev/) — Ativação opcional no Zsh quando instalado; a instalação e as versões dos runtimes não são gerenciadas aqui
 - **Ambiente dos shells** — Caminhos para scripts e binários locais; o Fish também adiciona `~/go/bin`
-- [btop](../packages/common/btop/) — Monitor de recursos e tema integrado à paleta
-- [Yazi](../themes/templates/common/yazi-theme.toml.tmpl) — Tema do gerenciador de arquivos no terminal
+- [btop](https://github.com/aristocratos/btop) — Monitor de recursos e tema integrado à paleta
+- [Yazi](https://github.com/sxyazi/yazi) — Tema do gerenciador de arquivos no terminal
 
 As integrações ficam em [config.fish](../packages/common/fish/.config/fish/config.fish)
 e [.zshrc](../packages/common/zsh/.zshrc). A instalação dos plugins está em
