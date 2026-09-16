@@ -22,9 +22,7 @@ terminais compartilhados entre Linux e macOS. Desktop Hyprland separado.
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) — Sugestões do histórico e das completions; `Ctrl+Espaço` aceita uma sugestão
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) — Destaque dos comandos durante a digitação
 - [Histórico do Zsh](https://zsh.sourceforge.io/Doc/Release/Options.html#History) — Até 100 mil entradas, remoção de duplicatas e gravação incremental
-- [mise](https://mise.jdx.dev/) — Ativação opcional no Zsh quando instalado; a instalação e as versões dos runtimes não são gerenciadas aqui
 - **Ambiente dos shells** — Caminhos para scripts e binários locais; o Fish também adiciona `~/go/bin`
-- [btop](https://github.com/aristocratos/btop) — Monitor de recursos e tema integrado à paleta
 - [Yazi](https://github.com/sxyazi/yazi) — Tema do gerenciador de arquivos no terminal
 
 As integrações ficam em [config.fish](../packages/common/fish/.config/fish/config.fish)

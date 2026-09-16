@@ -22,9 +22,7 @@ configs shared across Linux and macOS. Hyprland desktop configs live separately.
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) — Suggestions from history and completions; `Ctrl+Space` accepts a suggestion
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) — Highlights commands as you type
 - [Zsh history](https://zsh.sourceforge.io/Doc/Release/Options.html#History) — Up to 100,000 entries, duplicate removal, and incremental saving
-- [mise](https://mise.jdx.dev/) — Optional Zsh activation when installed; installation and runtime versions are not managed here
 - **Shell environment** — Shared script and local binary paths; Fish also adds `~/go/bin`
-- [btop](https://github.com/aristocratos/btop) — Resource monitor settings and a theme matching the palette
 - [Yazi](https://github.com/sxyazi/yazi) — Theme for the terminal file manager
 
 Shell integrations live in [config.fish](packages/common/fish/.config/fish/config.fish)
