@@ -1,6 +1,6 @@
 # dotfiles
 
-Arch Linux + Hyprland. Desktop apps share one palette; tmux uses craftzdog's Solarized layout.
+Arch Linux + Hyprland. Desktop apps share one palette;
 
 ## What's in here
 
@@ -55,12 +55,6 @@ background shells Tide uses to draw the prompt. Edit this file to change the
 versioned appearance; `fish_variables`, runtime caches and Fisher's installed
 plugin files stay local.
 
-The prompt uses craftzdog's [Tide colors](https://github.com/craftzdog/dotfiles/blob/bf2867469b8b7f0260e974a47297a7df61d53052/.config/fish/conf.d/tide.fish).
-Its two-line layout is reconstructed from the repository's
-[terminal screenshot](https://github.com/craftzdog/dotfiles/blob/bf2867469b8b7f0260e974a47297a7df61d53052/images/screenshot-1.png):
-directory and Git on the left, status and time on the right, a left frame,
-rounded outer ends and slanted internal separators. Upstream does not publish
-the complete `tide configure` choices, so those choices are explicit locally.
 
 On a fresh machine, install the plugins listed in `fish_plugins`:
 

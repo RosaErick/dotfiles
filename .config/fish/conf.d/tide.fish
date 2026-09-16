@@ -1,6 +1,6 @@
 # Tide: cores de craftzdog/dotfiles, commit bf2867469b8b7f0260e974a47297a7df61d53052.
-# Layout reconstruido a partir de images/screenshot-1.png do mesmo repositorio:
-# duas linhas, moldura esquerda, diretorio/Git e status/relogio a direita.
+# Layout baseado em images/screenshot-1.png do mesmo repositorio, em uma linha:
+# diretorio/Git a esquerda e status/relogio a direita.
 # O upstream publica as cores em .config/fish/conf.d/tide.fish, mas nao
 # as escolhas universais do assistente tide configure. Elas ficam explicitas aqui.
 # Fonte da verdade versionada; edite aqui para manter o prompt reproduzivel.
@@ -86,8 +86,8 @@ set -g tide_jobs_number_threshold 1000
 set -g tide_kubectl_bg_color 326CE5
 set -g tide_kubectl_color 000000
 set -g tide_kubectl_icon 󱃾
-set -g tide_left_prompt_frame_enabled true
-set -g tide_left_prompt_items pwd git newline
+set -g tide_left_prompt_frame_enabled false
+set -g tide_left_prompt_items pwd git
 set -g tide_left_prompt_prefix 
 set -g tide_left_prompt_separator_diff_color 
 set -g tide_left_prompt_separator_same_color 
